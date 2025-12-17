@@ -8,9 +8,9 @@
 
 import './bootstrap';
 
-// Import jQuery
-import $ from 'jquery';
-window.$ = window.jQuery = $;
+// Import jQuery (ใช้จาก CDN แทนเพื่อรองรับ DataTables)
+// import $ from 'jquery';
+// window.$ = window.jQuery = $;
 
 // Import Bootstrap
 import 'bootstrap';

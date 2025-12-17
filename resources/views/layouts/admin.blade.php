@@ -9,6 +9,10 @@
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
     
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap4.min.css">
+    
     @stack('styles')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -34,7 +38,10 @@
             <!-- User Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-user"></i>
+                    {{__('สวัสดี')}},
+                    |
+                    <!-- <i class="far fa-user"></i> -->
+                    {{ Auth::user()->name ?? 'User Name' }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <a href="#" class="dropdown-item">
@@ -70,25 +77,14 @@
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg" 
-                         class="img-circle elevation-2" 
-                         alt="User Image">
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">{{ Auth::user()->name ?? 'User Name' }}</a>
-                </div>
-            </div>
-
+       
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     
                     <!-- Dashboard -->
                     <li class="nav-item">
-                        <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('/','dashboard') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>Dashboard</p>
                         </a>
@@ -110,30 +106,79 @@
                                     <p>All Users</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Add New</p>
+                                </a>
+                            </li> -->
+                        </ul>
+                    </li>
+
+                    <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Members
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('customers.index') }}" class="nav-link {{ request()->routeIs('customers.index') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-box"></i>
+                                    <p>Customers Active</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('customers.expired') }}" class="nav-link {{ request()->routeIs('customers.expired') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Customer Expied</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
 
-                    <!-- Products -->
+                    <li class="nav-item {{ request()->is('sponsers*') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ request()->is('sponsers*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Sponsers
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('sponsers.index') }}" class="nav-link {{ request()->routeIs('sponsers.index') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>Sponser Active</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('sponsers.expired') }}" class="nav-link {{ request()->routeIs('sponsers.expired') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>Sponser Expied</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <!-- Reports -->
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-box"></i>
-                            <p>Products</p>
+                            <p>Reports</p>
                         </a>
                     </li>
 
                     <!-- Settings -->
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-cog"></i>
                             <p>Settings</p>
                         </a>
-                    </li>
+                    </li> -->
 
                     @yield('sidebar')
                 </ul>
@@ -144,7 +189,7 @@
     <!-- Content Wrapper -->
     <div class="content-wrapper">
         <!-- Content Header -->
-        <div class="content-header">
+        <!-- <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
@@ -157,7 +202,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Main content -->
         <section class="content">
@@ -195,8 +240,25 @@
     </footer>
 </div>
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 <!-- Vite JS -->
 @vite(['resources/js/app.js'])
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- DataTables Buttons -->
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
 
 @stack('scripts')
 </body>

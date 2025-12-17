@@ -98,7 +98,7 @@
             right: 0;
             height: 4px;
             background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
-            animation: shimmer 2s linear infinite;
+            animation: shimmer 5s linear infinite;
         }
 
         @keyframes shimmer {

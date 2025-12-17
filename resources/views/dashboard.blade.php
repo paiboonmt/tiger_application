@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard | Tiger Application')
 @section('page-title', 'Dashboard')
 
 @section('breadcrumb')

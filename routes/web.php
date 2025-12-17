@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SponserController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+// Route::get('/', function () {
+//     return view('dashboard');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -17,6 +19,14 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     // users.index
     Route::resource('users', App\Http\Controllers\UserController::class);
+
+    // CustomerController
+    Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
+    Route::get('customers/expired',[CustomerController::class, 'expired'])->name('customers.expired');
+
+    // SponserController
+    Route::get('sponsers', [SponserController::class, 'index'])->name('sponsers.index');
+    Route::get('sponsers/expired',[SponserController::class, 'expired'])->name('sponsers.expired');
 });
 
 Route::middleware('auth')->group(function () {
