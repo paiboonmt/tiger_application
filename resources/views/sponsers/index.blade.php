@@ -37,7 +37,7 @@
                                     </a>
                                     <span style="color: red; padding-right: 10px;">|</span>
 
-                                <a href="" class="text-white btn btn-sm btn-info" >ดูโปรไฟล์</a>
+                                <a href="{{ route('sponsers.profile',$c->id ) }}" target="_blank" class="text-white btn btn-sm btn-info" >ดูโปรไฟล์</a>
                             </td>
                             <td>{{ $c->m_card }}</td>
                             <td>{{ $c->fname }}</td>

@@ -29,4 +29,16 @@ class SponserController extends Controller
             ->get();
         return view('sponsers.expired', ['data' => $data]);
     }
+
+    public function profile($id)
+    {
+        $member = DB::table('member')->where('id', $id)->first();
+
+        if ($member) {
+            $expDate = \Carbon\Carbon::parse($member->exp_date);
+            $today = \Carbon\Carbon::today();
+            $member->days_left = $today->diffInDays($expDate, false);
+        }
+        return view('sponsers.profile', ['member' => $member]);
+    }
 }

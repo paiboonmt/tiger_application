@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     // SponserController
     Route::get('sponsers', [SponserController::class, 'index'])->name('sponsers.index');
     Route::get('sponsers/expired',[SponserController::class, 'expired'])->name('sponsers.expired');
+    Route::get('sponsers/profile/{id}',[SponserController::class, 'profile'])->name('sponsers.profile');
 });
 
 Route::middleware('auth')->group(function () {
