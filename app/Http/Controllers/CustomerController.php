@@ -7,79 +7,71 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $customers = DB::table('member')
-        ->join('products','member.package','=','products.id')
-        ->where('member.status_code','=',4)
-        ->where('member.exp_date','>=',date('Y-m-d'))
-        ->select('member.*', 'products.*')
-        ->orderBy('member.id','desc')
-        ->get();
-        return view('customers.index',['customers' => $customers]);
+            ->join('products', 'member.package', '=', 'products.id')
+            ->where('member.status_code', '=', 4)
+            ->where('member.exp_date', '>=', date('Y-m-d'))
+            ->select('member.*', 'products.product_name')
+            // ->limit(10)
+            ->get();
+
+        foreach ($customers as $customer) {
+            $expDate = \Carbon\Carbon::parse($customer->exp_date);
+            $today = \Carbon\Carbon::today();
+            $customer->days_left = $today->diffInDays($expDate, false);
+        }
+
+        return view('customers.index', ['customers' => $customers]);
     }
 
     public function expired()
     {
         $customers = DB::table('member')
-        ->join('products','member.package','=','products.id')
-        ->where('member.status_code','=',4)
-        ->where('member.exp_date','<=',date('Y-m-d'))
-        ->select('member.*', 'products.*')
-        ->orderBy('member.id','desc')
-        ->limit(100)
-        ->get();
-        return view('customers.expired',['customers' => $customers]);
+            ->join('products', 'member.package', '=', 'products.id')
+            ->where('member.status_code', '=', 4)
+            ->where('member.exp_date', '<=', date('Y-m-d'))
+            ->select('member.*', 'products.*')
+            ->orderBy('member.id', 'desc')
+            ->limit(100)
+            ->get();
+        return view('customers.expired', ['customers' => $customers]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function profile($id)
     {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $member = DB::table('member')
+            ->where('id', $id)
+            ->first();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        if ($member && $member->exp_date) {
+            $expDate = \Carbon\Carbon::parse($member->exp_date);
+            $today = \Carbon\Carbon::today();
+            $member->days_left = $today->diffInDays($expDate, false);
+        } else {
+            $member->days_left = null;
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $timeLine = DB::table('tb_time')
+            ->where('ref_m_card', $member->m_card)
+            ->orderBy('time_id', 'desc')
+            ->get();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $file = DB::table('tb_files')
+            ->where('product_id', $member->id)
+            ->get();
+
+        return view(
+            'customers.profile',
+            [
+                'member' => $member,
+                'timeLine' => $timeLine,
+                'file' => $file,
+            ]
+        );
     }
 }
