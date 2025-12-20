@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>ยิงเสือ - มวยไทย Login</title>
+    <title>ไทยเกอร์ - มวยไทย Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700;800&family=Kanit:wght@600;800&display=swap" rel="stylesheet">
     <style>
         * {

@@ -55,7 +55,6 @@ class CustomerController extends Controller
             $member->days_left = null;
         }
 
-
         $timeLine = DB::table('tb_time')
             ->where('ref_m_card', $member->m_card)
             ->orderBy('time_id', 'desc')
