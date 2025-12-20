@@ -1,23 +1,24 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SponserController;
 use Illuminate\Support\Facades\Route;
 
 
-// Route::get('/', function () {
-//     return view('dashboard');
-// });
-
 Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+    return view('auth.login');
+});
 
 
 Route::middleware('auth')->group(function () {
+    
+    // DashboardController
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+
     // users.index
     Route::resource('users', App\Http\Controllers\UserController::class);
 

@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('dashboard') }}" class="nav-link">Home</a>
+                    <a href="{{ route('dashboard.index') }}" class="nav-link">Home</a>
                 </li>
             </ul>
 
@@ -89,7 +89,7 @@
 
                         <!-- Dashboard -->
                         <li class="nav-item">
-                            <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('/','dashboard') ? 'active' : '' }}">
+                            <a href="{{ route('dashboard.index') }}" class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>Dashboard</p>
                             </a>
