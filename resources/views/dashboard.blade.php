@@ -127,7 +127,7 @@
                 </h3>
             </div>
             <div class="card-body">
-                <canvas id="monthlySalesChart" height="80"></canvas>
+                <canvas id="monthlySalesChart" height="80" data-sales-data='@json($saleReport12Month)'></canvas>
             </div>
         </div>
     </div>
@@ -137,8 +137,8 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-    // Monthly Sales Chart
-    const monthlyData = @json($saleReport12Month);
+    // Monthly Sales Chart - Data is passed via data attribute from Blade
+    const monthlyData = JSON.parse(document.getElementById('monthlySalesChart').dataset.salesData);
     const months = monthlyData.map(item => item.month);
     const sales = monthlyData.map(item => parseFloat(item.sum));
 
@@ -167,7 +167,10 @@
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            return 'ยอดขาย: ' + context.parsed.y.toLocaleString('th-TH', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' บาท';
+                            return 'ยอดขาย: ' + context.parsed.y.toLocaleString('th-TH', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }) + ' บาท';
                         }
                     }
                 }

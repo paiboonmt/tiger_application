@@ -9,6 +9,7 @@
 
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
+    <link rel="shortcut icon" href="{{ asset('images/logo/logo.png') }}" type="image/x-icon">
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
@@ -49,7 +50,7 @@
                         {{ Auth::user()->name ?? 'User Name' }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
+                        <a href="{{ route('profile.edit') }}" class="dropdown-item">
                             <i class="fas fa-user mr-2"></i> Profile
                         </a>
                         <div class="dropdown-divider"></div>
@@ -73,7 +74,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{ url('/dashboard') }}" class="brand-link">
-                <img src="https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png"
+                <img src="{{ asset('images/logo/logo.png') }}"
                     alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3"
                     style="opacity: .8">
@@ -96,7 +97,7 @@
                         </li>
 
                         <!-- Menu with Submenu -->
-                        <li class="nav-item {{ request()->is('users*') ? 'menu-open' : '' }}">
+                        <li class="nav-item {{ request()->is('users*') ? 'menu-open' : 'menu-open' }}">
                             <a href="#" class="nav-link {{ request()->is('users*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
@@ -120,7 +121,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : '' }}">
+                        <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : 'menu-open' }}">
                             <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
@@ -144,7 +145,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item {{ request()->is('sponsers*') ? 'menu-open' : '' }}">
+                        <li class="nav-item {{ request()->is('sponsers*') ? 'menu-open' : 'menu-open' }}">
                             <a href="#" class="nav-link {{ request()->is('sponsers*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
@@ -168,7 +169,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item {{ request()->is('report*') ? 'menu-open' : '' }}">
+                        <li class="nav-item {{ request()->is('report*') ? 'menu-open' : 'menu-open' }}">
                             <a href="#" class="nav-link {{ request()->is('report*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-print"></i>
                                 <p>
