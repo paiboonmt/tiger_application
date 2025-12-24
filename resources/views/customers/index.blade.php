@@ -1,13 +1,15 @@
 @extends('layouts.admin')
 @section('title', 'รายชื่อสมาชิก')
+@section('head', 'รายชื่อสมาชิก')
+@section('link', 'customers')
 
 @section('content')
 <div class="row">
     <div class="col p-1">
         <div class="card">
-            <div class="card-header bg-dark">
+            <!-- <div class="card-header bg-dark">
                 <h2>รายชื่อสมาชิก ที่ยังมีอายุการใช้งาน</h2>
-            </div>
+            </div> -->
             <div class="card-body">
                 <table class="table table-bordered table-hover" id="example1">
                     <thead class="bg-success">
@@ -38,7 +40,7 @@
                                     >
                                 </a>
                                 <span style="color: red; padding-right: 10px;">|</span>
-                                <a class="badge badge-info" href="{{ route('customers.profile',$item->id) }}">
+                                <a class="badge badge-info" href="{{ route('customers.profile',$item->id) }}" target="_blank">
                                    profile
                                 </a>
                             </td>
@@ -73,7 +75,7 @@
             "order": [
                 [0, "desc"]
             ],
-            "buttons": ["excel"]
+            // "buttons": ["excel"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 </script>

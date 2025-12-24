@@ -1,15 +1,13 @@
 @extends('layouts.admin')
 @section('title', 'Sponsers Page')
-
+@section('head', 'รายชื่อสปอนเซอร์')
+@section('link', 'sponsers')
 @section('content')
 <div class="row">
     <div class="col p-2">
         <div class="card">
-            <div class="card-header bg-dark">
-                <h1 class="card-title">รายชื่อสมาชิก Free Training </h1>
-            </div>
             <div class="card-body">
-                <table class="table table-bordered" id="example1">
+                <table class="table" id="example1">
                     <thead>
                         <tr>
                             <th hidden>ID</th>
@@ -28,7 +26,7 @@
                         @foreach ($data as $c)
                         <tr>
                             <td hidden>{{ $c->id }}</td>
-                            <td  class="bg-dark">
+                            <td>
                                 <a href="http://172.16.0.3/fighterimg/img/{{ $c->image }}" target="_blank">
                                     <img src="http://172.16.0.3/fighterimg/img/{{ $c->image }}"
                                         alt="User Avatar"
@@ -37,7 +35,7 @@
                                     </a>
                                     <span style="color: red; padding-right: 10px;">|</span>
 
-                                <a href="{{ route('sponsers.profile',$c->id ) }}" target="_blank" class="text-white btn btn-sm btn-info" >ดูโปรไฟล์</a>
+                                <a href="{{ route('sponsers.profile',$c->id ) }}" class="badge badge-info">ดูโปรไฟล์</a>
                             </td>
                             <td>{{ $c->m_card }}</td>
                             <td>{{ $c->fname }}</td>
@@ -71,7 +69,8 @@
             // "lengthChange": true,
             "autoWidth": false,
             "saveState": true,
-            "buttons": ["excel"]
+            "order": [[ 0, "desc" ]],
+            // "buttons": ["excel"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 </script>

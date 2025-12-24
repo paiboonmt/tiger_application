@@ -22,7 +22,7 @@
                                 class="form-control"
                                 id="start_date"
                                 name="start_date"
-                                 value="{{ request('start_date') }}"
+                                value="{{ \Carbon\Carbon::yesterday()->format('Y-m-d') }}"
                                 required>
                         </div>
                         <div class="col-md-4">
@@ -32,7 +32,7 @@
                                 class="form-control"
                                 id="end_date"
                                 name="end_date"
-                                value="{{ request('end_date') }}"
+                                value="{{ date('Y-m-d') }}"
                                 required>
                         </div>
                         <div class="col-md-4">

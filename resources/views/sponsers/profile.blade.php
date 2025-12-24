@@ -1,112 +1,156 @@
 @extends('layouts.admin')
-@section('title', 'Start Page')
-@section('page-title', 'Start Page')
-@section('breadcrumb')
-<li class="breadcrumb-item active">Start Page</li>
-@endsection
+@section('title', 'Profile Page')
+<!-- @section('page-title', 'Start Page') -->
+@section('head', 'Sponser Profile')
+
+@push('styles')
+<style>
+    #profileImage {
+        border-radius: 5px;
+        cursor: pointer;
+        max-width: 100%;
+    }
+
+    #profileImage:hover {
+        transform: scale(1.01) rotate(-1deg);
+        transition: transform 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
+    }
+
+    .ribbon-wrapper {
+        transition: opacity 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
+    }
+    #profileImage:hover ~ .ribbon-wrapper,
+    .position-relative:hover .ribbon-wrapper {
+        opacity: 0;
+    }
+    
+</style>
+@endpush
+
 @section('content')
 <div class="row">
-    <div class="col p-1">
-        <div class="card py-2 px-3">
-            <h1>
-                {{ $member->fname }}
-            </h1>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12 p-2">
-        <div class="card">
+    <div class="col-md-12 p-1">
+        <div class="card card-primary card-outline shadow">
             <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#profile" data-toggle="tab">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timelines</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Documents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#data" data-toggle="tab">Data</a></li>
                 </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
                 <div class="tab-content">
-                    <div class="tab-pane active" id="activity">
+                    <div class="tab-pane active" id="profile">
                         <div class="row">
                             <div class="col-2 text-center">
-                                <img src="http://172.16.0.3/fighterimg/img/{{ $member->image }}" alt="Profile Image" class="img-fluid rounded" style="max-width: 200px;">
+                                <div class="position-relative">
+                                    <div class="ribbon-wrapper">
+                                        @if ($member->days_left >= 0)
+                                        <div class="ribbon bg-success">
+                                            {{ $member->days_left }} วัน
+                                        </div>
+                                        @else
+                                        <div class="ribbon bg-red">
+                                            {{ $member->days_left }} วัน
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <a
+                                        href="http://172.16.0.3/fighterimg/img/{{ $member->image }}"
+                                        data-fancybox="gallery-1">
+                                        <img id="profileImage"
+                                            src="http://172.16.0.3/fighterimg/img/{{ $member->image }}"
+                                             />
+                                    </a>
+                                </div>
                             </div>
                             <div class="col">
                                 <div class="row">
 
                                     <div class="col-2">
                                         <div class="form-group">
-                                            <label>sex</label>
-                                            <input type="text" class="form-control" value="{{ $member->sex }}" readonly>
+                                            <label>Gender</label>
+                                            <input type="text" class="form-control" value="{{ $member->sex }}">
                                         </div>
                                     </div>
 
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label>Full Name</label>
-                                            <input type="text" class="form-control" value="{{ $member->fname }}" readonly>
+                                            <input type="text" class="form-control" value="{{ $member->fname }}">
                                         </div>
                                     </div>
 
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label>Nationality</label>
-                                            <input type="text" class="form-control" value="{{ $member->nationalty }}" readonly>
+                                            <input type="text" class="form-control" value="{{ $member->nationalty }}">
                                         </div>
                                     </div>
 
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label>Phone</label>
-                                            <input type="text" class="form-control" value="{{ $member->phone }}" readonly>
+                                            <label>Phone Number</label>
+                                            <input type="text" class="form-control" value="{{ $member->phone }}">
                                         </div>
                                     </div>
 
                                 </div>
 
                                 <div class="row">
-
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label>Sponser id</label>
-                                            <input type="text" class="form-control" value="{{ $member->m_card }}" readonly>
+                                            <label>Number card id</label>
+                                            <input type="text" class="form-control" value="{{ $member->m_card }}">
                                         </div>
                                     </div>
-
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label>Card id</label>
-                                            <input type="text" class="form-control" value="{{ $member->p_visa }}" readonly>
+                                            <label>National ID card number Or Passport</label>
+                                            <input type="text" class="form-control" value="{{ $member->p_visa }}">
                                         </div>
                                     </div>
-
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="text" class="form-control" value="{{ $member->email }}" readonly>
+                                            <input type="text" class="form-control" value="{{ $member->email }}">
                                         </div>
                                     </div>
-
-
                                 </div>
 
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label>Height</label>
-                                            <input type="text" class="form-control" value="{{ $member->height }}" readonly>
+                                            <label>Birth day</label>
+                                            <input type="date" class="form-control" value="{{ $member->birthday }}">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label>Weight</label>
-                                            <input type="text" class="form-control" value="{{ $member->weigh }}" readonly>
+                                            <label>Age</label>
+                                            <input type="text" class="form-control" value="{{ $member->age }} Years">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label>Emergency</label>
-                                            <input type="text" class="form-control" value="{{ $member->emergency }}" readonly>
+                                            <input type="text" class="form-control" value="{{ $member->emergency }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Height</label>
+                                            <input type="text" class="form-control" value="{{ $member->height }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Weight</label>
+                                            <input type="text" class="form-control" value="{{ $member->weigh }}">
                                         </div>
                                     </div>
                                 </div>
@@ -120,8 +164,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label>Address</label>
-                                            <textarea name="" id="" class="form-control" rows="3">{{ $member->accom }}</textarea>
+                                            <label>Remart</label>
+                                            <textarea name="" id="" class="form-control" rows="3">{{ $member->comment }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -129,26 +173,31 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <div class="form-group">
-                                            <label>sta_date</label>
-                                            <input type="date" class="form-control" value="{{ $member->sta_date }}" readonly>
+                                            <label>Start Training</label>
+                                            <input type="date" class="form-control" value="{{ $member->sta_date }}">
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group">
-                                            <label>exp_date</label>
-                                            <input type="date" class="form-control" value="{{ $member->exp_date }}" readonly>
+                                            <label>Card Expriy</label>
+                                            <input type="date" class="form-control" value="{{ $member->exp_date }}">
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group">
-                                            <label>Date Quantity</label>
-                                            <input type="text" class="form-control" value="{{ $member->days_left }}" readonly>
+                                            @if ($member->days_left >= 0)
+                                                <label>Date Quantity</label>
+                                                <input type="text" class="form-control bg-success" value="{{ $member->days_left }}">
+                                            @else
+                                                <label>Date Quantity</label>
+                                                <input type="text" class="form-control bg-danger" value="{{ $member->days_left }}">
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group">
-                                            <label>type_training</label>
-                                            <input type="text" class="form-control" value="{{ $member->type_training }}" readonly>
+                                            <label>Type Of Training</label>
+                                            <input type="text" class="form-control" value="{{ $member->type_training }}">
                                         </div>
                                     </div>
                                 </div>
@@ -156,14 +205,14 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label>type_fighter</label>
-                                            <input type="text" class="form-control" value="{{ $member->type_fighter }}" readonly>
+                                            <label>Type Of Use</label>
+                                            <input type="text" class="form-control" value="{{ $member->type_fighter }}">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Created At</label>
-                                            <input type="text" class="form-control" value="{{ $member->date }}" readonly>
+                                            <input type="text" class="form-control" value="{{ $member->date }}">
                                         </div>
                                     </div>
                                 </div>
@@ -173,150 +222,44 @@
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="timeline">
-                        <!-- The timeline -->
-                        <div class="timeline timeline-inverse">
-                            <!-- timeline time label -->
-                            <div class="time-label">
-                                <span class="bg-danger">
-                                    10 Feb. 2014
-                                </span>
-                            </div>
-                            <!-- /.timeline-label -->
-                            <!-- timeline item -->
-                            <div>
-                                <i class="fas fa-envelope bg-primary"></i>
-
-                                <div class="timeline-item">
-                                    <span class="time"><i class="far fa-clock"></i> 12:05</span>
-
-                                    <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                                    <div class="timeline-body">
-                                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                        quora plaxo ideeli hulu weebly balihoo...
-                                    </div>
-                                    <div class="timeline-footer">
-                                        <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END timeline item -->
-                            <!-- timeline item -->
-                            <div>
-                                <i class="fas fa-user bg-info"></i>
-
-                                <div class="timeline-item">
-                                    <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
-                                    <h3 class="timeline-header border-0"><a href="#">Sarah Young</a> accepted your friend request
-                                    </h3>
-                                </div>
-                            </div>
-                            <!-- END timeline item -->
-                            <!-- timeline item -->
-                            <div>
-                                <i class="fas fa-comments bg-warning"></i>
-
-                                <div class="timeline-item">
-                                    <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                                    <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                                    <div class="timeline-body">
-                                        Take me to your leader!
-                                        Switzerland is small and neutral!
-                                        We are more like Germany, ambitious and misunderstood!
-                                    </div>
-                                    <div class="timeline-footer">
-                                        <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
+                        <table class="table" id="timeLineTable">
+                            <thead>
+                                <tr>
+                                    <th>#No</th>
+                                    <th>Date : Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php $i = 1; @endphp
+                                @foreach ($timeLine as $item)
+                                <tr>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $item->date }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="settings">
+                        <div class="row">
+                            @foreach ($file as $doc)
+                            <div style="width: 350px;" class="px-2">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <a href="http://172.16.0.3/fighterimg/file/{{ $doc->image }}" data-fancybox="gallery-2">
+                                            <img src="http://172.16.0.3/fighterimg/file/{{ $doc->image }}" width="100%" />
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <!-- END timeline item -->
-                            <!-- timeline time label -->
-                            <div class="time-label">
-                                <span class="bg-success">
-                                    3 Jan. 2014
-                                </span>
-                            </div>
-                            <!-- /.timeline-label -->
-                            <!-- timeline item -->
-                            <div>
-                                <i class="fas fa-camera bg-purple"></i>
-
-                                <div class="timeline-item">
-                                    <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                                    <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                                    <div class="timeline-body">
-                                        <img src="https://placehold.it/150x100" alt="...">
-                                        <img src="https://placehold.it/150x100" alt="...">
-                                        <img src="https://placehold.it/150x100" alt="...">
-                                        <img src="https://placehold.it/150x100" alt="...">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END timeline item -->
-                            <div>
-                                <i class="far fa-clock bg-gray"></i>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- /.tab-pane -->
-
-                    <div class="tab-pane" id="settings">
-                        <form class="form-horizontal">
-                            <div class="form-group row">
-                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputName" placeholder="Name">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputName2" placeholder="Name">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-10">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger">Submit</button>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="tab-pane" id="data">
+                        <pre>{{ json_encode($member, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE) }}</pre>
                     </div>
-                    <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->
             </div><!-- /.card-body -->
@@ -327,5 +270,22 @@
 @endsection
 
 @push('scripts')
+
+<script>
+    $(document).ready(function() {
+        $('#timeLineTable').DataTable({
+            "ordering": true,
+            "searching": true,
+            "paging": true,
+            "info": true,
+            "lengthChange": false,
+            "pageLength": 10,
+        });
+    });
+
+    Fancybox.bind("[data-fancybox]", {
+        // Your custom options
+    });
+</script>
 
 @endpush

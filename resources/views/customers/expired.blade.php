@@ -1,42 +1,52 @@
 @extends('layouts.admin')
 @section('title', 'รายชื่อสมาชิก')
+@section('head', 'รายชื่อสมาชิก')
+@section('link', 'customers')
 
 @section('content')
 <div class="row">
-    <div class="col p-2">
+    <div class="col p-1">
         <div class="card">
-            <div class="card-header bg-dark">
-                <h1 class="card-title">รายชื่อสมาชิก</h1>
-            </div>
+            <!-- <div class="card-header bg-dark">
+                <h2>รายชื่อสมาชิก ที่ยังมีอายุการใช้งาน</h2>
+            </div> -->
             <div class="card-body">
-                <table class="table table-bordered" id="example1">
-                    <thead>
+                <table class="table table-bordered table-hover" id="example1">
+                    <thead class="bg-dark">
                         <tr>
-                            <th hidden>ID</th>
-                            <th>หมายเลขสมาชิก</th>
+                            <th hidden>id</th>
+                            <th>ดู</th>
+                            <th>เลขสมาชิก</th>
                             <th>ชื่อ</th>
-                            <th>หมายเลขบิล</th>
+                            <th>บิล</th>
                             <th>สัญชาติ</th>
                             <th>บริการ</th>
                             <th>เริ่ม</th>
                             <th>หมด</th>
-                            <th>บันทึก</th>
+                            <th hidden>บันทึก</th>
+                            <th>วัน</th>
                             <th>ผู้บันทึก</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($customers as $c)
+                        @foreach ($customers as $item)
                         <tr>
-                            <td hidden>{{ $c->id }}</td>
-                            <td>{{ $c->m_card }}</td>
-                            <td>{{ $c->fname }}</td>
-                            <td>{{ $c->invoice }}</td>
-                            <td>{{ $c->nationalty }}</td>
-                            <td>{{ $c->product_name }}</td>
-                            <td>{{ $c->sta_date }}</td>
-                            <td>{{ $c->exp_date }}</td>
-                            <td>{{ $c->date }}</td>
-                            <td>{{ $c->AddBy }}</td>
+                            <td hidden>{{ $item->id }}</td>
+                            <td>
+                                <a class="badge badge-info" href="{{ route('customers.profile',$item->id) }}">
+                                    เข้าดูโปรไฟล์
+                                </a>
+                            </td>
+                            <td>{{ $item->m_card }}</td>
+                            <td>{{ $item->fname }}</td>
+                            <td>{{ $item->invoice }}</td>
+                            <td>{{ $item->nationalty }}</td>
+                            <td>{{ $item->product_name }}</td>
+                            <td>{{ date('d-m-Y', strtotime( $item->sta_date )) }}</td>
+                            <td>{{ date('d-m-Y', strtotime( $item->exp_date )) }}</td>
+                            <td hidden>{{ $item->date }}</td>
+                            <td> <span class="badge badge-info" style="width: 40px;">{{ $item->days_left }}</span></td>
+                            <td>{{ $item->AddBy }}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -55,7 +65,10 @@
             // "lengthChange": true,
             "autoWidth": false,
             "saveState": true,
-            "buttons": [ "excel"]
+            "order": [
+                [0, "desc"]
+            ],
+            // "buttons": ["excel"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 </script>

@@ -29,14 +29,21 @@ class CustomerController extends Controller
 
     public function expired()
     {
-        $customers = DB::table('member')
+         $customers = DB::table('member')
             ->join('products', 'member.package', '=', 'products.id')
             ->where('member.status_code', '=', 4)
             ->where('member.exp_date', '<=', date('Y-m-d'))
-            ->select('member.*', 'products.*')
-            ->orderBy('member.id', 'desc')
-            ->limit(100)
+            ->select('member.*', 'products.product_name')
+            ->limit(50)
+            ->orderBy('member.id', 'desc') 
             ->get();
+
+        foreach ($customers as $customer) {
+            $expDate = \Carbon\Carbon::parse($customer->exp_date);
+            $today = \Carbon\Carbon::today();
+            $customer->days_left = $today->diffInDays($expDate, false);
+        }
+
         return view('customers.expired', ['customers' => $customers]);
     }
 
@@ -55,6 +62,11 @@ class CustomerController extends Controller
             $member->days_left = null;
         }
 
+        // Join with products table to get product_name
+        $product = DB::table('products')
+            ->where('id', $member->package)
+            ->first();
+
         $timeLine = DB::table('tb_time')
             ->where('ref_m_card', $member->m_card)
             ->orderBy('time_id', 'desc')
@@ -68,6 +80,7 @@ class CustomerController extends Controller
             'customers.profile',
             [
                 'member' => $member,
+                'product' => $product,
                 'timeLine' => $timeLine,
                 'file' => $file,
             ]

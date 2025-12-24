@@ -18,7 +18,15 @@
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" />
 
+    <style>
+        body {
+            font-family: "Source Sans Pro", "Sarabun", sans-serif;
+        }
+    </style>
+
     @stack('styles')
+
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -34,7 +42,7 @@
                     </a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('dashboard.index') }}" class="nav-link">Home</a>
+                    <a href="@yield('link')" class="nav-link">@yield('head','Home')</a>
                 </li>
             </ul>
 
@@ -48,10 +56,11 @@
                         |
                         <!-- <i class="far fa-user"></i> -->
                         {{ Auth::user()->name ?? 'User Name' }}
+                        <i class="fas fa-caret-down ml-1"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="{{ route('profile.edit') }}" class="dropdown-item">
-                            <i class="fas fa-user mr-2"></i> Profile
+                        <a href="{{ route('profile.edit') }}" class="dropdown-item  disabled">
+                            <i class="fas fa-user mr-2"></i> ข้อมูลส่วนตัว
                         </a>
                         <div class="dropdown-divider"></div>
                         <!-- Authentication -->
@@ -61,7 +70,8 @@
                             <x-responsive-nav-link :href="route('logout')" class="dropdown-item"
                                 onclick="event.preventDefault(); this.closest('form').submit();">
                                 <i class="fas fa-sign-out-alt mr-2"></i>
-                                {{ __('Log Out') }}
+                                <!-- {{ __('Log Out') }} -->
+                                ลงชื่อออก
                             </x-responsive-nav-link>
                         </form>
 
@@ -125,21 +135,30 @@
                             <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    Members
+                                    รายชื่อลูกค้า
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('customers.index') }}" class="nav-link {{ request()->routeIs(['customers.index','customers.profile']) ? 'active' : '' }}">
+                                    <a href="{{ route('customers.index') }}" class="nav-link {{ request()->routeIs(['customers.index']) ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
-                                        <p>Customers Active</p>
+                                        <p>รายชื่อลูกค้า 
+                                            <span class="badge badge-info">
+                                                Active  
+                                            </span>
+                                        </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('customers.expired') }}" class="nav-link {{ request()->routeIs('customers.expired') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
-                                        <p>Customer Expied</p>
+                                        <p>
+                                            รายชื่อลูกค้า 
+                                            <span class="badge badge-danger">
+                                                Expired
+                                            </span>
+                                        </p>
                                     </a>
                                 </li>
                             </ul>
