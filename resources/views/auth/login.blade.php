@@ -501,7 +501,7 @@
                     </svg>
                 </div>
                 <h1 class="logo-title">ไทเกอร์ มวยไทย</h1>
-                <p class="logo-subtitle">tiger muay thai</p>
+                <!-- <p class="logo-subtitle">tiger muay thai</p> -->
             </div>
 
             <!-- Session Status -->
@@ -551,7 +551,7 @@
                     @enderror
                 </div>
 
-                <div class="remember-forgot">
+                <!-- <div class="remember-forgot">
                     <label class="remember-me">
                         <input type="checkbox" id="remember" name="remember">
                         <span>จำฉันไว้</span>
@@ -559,7 +559,7 @@
                     @if (Route::has('password.request'))
                     <a href="{{ route('password.request') }}" class="forgot-link">ลืมรหัสผ่าน?</a>
                     @endif
-                </div>
+                </div> -->
 
                 <button type="submit" class="login-button">
                     เข้าสู่ระบบ
