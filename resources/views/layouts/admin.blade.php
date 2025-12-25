@@ -97,21 +97,23 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
+                        @if ( Auth::user()->role == 'admin' )
                         <!-- Dashboard -->
                         <li class="nav-item">
                             <a href="{{ route('dashboard.index') }}" class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>Dashboard</p>
+                                <p>แดชบอร์ด</p>
                             </a>
                         </li>
-
+                        @endif
                         <!-- Menu with Submenu -->
+
+                        @if ( Auth::user()->role == 'admin' )
                         <li class="nav-item {{ request()->is('users*') ? 'menu-open' : 'menu-open' }}">
                             <a href="#" class="nav-link {{ request()->is('users*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    Users
+                                    ผู้ใช้งาน
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -119,23 +121,24 @@
                                 <li class="nav-item">
                                     <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>All Users</p>
+                                        <p>ตั้งค่าผู้ใช้งาน</p>
                                     </a>
                                 </li>
                                 <!-- <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Add New</p>
-                                </a>
-                            </li> -->
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add New</p>
+                                    </a>
+                                </li> -->
                             </ul>
                         </li>
+                        @endif
 
                         <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : 'menu-open' }}">
                             <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    รายชื่อลูกค้า
+                                    สมาชิกกลุ่ม ลูกค้า
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -143,9 +146,9 @@
                                 <li class="nav-item">
                                     <a href="{{ route('customers.index') }}" class="nav-link {{ request()->routeIs(['customers.index']) ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
-                                        <p>รายชื่อลูกค้า 
-                                            <span class="badge badge-info">
-                                                Active  
+                                        <p>รายชื่อลูกค้า
+                                            <span class="badge badge-success">
+                                                Active
                                             </span>
                                         </p>
                                     </a>
@@ -154,7 +157,7 @@
                                     <a href="{{ route('customers.expired') }}" class="nav-link {{ request()->routeIs('customers.expired') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>
-                                            รายชื่อลูกค้า 
+                                            รายชื่อลูกค้า
                                             <span class="badge badge-danger">
                                                 Expired
                                             </span>
@@ -168,7 +171,7 @@
                             <a href="#" class="nav-link {{ request()->is('sponsers*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    Sponsers
+                                    สมาชิกกลุ่ม พิเศษ
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -176,13 +179,15 @@
                                 <li class="nav-item">
                                     <a href="{{ route('sponsers.index') }}" class="nav-link {{ request()->routeIs('sponsers.index') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
-                                        <p>Sponser Active</p>
+                                        <p>รายชื่อกลุ่มที่</p>
+                                        <span class="badge badge-success">Active</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('sponsers.expired') }}" class="nav-link {{ request()->routeIs('sponsers.expired') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
-                                        <p>Sponser Expied</p>
+                                        <p>รายชื่อกลุ่มที่</p>
+                                        <span class="badge badge-danger">Expied</span>
                                     </a>
                                 </li>
                             </ul>

@@ -1,14 +1,14 @@
 @extends('layouts.admin')
-
-@section('title', 'Users Management')
-@section('page-title', 'Users Management')
+@section('title', 'จัดการ ผู้ใช้งานระบบ')
+@section('head', 'ผู้ใช้งานระบบ')
 @section('content')
-
 <div class="row">
-    <div class="col">
+    <div class="col-md-12 p-1">
         <div class="card">
             <div class="card-header bg-dark">
-                <h3 class="card-title">Users List</h3>
+                <a href="{{ route('users.create') }}" class="btn btn-info">
+                    เพื่มผู้ใช้งานระบบ
+                </a>
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-striped" id="user">
