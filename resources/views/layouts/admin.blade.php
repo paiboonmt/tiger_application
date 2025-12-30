@@ -10,15 +10,16 @@
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
     <link rel="shortcut icon" href="{{ asset('images/logo/logo.png') }}" type="image/x-icon">
-
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css?v=3.2.0">
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap4.min.css">
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" />
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css?v=3.2.0">
+    <!-- fancyapps -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" />
 
     <style>
         body {
@@ -27,7 +28,6 @@
     </style>
 
     @stack('styles')
-
 
 </head>
 
@@ -47,39 +47,6 @@
                     <a href="@yield('link')" class="nav-link">@yield('head','Home')</a>
                 </li>
             </ul>
-
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-
-                <!-- User Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        {{__('สวัสดี')}},
-                        |
-                        <!-- <i class="far fa-user"></i> -->
-                        {{ Auth::user()->name ?? 'User Name' }}
-                        <i class="fas fa-caret-down ml-1"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="{{ route('profile.edit') }}" class="dropdown-item  disabled">
-                            <i class="fas fa-user mr-2"></i> ข้อมูลส่วนตัว
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-responsive-nav-link :href="route('logout')" class="dropdown-item"
-                                onclick="event.preventDefault(); this.closest('form').submit();">
-                                <i class="fas fa-sign-out-alt mr-2"></i>
-                                <!-- {{ __('Log Out') }} -->
-                                ลงชื่อออก
-                            </x-responsive-nav-link>
-                        </form>
-
-                    </div>
-                </li>
-            </ul>
         </nav>
 
         <!-- Main Sidebar -->
@@ -95,6 +62,14 @@
 
             <!-- Sidebar -->
             <div class="sidebar">
+
+                <div class="user-panel d-flex text-center">
+                    <div class="info text-center w-100">
+                        <a href="#">
+                          <span>You are  : </span>  {{ Auth::user()->name ?? 'User Name' }}
+                        </a>
+                    </div>
+                </div>
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -219,21 +194,19 @@
                             </ul>
                         </li>
 
-                        <!-- Reports -->
-                        <!-- <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-box"></i>
-                            <p>Reports</p>
-                        </a>
-                    </li> -->
+                        <!-- logout -->
+                        <li class="nav-item">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <x-responsive-nav-link :href="route('logout')" class="nav-link"
+                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>ลงชื่อออก</p>
+                                </x-responsive-nav-link>
+                            </form>
+                        </li>
 
-                        <!-- Settings -->
-                        <!-- <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-cog"></i>
-                            <p>Settings</p>
-                        </a>
-                    </li> -->
+
 
                         @yield('sidebar')
                     </ul>
@@ -295,28 +268,31 @@
         </footer>
     </div>
 
-    <!-- jQuery -->
-    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
-    <script src="https://adminlte.io/themes/v3/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://adminlte.io/themes/v3/dist/js/adminlte.min.js?v=3.2.0"></script>
-
     <!-- Vite JS -->
     @vite(['resources/js/app.js'])
 
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="https://adminlte.io/themes/v3/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="https://adminlte.io/themes/v3/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/jszip/jszip.min.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+    <!-- AdminLTE App -->
+    <script src="https://adminlte.io/themes/v3/dist/js/adminlte.min.js?v=3.2.0"></script>
     <!-- fancyapps -->
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js"></script>
-    <!-- DataTables Buttons -->
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
 
     @stack('scripts')
 </body>

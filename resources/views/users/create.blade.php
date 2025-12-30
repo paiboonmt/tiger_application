@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-md-6 mx-auto p-1 ">
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('users.store') }}">
             @csrf
             <div class="card p-3">
                 <div class="row">

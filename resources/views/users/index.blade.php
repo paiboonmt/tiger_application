@@ -14,10 +14,11 @@
                 <table class="table table-bordered table-striped" id="user">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
+                            <th>ไอดี</th>
+                            <th>ชื่อ</th>
+                            <th>อีเมล</th>
+                            <th>สิทธิ</th>
+                            <th>จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,6 +28,16 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->role }}</td>
+                            <td class="text-center">
+                               <div class="group-btn" role="group" aria-label="Basic example">
+                                      <a href="#" class="btn btn-sm btn-warning">แก้ไข</a>
+                                      <form action="#" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('ยืนยันการลบข้อมูล ?')">ลบ</button>
+                                      </form>
+                               </div>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

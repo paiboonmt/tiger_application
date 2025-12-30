@@ -4,32 +4,45 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
+
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $users = User::all();
         return view('users.index', compact('users'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('users.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+            // "_token" => "OjxoHqcWd0bn4AFLzWvnW6d2rMXiQ7XzdZUNW4sb"
+            // "name" => "Test1"
+            // "email" => "test1@local.com"
+            // "password" => "test123"
+            // "password_confirmation" => "test123"
+
+        $request->validate([
+            'name' => ['required',],
+            'email' => ['required','unique:'.User::class],
+            'password' => ['required'],
+            'password_confirmation' => ['required','same:password'],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('users.index');
+        
     }
 
     /**
