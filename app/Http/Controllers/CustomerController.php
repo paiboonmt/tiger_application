@@ -23,7 +23,7 @@ class CustomerController extends Controller
             $today = \Carbon\Carbon::today();
             $customer->days_left = $today->diffInDays($expDate, false);
         }
-
+        // dd($customers);
         return view('customers.index', ['customers' => $customers]);
     }
 

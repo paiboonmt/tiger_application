@@ -96,7 +96,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
+                                    <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.index','users.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>ตั้งค่าผู้ใช้งาน</p>
                                     </a>
