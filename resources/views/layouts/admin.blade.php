@@ -86,7 +86,7 @@
                         <!-- Menu with Submenu -->
 
                         @if ( Auth::user()->role == 'admin' )
-                        <li class="nav-item {{ request()->is('users*') ? 'menu-open' : 'menu-open' }}">
+                        <li class="nav-item {{ request()->is('users*') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ request()->is('users*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
@@ -111,7 +111,7 @@
                         </li>
                         @endif
 
-                        <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : 'menu-open' }}">
+                        <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
@@ -144,7 +144,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item {{ request()->is('sponsers*') ? 'menu-open' : 'menu-open' }}">
+                        <li class="nav-item {{ request()->is('sponsers*') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ request()->is('sponsers*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
@@ -170,7 +170,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item {{ request()->is('report*') ? 'menu-open' : 'menu-open' }}">
+                        <li class="nav-item {{ request()->is('report*') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ request()->is('report*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-print"></i>
                                 <p>

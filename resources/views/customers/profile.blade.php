@@ -21,10 +21,10 @@
                         <div class="row">
                             <div class="col-2 text-center">
                                 <a
-                                    href="http://172.16.0.3/memberimg/img/{{ $member->image }}"
+                                    href="http://119.63.78.98:8889/memberimg/img/{{ $member->image }}"
                                     data-fancybox="gallery-1">
                                     <img
-                                        src="http://172.16.0.3/memberimg/img/{{ $member->image }}"
+                                        src="http://119.63.78.98:8889/memberimg/img/{{ $member->image }}"
                                         class="img-fluid rounded" style="max-width: 200px;"/>
                                 </a>
                             </div>
@@ -203,11 +203,11 @@
                                     <div class="card-body text-center">
 
                                         <a
-                                            href="http://172.16.0.3/memberimg/file/{{ $doc->image }}"
+                                            href="http://119.63.78.98:8889/memberimg/file/{{ $doc->image }}"
                                             data-fancybox="gallery-2"
                                             data-caption="Optional caption,&lt;br /&gt;that can contain &lt;em&gt;HTML&lt;/em&gt; code">
                                             <img
-                                                src="http://172.16.0.3/memberimg/file/{{ $doc->image }}"
+                                                src="http://119.63.78.98:8889/memberimg/file/{{ $doc->image }}"
                                                 width="100%" />
                                         </a>
 

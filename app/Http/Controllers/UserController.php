@@ -49,8 +49,10 @@ class UserController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
+    {       
+        $data = User::find($id);
+        // dd($data);
+        return view('users.edit',compact('data'));
     }
 
     /**
@@ -66,7 +68,24 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request->all(),$id);
+        //   "_token" => "2HIsJakS3RUhiOWTc11eplGEd9s204bbOrcEeBI5"
+        // "name" => "Test"
+        // "email" => "test1@local.com"
+        // "role" => "user"
+        // "password" => null
+        // "password_confirmation" => null
+
+        $user = User::find($id);
+        if ( $request->password == null) {   
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->role = $request->role;
+            $user->save();
+            return redirect()->route('users.index');
+        }
+        
+
     }
 
     /**

@@ -33,8 +33,8 @@
                         <tr>
                             <td hidden>{{ $item->id }}</td>
                             <td>
-                                <a href="http://172.16.0.3/memberimg/img/{{ $item->image }}" target="_blank">
-                                    <img src="http://172.16.0.3/memberimg/img/{{ $item->image }}"
+                                <a href="http://119.63.78.98:8889/memberimg/img/{{ $item->image }}" target="_blank">
+                                    <img src="http://119.63.78.98:8889/memberimg/img/{{ $item->image }}"
                                         class="img-size-50 mr-2 img-circle"
                                         style="width:40px; height:40px;"
                                     >

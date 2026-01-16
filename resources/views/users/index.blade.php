@@ -2,6 +2,7 @@
 @section('title', 'จัดการ ผู้ใช้งานระบบ')
 @section('head', 'ผู้ใช้งานระบบ')
 @section('content')
+
 <div class="row">
     <div class="col-md-12 p-1">
         <div class="card">
@@ -11,7 +12,7 @@
                 </a>
             </div>
             <div class="card-body">
-                <table class="table table-bordered table-striped" id="user">
+                <table class="table table-sm table-bordered table-striped" id="user">
                     <thead>
                         <tr>
                             <th>ไอดี</th>
@@ -23,21 +24,20 @@
                     </thead>
                     <tbody>
                         @foreach($users as $user)
-                       
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->role }}</td>
-                            <td class="text-center">
-                               <div class="group-btn" role="group" aria-label="Basic example">
-                                      <a href="#" class="btn btn-sm btn-warning">แก้ไข</a>
-                                      <form action="#" method="POST" class="d-inline">
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <form action="#" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('ยืนยันการลบข้อมูล ?')">ลบ</button>
-                                      </form>
-                               </div>
+                                        <a href="{{ route( 'users.edit',$user->id ) }}" class="btn btn-warning">แก้ไข</a>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('ยืนยันการลบข้อมูล ?')">ลบ</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
