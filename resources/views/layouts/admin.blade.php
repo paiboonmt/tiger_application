@@ -185,6 +185,9 @@
                                         <p>รายงานเข้าใช้บริการ</p>
                                     </a>
                                 </li>
+
+
+                                
                                 <li class="nav-item">
                                     <a href="{{ route('report.customerTotal') }}" class="nav-link {{ request()->routeIs('report.customerTotal') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
