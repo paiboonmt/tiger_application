@@ -75,13 +75,20 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         @if ( Auth::user()->role == 'admin' )
-                        <!-- Dashboard -->
-                        <li class="nav-item">
-                            <a href="{{ route('dashboard.index') }}" class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>แดชบอร์ด</p>
-                            </a>
-                        </li>
+                            <!-- Dashboard Tiger muaythai -->
+                            <li class="nav-item">
+                                <a href="{{ route('dashboard.index') }}" class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>แดชบอร์ด</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="" class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-sign-in-alt"></i>
+                                    <p>เช็คอินเข้าใช้บริการ</p>
+                                </a>
+                            </li>
                         @endif
                         <!-- Menu with Submenu -->
 
