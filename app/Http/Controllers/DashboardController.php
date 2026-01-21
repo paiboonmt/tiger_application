@@ -35,6 +35,13 @@ class DashboardController extends Controller
             ->where('status_code', 4)
             ->whereDate('date', DB::raw('CURRENT_DATE'))
             ->count('id');
+
+        // จำนวนสมาชิกที่เข้าใช้บริการฟรี
+        $freeMemberTotals = DB::table('member')
+            ->where('status_code', 3)
+            ->whereDate('exp_date', '>=', DB::raw('CURRENT_DATE'))
+            ->count('id');
+
         // Age group counts
         $ageRanges = [
             'น้อยกว่า 18' => [0, 17],
@@ -70,6 +77,14 @@ class DashboardController extends Controller
             ->limit(12)
             ->get();
 
+        // Total report sale total year
+        $saleReportYear = DB::table('orders')
+            ->selectRaw("DATE_FORMAT(`date`, '%Y') AS year, SUM(total) AS sum")
+            ->groupByRaw("DATE_FORMAT(`date`, '%Y')")
+            ->orderBy('year', 'DESC')
+            ->limit(3)
+            ->get();
+
         return view(
             'dashboard',
             [
@@ -80,6 +95,8 @@ class DashboardController extends Controller
                 'ageCounts' => $ageCounts ?? [],
                 'saleReport1Month' => $saleReport1Month ?? [],  
                 'saleReport12Month' => $saleReport12Month ?? [],
+                'saleReportYear' => $saleReportYear ?? [],
+                'freeMemberTotals' => $freeMemberTotals ?? 0,
             ]
         );
     }
