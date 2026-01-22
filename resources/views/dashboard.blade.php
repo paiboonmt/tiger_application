@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard | Tiger Application')
-@section('page-title', 'Dashboard')
+@section('title', 'ไทเกอร์ มวยไทย | แดชบอร์ด')
+@section('page-title', 'แดชบอร์ด')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item active">Dashboard</li>
+    <li class="breadcrumb-item active">แดชบอร์ด</li>
 @endsection
 
 @section('content')
-    <!-- Info boxes -->
+
     <div class="row">
 
         <div class="col-12 p-2 col-sm-6 col-md-3">
@@ -52,7 +52,6 @@
         </div>
     </div>
 
-    <!-- Main row -->
     <div class="row">
         <!-- Left col -->
         <div class="col-md-4">
@@ -183,7 +182,6 @@
         </div>
     </div>
 
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -199,7 +197,6 @@
             </div>
         </div>
     </div>
-
 
 @endsection
 

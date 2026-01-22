@@ -1,58 +1,44 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard | Tiger Application')
-@section('page-title', 'Dashboard')
+@section('title', 'ไทเกอร์ มวยไทย | แดชบอร์ด')
+@section('page-title', 'แดชบอร์ด')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item active">Dashboard</li>
+    <li class="breadcrumb-item active">แดชบอร์ด</li>
 @endsection
 
 @section('content')
-    <!-- Info boxes -->
     <div class="row">
-
-        <div class="col-12 p-2 col-sm-6 col-md-3">
+        <div class="col-12 p-2 col-sm-6 col-md-4">
             <div class="info-box">
                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">จำนวนลูกค้าที่เป็นสมาชิก</span>
-                    <span class="info-box-number"></span>
+                    <span class="info-box-number">{{ $dataMembers['totalMembers'] }}</span>
                 </div>
             </div>
         </div>
 
-        <div class="col-12 p-2 col-sm-6 col-md-3">
+        <div class="col-12 p-2 col-sm-6 col-md-4">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">ลูกค้าสมัครสมาชิกใหม่วันนี้</span>
-                    <span class="info-box-number"></span>
+                    <span class="info-box-number">{{ $dataNewMember['totalNewMembers'] }}</span>
                 </div>
             </div>
         </div>
 
-        <div class="col-12 p-2 col-sm-6 col-md-3">
+        <div class="col-12 p-2 col-sm-6 col-md-4">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-check-double"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">จำนวนลูกค้าที่เข้ามาวันนี้</span>
-                    <span class="info-box-number"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 p-2 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fab fa-first-order-alt"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">จำนวนสมาชิกที่เข้าใช้บริการฟรี</span>
-                    <span class="info-box-number"></span>
+                    <span class="info-box-number">{{ $dataCheckin['totalCheckins'] }}</span>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Main row -->
     <div class="row">
         <!-- Left col -->
         <div class="col-md-4">
@@ -133,7 +119,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -159,8 +144,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -176,8 +159,6 @@
             </div>
         </div>
     </div>
-
-
 @endsection
 
 @push('scripts')
@@ -264,8 +245,7 @@
                 ]
             });
         });
-    </script>
-    <script>
+ 
         $(document).ready(function () {
             $('#table-service-sales').DataTable({
                 "paging": true,
@@ -281,9 +261,7 @@
                 ]
             });
         });
-    </script>
 
-    <script>
         function refreshData() {
             window.location.reload('#table-service-sales');
         }
