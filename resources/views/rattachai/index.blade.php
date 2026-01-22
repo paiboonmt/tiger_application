@@ -16,7 +16,7 @@
                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">จำนวนลูกค้าที่เป็นสมาชิก</span>
-                    <span class="info-box-number">{{ $data }}</span>
+                    <span class="info-box-number"></span>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">ลูกค้าสมัครสมาชิกใหม่วันนี้</span>
-                    <span class="info-box-number">{{ $newMemberTotals }} </span>
+                    <span class="info-box-number"></span>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-check-double"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">จำนวนลูกค้าที่เข้ามาวันนี้</span>
-                    <span class="info-box-number">{{ $checkInTotals }}</span>
+                    <span class="info-box-number"></span>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                 <span class="info-box-icon bg-danger elevation-1"><i class="fab fa-first-order-alt"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">จำนวนสมาชิกที่เข้าใช้บริการฟรี</span>
-                    <span class="info-box-number">{{ $freeMemberTotals }}</span>
+                    <span class="info-box-number"></span>
                 </div>
             </div>
         </div>
@@ -73,12 +73,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($saleReport1Month as $report)
-                                <tr>
-                                    <td>{{ $report->order_date }}</td>
-                                    <td>{{ number_format($report->sum, 2) }} บาท</td>
-                                </tr>
-                            @endforeach
+                           
                         </tbody>
                     </table>
                 </div>
@@ -103,12 +98,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($saleReport12Month as $report)
-                                <tr>
-                                    <td>{{ $report->month }}</td>
-                                    <td>{{ number_format($report->sum, 2) }} บาท</td>
-                                </tr>
-                            @endforeach
+                           
                         </tbody>
                     </table>
                 </div>
@@ -133,18 +123,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($saleReportYear as $report)
-                                <tr>
-                                    <td>{{ $report->year }}</td>
-                                    <td>{{ number_format($report->sum, 2) }} บาท</td>
-                                </tr>
-                            @endforeach
+                            
                         </tbody>
                         <tfoot>
-                            <tr>
-                                <td>รวม</td>
-                                <td>{{ number_format($saleReportYear->sum('sum'), 2) }} บาท</td>
-                            </tr>
+                           
                         </tfoot>
                     </table>
                 </div>
@@ -158,7 +140,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-chart-area mr-1"></i>
-                        บริการที่ขายดีที่สุด เดือน {{ $month }}
+                        บริการที่ขายดีที่สุด เดือน
                     </h3>
                 </div>
                 <div class="card-body">
@@ -170,12 +152,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($serviceSales as $report)
-                                <tr>
-                                    <td>{{ $report->product_name }}</td>
-                                    <td>{{ number_format($report->sum_total, 2) }} บาท</td>
-                                </tr>
-                            @endforeach
+                            
                         </tbody>
                     </table>
                 </div>
@@ -194,7 +171,7 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <canvas id="monthlySalesChart" height="80" data-sales-data='@json($saleReport12Month)'></canvas>
+                  
                 </div>
             </div>
         </div>

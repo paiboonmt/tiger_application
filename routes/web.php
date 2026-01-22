@@ -4,6 +4,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\RattachaiController;
 use App\Http\Controllers\SponserController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,8 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     // DashboardController
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    // RattachaiController
+    Route::get('/rattachai', [RattachaiController::class, 'index'])->name('rattachai.index');
     // users.index
     Route::get('users', [UserController::class,'index'])->name('users.index');
     Route::get('users/create', [UserController::class,'create'])->name('users.create');

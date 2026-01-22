@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use function Laravel\Prompts\select;
 
 class DashboardController extends Controller
 {
@@ -85,6 +86,41 @@ class DashboardController extends Controller
             ->limit(3)
             ->get();
 
+        function month($m)
+        {
+            $months = [
+                '01' => 'มกราคม',
+                '02' => 'กุมภาพันธ์',
+                '03' => 'มีนาคม',
+                '04' => 'เมษายน',
+                '05' => 'พฤษภาคม',
+                '06' => 'มิถุนายน',
+                '07' => 'กรกฎาคม',
+                '08' => 'สิงหาคม',
+                '09' => 'กันยายน',
+                '10' => 'ตุลาคม',
+                '11' => 'พฤศจิกายน',
+                '12' => 'ธันวาคม'
+            ];
+            return $months[$m] ?? '';
+        }
+
+        $m = month(date('m'));
+
+        $serviceSales = DB::table('order_details')
+            ->select(
+                'product_id',
+                'product_name',
+                'total',
+                DB::raw('COUNT(*) as total_orders'),
+                DB::raw('SUM(quantity) as total_quantity_sold'),
+                DB::raw('SUM(total) as sum_total')
+            )
+            ->where('date', '>=', Carbon::now()->subMonth())
+            ->groupBy('product_id', 'product_name', 'total')
+            ->orderBy('sum_total', 'DESC')
+            ->get();
+
         return view(
             'dashboard',
             [
@@ -93,10 +129,12 @@ class DashboardController extends Controller
                 'checkInTotals' => $checkInTotals->quantity ?? 0,
                 'newMemberTotals' => $newMemberTotals ?? 0,
                 'ageCounts' => $ageCounts ?? [],
-                'saleReport1Month' => $saleReport1Month ?? [],  
+                'saleReport1Month' => $saleReport1Month ?? [],
                 'saleReport12Month' => $saleReport12Month ?? [],
                 'saleReportYear' => $saleReportYear ?? [],
                 'freeMemberTotals' => $freeMemberTotals ?? 0,
+                'serviceSales' => $serviceSales ?? [],
+                'month' => $m ?? [],
             ]
         );
     }

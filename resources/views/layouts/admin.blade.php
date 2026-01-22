@@ -13,9 +13,12 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet"
+        href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet"
+        href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet"
+        href="https://adminlte.io/themes/v3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css?v=3.2.0">
     <!-- fancyapps -->
@@ -44,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="@yield('link')" class="nav-link">@yield('head','Home')</a>
+                    <a href="@yield('link')" class="nav-link">@yield('head', 'Home')</a>
                 </li>
             </ul>
         </nav>
@@ -53,10 +56,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{ url('/dashboard') }}" class="brand-link">
-                <img src="{{ asset('images/logo/logo.png') }}"
-                    alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="{{ asset('images/logo/logo.png') }}" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Tiger Application</span>
             </a>
 
@@ -66,22 +67,56 @@
                 <div class="user-panel d-flex text-center">
                     <div class="info text-center w-100">
                         <a href="#">
-                          <span>You are  : </span>  {{ Auth::user()->name ?? 'User Name' }}
+                            <span>You are : </span> {{ Auth::user()->name ?? 'User Name' }}
                         </a>
                     </div>
                 </div>
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        @if ( Auth::user()->role == 'admin' )
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        @if (Auth::user()->role == 'admin')
                             <!-- Dashboard Tiger muaythai -->
                             <li class="nav-item">
-                                <a href="{{ route('dashboard.index') }}" class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
+                                <a href="{{ route('dashboard.index') }}"
+                                    class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>แดชบอร์ด</p>
+                                    <p>ไทเกอร์ มวยไทย</p>
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('rattachai.index') }}"
+                                    class="nav-link {{ request()->routeIs('rattachai.*') ? 'active' : '' }} ">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>รัตชัย มวยไทย</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>นักสู้ มวยไทย</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>ร้านนวด สาขา 1</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>ร้านนวด สาขา 2</p>
+                                </a>
+                            </li>
+
+
+
 
                             <li class="nav-item">
                                 <a href="" class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
@@ -92,30 +127,31 @@
                         @endif
                         <!-- Menu with Submenu -->
 
-                        @if ( Auth::user()->role == 'admin' )
-                        <li class="nav-item {{ request()->is('users*') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ request()->is('users*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>
-                                    ผู้ใช้งาน
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.index','users.create') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>ตั้งค่าผู้ใช้งาน</p>
-                                    </a>
-                                </li>
-                                <!-- <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add New</p>
-                                    </a>
-                                </li> -->
-                            </ul>
-                        </li>
+                        @if (Auth::user()->role == 'admin')
+                            <li class="nav-item {{ request()->is('users*') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ request()->is('users*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        ผู้ใช้งาน
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('users.index') }}"
+                                            class="nav-link {{ request()->routeIs('users.index', 'users.create') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>ตั้งค่าผู้ใช้งาน</p>
+                                        </a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                                        <a href="#" class="nav-link">
+                                                            <i class="far fa-circle nav-icon"></i>
+                                                            <p>Add New</p>
+                                                        </a>
+                                                    </li> -->
+                                </ul>
+                            </li>
                         @endif
 
                         <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : '' }}">
@@ -128,7 +164,8 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('customers.index') }}" class="nav-link {{ request()->routeIs(['customers.index']) ? 'active' : '' }}">
+                                    <a href="{{ route('customers.index') }}"
+                                        class="nav-link {{ request()->routeIs(['customers.index']) ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>รายชื่อลูกค้า
                                             <span class="badge badge-success">
@@ -138,7 +175,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('customers.expired') }}" class="nav-link {{ request()->routeIs('customers.expired') ? 'active' : '' }}">
+                                    <a href="{{ route('customers.expired') }}"
+                                        class="nav-link {{ request()->routeIs('customers.expired') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>
                                             รายชื่อลูกค้า
@@ -161,14 +199,16 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('sponsers.index') }}" class="nav-link {{ request()->routeIs('sponsers.index') ? 'active' : '' }}">
+                                    <a href="{{ route('sponsers.index') }}"
+                                        class="nav-link {{ request()->routeIs('sponsers.index') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>รายชื่อกลุ่มที่</p>
                                         <span class="badge badge-success">Active</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('sponsers.expired') }}" class="nav-link {{ request()->routeIs('sponsers.expired') ? 'active' : '' }}">
+                                    <a href="{{ route('sponsers.expired') }}"
+                                        class="nav-link {{ request()->routeIs('sponsers.expired') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>รายชื่อกลุ่มที่</p>
                                         <span class="badge badge-danger">Expied</span>
@@ -187,14 +227,16 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('report.checkin') }}" class="nav-link {{ request()->routeIs(['report.checkin','report.checkin.search']) ? 'active' : '' }}">
+                                    <a href="{{ route('report.checkin') }}"
+                                        class="nav-link {{ request()->routeIs(['report.checkin', 'report.checkin.search']) ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>รายงานเข้าใช้บริการ</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="{{ route('report.customerTotal') }}" class="nav-link {{ request()->routeIs('report.customerTotal') ? 'active' : '' }}">
+                                    <a href="{{ route('report.customerTotal') }}"
+                                        class="nav-link {{ request()->routeIs('report.customerTotal') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>รายงานจำนวนลูกค้า</p>
                                     </a>
@@ -244,21 +286,21 @@
             <section class="content">
                 <div class="container-fluid">
                     @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     @endif
 
                     @if(session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ session('error') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     @endif
 
                     @yield('content')
