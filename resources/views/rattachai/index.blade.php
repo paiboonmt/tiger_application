@@ -59,7 +59,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                           
+                            @foreach ( $dataDalySale as $sale )
+                                <tr>
+                                    <td>{{ $sale->date }}</td>
+                                    <td>{{ number_format($sale->sum, 2) }} บาท</td>
+                                </tr>
+                            
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

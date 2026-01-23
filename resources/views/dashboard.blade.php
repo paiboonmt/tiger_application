@@ -83,6 +83,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- Right col -->
         <div class="col-md-4">
             <!-- Info Box -->
