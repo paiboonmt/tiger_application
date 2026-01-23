@@ -24,7 +24,8 @@ class RattachaiController extends Controller
         $dalySale = "https://api.tigermuaythai-app.com/api/daily-sales";
         $responseDalySale = Http::get($dalySale);
         $dataDalySale = $responseDalySale->json();
-  
-        return view('rattachai.index', compact('dataMembers', 'dataNewMember', 'dataCheckin','dataDalySale'));
+
+        return view('rattachai.index', compact('dataMembers', 'dataNewMember', 'dataCheckin', 'dataDalySale'));
+
     }
 }
