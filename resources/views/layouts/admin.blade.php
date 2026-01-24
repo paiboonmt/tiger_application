@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'AdminLTE 3')</title>
-
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
     <link rel="shortcut icon" href="{{ asset('images/logo/logo.png') }}" type="image/x-icon">
@@ -77,10 +76,9 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         @if (Auth::user()->role == 'admin')
-                            <!-- Dashboard Tiger muaythai -->
                             <li class="nav-item">
-                                <a href="{{ route('dashboard.index') }}"
-                                    class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
+                                <a href="{{ route('tiger.index') }}"
+                                    class="nav-link {{ request()->routeIs('tiger.*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>ไทเกอร์ มวยไทย</p>
                                 </a>
@@ -114,10 +112,6 @@
                                     <p>ร้านนวด สาขา 2</p>
                                 </a>
                             </li>
-
-
-
-
                             <li class="nav-item">
                                 <a href="" class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-sign-in-alt"></i>
@@ -144,12 +138,6 @@
                                             <p>ตั้งค่าผู้ใช้งาน</p>
                                         </a>
                                     </li>
-                                    <!-- <li class="nav-item">
-                                                        <a href="#" class="nav-link">
-                                                            <i class="far fa-circle nav-icon"></i>
-                                                            <p>Add New</p>
-                                                        </a>
-                                                    </li> -->
                                 </ul>
                             </li>
                         @endif

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class TigerController extends Controller
 {
     public function index()
     {
@@ -27,19 +28,19 @@ class DashboardController extends Controller
 
         // Check-in today total
         $checkInTotals = DB::table('totel')
-            ->whereDate('date',  now()->toDateString())
+            ->whereDate('date', now()->toDateString())
             ->first();
 
         // New members today total
         $newMemberTotals = DB::table('member')
             ->where('status_code', 4)
-            ->whereDate('date',  now()->toDateString())
+            ->whereDate('date', now()->toDateString())
             ->count('id');
 
         // จำนวนสมาชิกที่เข้าใช้บริการฟรี
         $freeMemberTotals = DB::table('member')
             ->where('status_code', 3)
-            ->whereDate('exp_date', '>=',  now()->toDateString())
+            ->whereDate('exp_date', '>=', now()->toDateString())
             ->count('id');
 
         // Age group counts
@@ -55,7 +56,7 @@ class DashboardController extends Controller
         foreach ($ageRanges as $key => [$min, $max]) {
             $ageCounts[$key] = DB::table('member')
                 ->where('status_code', 4)
-                ->whereDate('exp_date', '>=',  now()->toDateString())
+                ->whereDate('exp_date', '>=', now()->toDateString())
                 ->whereRaw("TIMESTAMPDIFF(YEAR, birthday, CURDATE()) BETWEEN ? AND ?", [$min, $max])
                 ->count('id');
         }
@@ -121,7 +122,7 @@ class DashboardController extends Controller
             ->get();
 
         return view(
-            'dashboard',
+            'tiger.index',
             [
                 'data' => $data ?? 0,
                 'typeTotals' => $typeTotals ?? [],

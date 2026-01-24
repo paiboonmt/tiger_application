@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'รัตชัย | แดชบอร์ด')
+@section('title', 'ไทเกอร์ มวยไทย | แดชบอร์ด')
 @section('page-title', 'แดชบอร์ด')
 
 @section('breadcrumb')
@@ -8,38 +8,52 @@
 @endsection
 
 @section('content')
+
     <div class="row">
-        <div class="col-12 p-2 col-sm-6 col-md-4">
+
+        <div class="col-12 p-2 col-sm-6 col-md-3">
             <div class="info-box">
                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">จำนวนลูกค้าที่เป็นสมาชิก</span>
-                    <span class="info-box-number">{{ $dataMembers['totalMembers'] }}</span>
+                    <span class="info-box-number">{{ $data }}</span>
                 </div>
             </div>
         </div>
 
-        <div class="col-12 p-2 col-sm-6 col-md-4">
+        <div class="col-12 p-2 col-sm-6 col-md-3">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">ลูกค้าสมัครสมาชิกใหม่วันนี้</span>
-                    <span class="info-box-number">{{ $dataNewMember['totalNewMembers'] }}</span>
+                    <span class="info-box-number">{{ $newMemberTotals }} </span>
                 </div>
             </div>
         </div>
 
-        <div class="col-12 p-2 col-sm-6 col-md-4">
+        <div class="col-12 p-2 col-sm-6 col-md-3">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-check-double"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">จำนวนลูกค้าที่เข้ามาวันนี้</span>
-                    <span class="info-box-number">{{ $dataCheckin['totalCheckins'] }}</span>
+                    <span class="info-box-number">{{ $checkInTotals }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 p-2 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fab fa-first-order-alt"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">จำนวนสมาชิกที่เข้าใช้บริการฟรี</span>
+                    <span class="info-box-number">{{ $freeMemberTotals }}</span>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="row">
+        <!-- Left col -->
         <div class="col-md-4">
             <!-- Card -->
             <div class="card">
@@ -58,10 +72,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dataDalySales as $itemDalySales)
+                            @foreach($saleReport1Month as $report)
                                 <tr>
-                                    <td>{{ \Carbon\Carbon::parse($itemDalySales['order_date'])->format('d/m/Y') }}</td>
-                                    <td>{{ number_format($itemDalySales['sum'], 2) }}</td>
+                                    <td>{{ $report->order_date }}</td>
+                                    <td>{{ number_format($report->sum, 2) }} บาท</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -69,6 +83,8 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Right col -->
         <div class="col-md-4">
             <!-- Info Box -->
             <div class="card">
@@ -87,27 +103,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dataMonthlySales as $itemMonthlySales)
-                                @php
-                                    $thai_months = [
-                                        '01' => 'มกราคม',
-                                        '02' => 'กุมภาพันธ์',
-                                        '03' => 'มีนาคม',
-                                        '04' => 'เมษายน',
-                                        '05' => 'พฤษภาคม',
-                                        '06' => 'มิถุนายน',
-                                        '07' => 'กรกฎาคม',
-                                        '08' => 'สิงหาคม',
-                                        '09' => 'กันยายน',
-                                        '10' => 'ตุลาคม',
-                                        '11' => 'พฤศจิกายน',
-                                        '12' => 'ธันวาคม'
-                                    ];
-                                    $month_num = \Carbon\Carbon::parse($itemMonthlySales['month'])->format('m');
-                                @endphp
+                            @foreach($saleReport12Month as $report)
                                 <tr>
-                                    <td>{{ $thai_months[$month_num] ?? $itemMonthlySales['month'] }}</td>
-                                    <td>{{ number_format($itemMonthlySales['sum'], 2) }}</td>
+                                    <td>{{ $report->month }}</td>
+                                    <td>{{ number_format($report->sum, 2) }} บาท</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -115,6 +114,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-4">
             <!-- Info Box -->
             <div class="card">
@@ -133,23 +133,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dataYearlySales as $itemYearlySales)
+                            @foreach($saleReportYear as $report)
                                 <tr>
-                                    <td>{{ $itemYearlySales['year'] }}</td>
-                                    <td>{{ number_format($itemYearlySales['sum'], 2) }}</td>
+                                    <td>{{ $report->year }}</td>
+                                    <td>{{ number_format($report->sum, 2) }} บาท</td>
                                 </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
-                            @php
-                                $totalYearlySales = 0;
-                                foreach ($dataYearlySales as $itemYearlySales) {
-                                    $totalYearlySales += $itemYearlySales['sum'];
-                                }
-                            @endphp
                             <tr>
-                                <th>รวม</th>
-                                <th>{{ number_format($totalYearlySales, 2) }}</th>
+                                <td>รวม</td>
+                                <td>{{ number_format($saleReportYear->sum('sum'), 2) }} บาท</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -157,13 +151,14 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-chart-area mr-1"></i>
-                        บริการที่ขายดีที่สุด เดือน {{ $currentMonth }}
+                        บริการที่ขายดีที่สุด เดือน {{ $month }}
                     </h3>
                 </div>
                 <div class="card-body">
@@ -175,10 +170,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dataProductPopular as $itemProductPopular)
+                            @foreach($serviceSales as $report)
                                 <tr>
-                                    <td>{{ $itemProductPopular['product_name'] }}</td>
-                                    <td>{{ number_format($itemProductPopular["sum_total"], 2) }}</td>
+                                    <td>{{ $report->product_name }}</td>
+                                    <td>{{ number_format($report->sum_total, 2) }} บาท</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -187,10 +182,79 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-area mr-1"></i>
+                        กราฟยอดขายประจำเดือน
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="monthlySalesChart" height="80" data-sales-data='@json($saleReport12Month)'></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script>
+        // Monthly Sales Chart - Data is passed via data attribute from Blade
+        const monthlyData = JSON.parse(document.getElementById('monthlySalesChart').dataset.salesData);
+        const months = monthlyData.map(item => item.month);
+        const sales = monthlyData.map(item => parseFloat(item.sum));
+
+        const ctx = document.getElementById('monthlySalesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'ยอดขาย (บาท)',
+                    data: sales,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return 'ยอดขาย: ' + context.parsed.y.toLocaleString('th-TH', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                }) + ' บาท';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function (value) {
+                                return value.toLocaleString('th-TH') + ' ฿';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
         $(document).ready(function () {
             $('#table-sale-report-1month').DataTable({
                 "paging": true,
@@ -205,6 +269,8 @@
                     [0, 'desc']
                 ]
             });
+        });
+        $(document).ready(function () {
             $('#table-sale-report-12month').DataTable({
                 "paging": true,
                 "lengthChange": false,
@@ -218,23 +284,29 @@
                     [0, 'desc']
                 ]
             });
+        });
+ 
+        $(document).ready(function () {
             $('#table-service-sales').DataTable({
                 "paging": true,
                 "lengthChange": false,
                 "searching": false,
-                "ordering": true,
+                "ordering": false,
                 "info": false,
                 "autoWidth": false,
                 "responsive": false,
                 "pageLength": 5,
                 "order": [
-                    [1, 'desc']
+                    [0, 'desc']
                 ]
             });
         });
+    </script>
+
+    <!-- <script>
         function refreshData() {
             window.location.reload();
         }
-        setInterval(refreshData, 180000);
-    </script>
+        setInterval(refreshData, 60000);
+    </script> -->
 @endpush

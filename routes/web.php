@@ -7,6 +7,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RattachaiController;
 use App\Http\Controllers\SponserController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TigerController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,13 +20,19 @@ Route::middleware('auth')->group(function () {
     // DashboardController
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     // RattachaiController
-    Route::get('/rattachai', [RattachaiController::class, 'index'])->name('rattachai.index');
-    // users.index
-    Route::get('users', [UserController::class,'index'])->name('users.index');
-    Route::get('users/create', [UserController::class,'create'])->name('users.create');
-    Route::post('users/store', [UserController::class,'store'])->name('users.store');
-    Route::get('users/edit/{id}', [UserController::class,'show'])->name('users.edit');
-    Route::post('users/update/{id}',[UserController::class,'update'])->name('users.update');
+    Route::middleware('admin')->group(function () {
+
+        Route::get('/tiger', [TigerController::class, 'index'])->name('tiger.index');
+
+        Route::get('/rattachai', [RattachaiController::class, 'index'])->name('rattachai.index');
+        // users.index
+        Route::get('users', [UserController::class, 'index'])->name('users.index');
+        Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('users/store', [UserController::class, 'store'])->name('users.store');
+        Route::get('users/edit/{id}', [UserController::class, 'show'])->name('users.edit');
+        Route::post('users/update/{id}', [UserController::class, 'update'])->name('users.update');
+    });
+
 
 
     // CustomerController
