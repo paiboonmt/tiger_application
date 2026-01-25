@@ -153,7 +153,7 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('customers.index') }}"
-                                        class="nav-link {{ request()->routeIs(['customers.index']) ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs(['customers.index','customers.profile']) ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>รายชื่อลูกค้า
                                             <span class="badge badge-success">
@@ -298,7 +298,7 @@
 
         <!-- Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2024 <a href="#">Your Company</a>.</strong>
+            <strong>Copyright &copy; 2026 <a href="#">Tiger Application</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1.0.0
