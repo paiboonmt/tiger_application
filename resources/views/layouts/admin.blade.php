@@ -93,7 +93,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{ route('nukzu.index') }}" class="nav-link {{ request()->routeIs('nukzu.*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>นักสู้ มวยไทย</p>
                                 </a>

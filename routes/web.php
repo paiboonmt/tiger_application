@@ -8,6 +8,7 @@ use App\Http\Controllers\RattachaiController;
 use App\Http\Controllers\SponserController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TigerController;
+use App\Http\Controllers\NukzuController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('admin')->group(function () {
 
         Route::get('/tiger', [TigerController::class, 'index'])->name('tiger.index');
-
+        Route::get('/nukzu', [NukzuController::class, 'index'])->name('nukzu.index');
         Route::get('/rattachai', [RattachaiController::class, 'index'])->name('rattachai.index');
         // users.index
         Route::get('users', [UserController::class, 'index'])->name('users.index');
