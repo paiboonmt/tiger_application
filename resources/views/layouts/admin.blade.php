@@ -66,7 +66,7 @@
                 <div class="user-panel d-flex text-center">
                     <div class="info text-center w-100">
                         <a href="#">
-                            <span>You are : </span> {{ Auth::user()->name ?? 'User Name' }}
+                            <span></span> {{ Auth::user()->name ?? 'User Name' }}
                         </a>
                     </div>
                 </div>
@@ -84,36 +84,37 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('rattachai.index') }}"
                                     class="nav-link {{ request()->routeIs('rattachai.*') ? 'active' : '' }} ">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>รัตชัย มวยไทย</p>
                                 </a>
-                            </li>
+                            </li> --}}
 
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('nukzu.index') }}" class="nav-link {{ request()->routeIs('nukzu.*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>นักสู้ มวยไทย</p>
                                 </a>
-                            </li>
+                            </li> --}}
 
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="" class="nav-link">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>ร้านนวด สาขา 1</p>
                                 </a>
-                            </li>
+                            </li> --}}
 
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="" class="nav-link">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>ร้านนวด สาขา 2</p>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
-                                <a href="" class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
+                                <a href=""
+                                    class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-sign-in-alt"></i>
                                     <p>เช็คอินเข้าใช้บริการ</p>
                                 </a>
@@ -153,7 +154,7 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('customers.index') }}"
-                                        class="nav-link {{ request()->routeIs(['customers.index','customers.profile']) ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs(['customers.index', 'customers.profile']) ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>รายชื่อลูกค้า
                                             <span class="badge badge-success">
@@ -232,6 +233,15 @@
                             </ul>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{ route('nationality.index') }}" class="nav-link {{ request()->is('nationality*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-print"></i>
+                                <p>
+                                    สัญชาติ
+                                </p>
+                            </a>
+                        </li>
+
                         <!-- logout -->
                         <li class="nav-item">
                             <form method="POST" action="{{ route('logout') }}">
@@ -273,7 +283,7 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    @if(session('success'))
+                    @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('success') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -282,7 +292,7 @@
                         </div>
                     @endif
 
-                    @if(session('error'))
+                    @if (session('error'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             {{ session('error') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NationalityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RattachaiController;
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
         Route::post('users/update/{id}', [UserController::class, 'update'])->name('users.update');
     });
 
+    // Nationality
+    Route::get('/nationality',[NationalityController::class , 'index'])->name('nationality.index');
 
 
     // CustomerController
