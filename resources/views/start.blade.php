@@ -1,8 +1,6 @@
 @extends('layouts.admin')
-@section('title', 'จัดการ ผู้ใช้งานระบบ')
+@section('title', 'ไทเกอร์ มวยไทย | เพื่มสินค้า')
 @section('head', 'ผู้ใช้งานระบบ')
-
-
 
 @section('content')
 @endsection

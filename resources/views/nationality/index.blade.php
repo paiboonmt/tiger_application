@@ -15,7 +15,7 @@
                             <h4>สัญชาติ</h4>
                         </div>
                         <div class="col text-end">
-                            <a href="" class="btn btn-success">
+                            <a href="{{ route('nationality.create') }}" class="btn btn-success">
                                 <i class="fas fa-plus"></i>
                                 เพื่มข้อมูล
                             </a>
@@ -32,15 +32,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Thailand</td>
-                                <th>
-                                    <div class="row">
-                                        
-                                    </div>
-                                </th>
-                            </tr>
+                            @foreach ($nationalities as $nationality)
+                                <tr>
+                                    <td>{{ $nationality->id }}</td>
+                                    <td>{{ $nationality->name }}</td>
+                                    <th>
+                                        <form action="{{ route('nationality.delete', $nationality->id) }}" method="POST">
+                                            <div class="btn-group" role="group">
+                                                <a href="{{ route('nationality.edit', $nationality->id) }}"
+                                                    class="btn btn-warning">
+                                                    <i class="fas fa-edit"></i>
+                                                    แก้ไข
+                                                </a>
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                    ลบ
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </th>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -51,5 +64,5 @@
 @endsection
 
 @push('scripts')
- 
+
 @endpush

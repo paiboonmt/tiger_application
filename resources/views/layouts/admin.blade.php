@@ -242,6 +242,16 @@
                             </a>
                         </li>
 
+                        <!-- product -->
+                        <li class="nav-item">
+                            <a href="{{ route('product.index') }}" class="nav-link {{ request()->is('product*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-print"></i>
+                                <p>
+                                    สินค้า
+                                </p>
+                            </a>
+                        </li>
+
                         <!-- logout -->
                         <li class="nav-item">
                             <form method="POST" action="{{ route('logout') }}">
@@ -281,7 +291,7 @@
         </div> -->
 
             <!-- Main content -->
-            <section class="content">
+            <section class="content p-2">
                 <div class="container-fluid">
                     @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">

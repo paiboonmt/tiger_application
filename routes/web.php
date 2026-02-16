@@ -10,6 +10,7 @@ use App\Http\Controllers\SponserController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TigerController;
 use App\Http\Controllers\NukzuController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,7 +38,19 @@ Route::middleware('auth')->group(function () {
 
     // Nationality
     Route::get('/nationality',[NationalityController::class , 'index'])->name('nationality.index');
+    Route::get('/nationality/create',[NationalityController::class , 'create'])->name('nationality.create');
+    Route::post('/nationality/store',[NationalityController::class , 'store'])->name('nationality.store');
+    Route::get('/nationality/edit/{id}',[NationalityController::class , 'edit'])->name('nationality.edit');
+    Route::post('/nationality/update/{id}',[NationalityController::class , 'update'])->name('nationality.update');
+    Route::post('/nationality/delete/{id}',[NationalityController::class , 'destroy'])->name('nationality.delete');
 
+    // product
+    Route::get('/product',[ProductsController::class , 'index'])->name('product.index');
+    Route::get('/product/create',[ProductsController::class , 'create'])->name('product.create');
+    Route::post('/product/store',[ProductsController::class , 'store'])->name('product.store');
+    Route::get('/product/edit/{id}',[ProductsController::class , 'edit'])->name('product.edit');
+    Route::post('/product/update/{id}',[ProductsController::class , 'update'])->name('product.update');
+    Route::get('/product/delete/{id}',[ProductsController::class , 'destroy'])->name('product.delete');
 
     // CustomerController
     Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
