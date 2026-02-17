@@ -20,7 +20,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="product_name">ชื่อสินค้า</label>
-                            <input type="text" class="form-control" id="product_name" name="product_name">
+                            <input type="text" class="form-control" id="product_name" name="product_name" autofocus>
                         </div>
                         <div class="form-group">
                             <label for="price">ราคา</label>

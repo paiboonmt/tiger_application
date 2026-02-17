@@ -3,6 +3,11 @@
 @section('head', 'สินค้า')
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -15,9 +20,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered" id="product-table">
+                    <table class="table table-sm table-bordered" id="product-table">
                         <thead>
                             <tr>
+                                <th>รหัสสินค้า</th>
                                 <th>ชื่อสินค้า</th>
                                 <th>ราคา</th>
                                 <th>จัดการ</th>
@@ -26,17 +32,22 @@
                         <tbody>
                             @foreach ($products as $product)
                                 <tr>
+                                    <td>{{ $product->id }}</td>
                                     <td>{{ $product->product_name }}</td>
-                                    <td>{{ number_format($product->price ,2) }}</td>
+                                    <td>{{ number_format($product->price, 2) }}</td>
                                     <td>
+                                        <form action="{{ route('product.delete', $product->id) }}" method="post">
                                         <div class="btn-group" rows="group">
-                                            <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary btn-sm">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="{{ route('product.delete', $product->id) }}" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </div>
+                                                @csrf
+                                                <a href="{{ route('product.edit', $product->id) }}"
+                                                    class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('คุณต้องการลบสินค้านี้?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -51,9 +62,21 @@
 @push('scripts')
 
     <script>
-        $(document).ready(function() {
-            $('#product-table').DataTable();
+        $("#product-table").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false, "stateSave": true,
         });
     </script>
+
+    @if (session()->has('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session()->get('success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        </script>
+    @endif
+    
 
 @endpush

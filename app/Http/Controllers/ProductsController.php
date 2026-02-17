@@ -37,6 +37,8 @@ class ProductsController extends Controller
         $request->validate([
             'product_name' => 'required',
             'price' => 'required',
+            'detail' => '',
+            'code' => '',
         ]);
         $product = Products::findOrFail($id);
         $product->update($request->all());
@@ -46,6 +48,6 @@ class ProductsController extends Controller
     {
         $product = Products::findOrFail($id);
         $product->delete();
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'ลบสินค้าเรียบร้อยแล้ว');
     }
 }

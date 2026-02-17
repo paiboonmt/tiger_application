@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/product/store',[ProductsController::class , 'store'])->name('product.store');
     Route::get('/product/edit/{id}',[ProductsController::class , 'edit'])->name('product.edit');
     Route::post('/product/update/{id}',[ProductsController::class , 'update'])->name('product.update');
-    Route::get('/product/delete/{id}',[ProductsController::class , 'destroy'])->name('product.delete');
+    Route::post('/product/delete/{id}',[ProductsController::class , 'destroy'])->name('product.delete');
 
     // CustomerController
     Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
