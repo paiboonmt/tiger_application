@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TigerController;
 use App\Http\Controllers\NukzuController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -51,6 +52,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/product/edit/{id}',[ProductsController::class , 'edit'])->name('product.edit');
     Route::post('/product/update/{id}',[ProductsController::class , 'update'])->name('product.update');
     Route::post('/product/delete/{id}',[ProductsController::class , 'destroy'])->name('product.delete');
+
+    // payment
+    Route::get('/payment',[PaymentController::class , 'index'])->name('payment.index');
+    Route::get('/payment/create',[PaymentController::class , 'create'])->name('payment.create');
+    Route::post('/payment/store',[PaymentController::class , 'store'])->name('payment.store');
+    Route::get('/payment/edit/{id}',[PaymentController::class , 'edit'])->name('payment.edit');
+    Route::post('/payment/update/{id}',[PaymentController::class , 'update'])->name('payment.update');
+    Route::post('/payment/delete/{id}',[PaymentController::class , 'destroy'])->name('payment.destroy');
 
     // CustomerController
     Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');

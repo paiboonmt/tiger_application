@@ -49,6 +49,18 @@
                     <a href="@yield('link')" class="nav-link">@yield('head', 'Home')</a>
                 </li>
             </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <a href="#" class="nav-link">
+                    {{ Auth::user()->name ?? 'User Name' }}
+                </a>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="logout" href="{{ route('logout') }}" role="button">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </li>
+            </ul>
         </nav>
 
         <!-- Main Sidebar -->
@@ -63,13 +75,13 @@
             <!-- Sidebar -->
             <div class="sidebar">
 
-                <div class="user-panel d-flex text-center">
+                <!-- <div class="user-panel d-flex text-center">
                     <div class="info text-center w-100">
                         <a href="#">
                             <span></span> {{ Auth::user()->name ?? 'User Name' }}
                         </a>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -93,7 +105,8 @@
                             </li> --}}
 
                             {{-- <li class="nav-item">
-                                <a href="{{ route('nukzu.index') }}" class="nav-link {{ request()->routeIs('nukzu.*') ? 'active' : '' }}">
+                                <a href="{{ route('nukzu.index') }}"
+                                    class="nav-link {{ request()->routeIs('nukzu.*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>นักสู้ มวยไทย</p>
                                 </a>
@@ -113,8 +126,7 @@
                                 </a>
                             </li> --}}
                             <li class="nav-item">
-                                <a href=""
-                                    class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
+                                <a href="" class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-sign-in-alt"></i>
                                     <p>เช็คอินเข้าใช้บริการ</p>
                                 </a>
@@ -234,7 +246,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('nationality.index') }}" class="nav-link {{ request()->is('nationality*') ? 'active' : '' }}">
+                            <a href="{{ route('nationality.index') }}"
+                                class="nav-link {{ request()->is('nationality*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-print"></i>
                                 <p>
                                     สัญชาติ
@@ -244,10 +257,22 @@
 
                         <!-- product -->
                         <li class="nav-item">
-                            <a href="{{ route('product.index') }}" class="nav-link {{ request()->is('product*') ? 'active' : '' }}">
+                            <a href="{{ route('product.index') }}"
+                                class="nav-link {{ request()->is('product*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-print"></i>
                                 <p>
                                     สินค้า
+                                </p>
+                            </a>
+                        </li>
+
+                        <!-- payment -->
+                        <li class="nav-item">
+                            <a href="{{ route('payment.index') }}"
+                                class="nav-link {{ request()->is('payment*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-print"></i>
+                                <p>
+                                    ชำระเงิน
                                 </p>
                             </a>
                         </li>
