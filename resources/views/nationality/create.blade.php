@@ -6,7 +6,7 @@
 @section('content')
 
 <div class="row">
-    <div class="col-12 p-2">
+    <div class="col-6 p-2">
         <div class="card">
             <div class="card-header bg-dark">
                 <div class="row">
@@ -28,7 +28,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="name">ชื่อสัญชาติ</label>
-                                <input type="text" name="name" id="name" class="form-control" required>
+                                <input type="text" name="n_name" class="form-control" autofocus required>
                             </div>
                         </div>
                     </div>

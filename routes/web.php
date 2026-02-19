@@ -25,7 +25,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     // RattachaiController
     Route::middleware('admin')->group(function () {
-
         Route::get('/tiger', [TigerController::class, 'index'])->name('tiger.index');
         Route::get('/nukzu', [NukzuController::class, 'index'])->name('nukzu.index');
         Route::get('/rattachai', [RattachaiController::class, 'index'])->name('rattachai.index');

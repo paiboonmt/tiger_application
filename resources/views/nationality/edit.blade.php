@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-12 p-2">
+        <div class="col-6 p-2">
             <div class="card">
                 <div class="card-header bg-dark">
                     <div class="row">
@@ -22,14 +22,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('nationality.update', $nationality->id) }}" method="POST">
+                    <form action="{{ route('nationality.update', $nationality->nationality_id) }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="name">ชื่อสัญชาติ</label>
-                                    <input type="text" name="name" id="name" class="form-control" required
-                                        value="{{ $nationality->name }}">
+                                    <label for="n_name">ชื่อสัญชาติ</label>
+                                    <input type="text" name="n_name" id="n_name" class="form-control" required
+                                        value="{{ $nationality->n_name }}">
                                 </div>
                             </div>
                         </div>

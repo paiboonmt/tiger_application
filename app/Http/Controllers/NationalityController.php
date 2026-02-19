@@ -21,14 +21,14 @@ class NationalityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'n_name' => 'required',
         ]);
 
         $nationality = new Nationality();
-        $nationality->name = $request->name;
+        $nationality->n_name = $request->n_name;
         $nationality->save();
 
-        return redirect()->route('nationality.index')->with('success', 'Nationality created successfully');
+        return redirect()->route('nationality.index');
     }
 
     public function edit($id)
@@ -40,21 +40,20 @@ class NationalityController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'n_name' => 'required',
         ]);
 
         $nationality = Nationality::findOrFail($id);
-        $nationality->name = $request->name;
+        $nationality->n_name = $request->n_name;
         $nationality->save();
 
-        return redirect()->route('nationality.index')->with('success', 'Nationality updated successfully');
+        return redirect()->route('nationality.index');
     }
 
     public function destroy($id)
     {
         $nationality = Nationality::findOrFail($id);
         $nationality->delete();
-
-        return redirect()->route('nationality.index')->with('success', 'Nationality deleted successfully');
+        return redirect()->route('nationality.index');
     }
 }

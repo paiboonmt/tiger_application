@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('nationalities', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->id('nationality_id');
+            $table->string('n_name');
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->timestamp('created_at')->useCurrent();
         });

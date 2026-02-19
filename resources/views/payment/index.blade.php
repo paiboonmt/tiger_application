@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header">
+        <div class="card-header bg-dark">
             <h3 class="card-title">รายการชำระเงิน</h3>
             <div class="card-tools">
                 <a href="{{ route('payment.create') }}" class="btn btn-primary btn-sm">
@@ -14,10 +14,9 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered">
+            <table class="table" id="payment-table">
                 <thead>
                     <tr>
-                        <th>รหัสชำระเงิน</th>
                         <th>ชื่อชำระเงิน</th>
                         <th>ราคา</th>
                         <th></th>
@@ -26,7 +25,6 @@
                 <tbody>
                     @foreach ($payments as $payment)
                         <tr>
-                            <td>{{ $payment->pay_id }}</td>
                             <td>{{ $payment->pay_name }}</td>
                             <td>{{ $payment->value }}</td>
                             <td class="text-center">
@@ -34,8 +32,7 @@
                                     style="display: inline;">
                                     @csrf
                                     <div class="btn-group" role="group">
-                                        <a href="{{ route('payment.edit', $payment->pay_id) }}"
-                                            class="btn btn-primary btn-sm">
+                                        <a href="{{ route('payment.edit', $payment->pay_id) }}" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
                                             แก้ไข
                                         </a>
@@ -56,4 +53,19 @@
 @endsection
 
 @push('scripts')
+
+    <script>
+        $(document).ready(function () {
+            $('#payment-table').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+
 @endpush

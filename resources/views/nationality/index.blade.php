@@ -22,8 +22,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-body">
-                    <table class="table table-bordered hover">
+                <div class="card-body">
+                    <table class="table table-sm" id="nationalityTable">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -34,18 +34,19 @@
                         <tbody>
                             @foreach ($nationalities as $nationality)
                                 <tr>
-                                    <td>{{ $nationality->id }}</td>
-                                    <td>{{ $nationality->name }}</td>
+                                    <td>{{ $nationality->nationality_id }}</td>
+                                    <td>{{ $nationality->n_name }}</td>
                                     <th>
-                                        <form action="{{ route('nationality.delete', $nationality->id) }}" method="POST">
+                                        <form action="{{ route('nationality.delete', $nationality->nationality_id) }}" method="POST">
                                             <div class="btn-group" role="group">
-                                                <a href="{{ route('nationality.edit', $nationality->id) }}"
-                                                    class="btn btn-warning">
+                                                <a href="{{ route('nationality.edit', $nationality->nationality_id) }}"
+                                                    class="btn btn-warning btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                     แก้ไข
                                                 </a>
                                                 @csrf
-                                                <button type="submit" class="btn btn-danger">
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('คุณต้องการลบข้อมูลนี้หรือไม่?')">
                                                     <i class="fas fa-trash"></i>
                                                     ลบ
                                                 </button>
@@ -64,5 +65,20 @@
 @endsection
 
 @push('scripts')
+
+    <script>
+         $(document).ready(function () {
+            $('#nationalityTable').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+                "stateSave": true,
+            });
+        });
+    </script>
 
 @endpush
