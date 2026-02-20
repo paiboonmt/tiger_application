@@ -75,18 +75,11 @@
             <!-- Sidebar -->
             <div class="sidebar">
 
-                <!-- <div class="user-panel d-flex text-center">
-                    <div class="info text-center w-100">
-                        <a href="#">
-                            <span></span> {{ Auth::user()->name ?? 'User Name' }}
-                        </a>
-                    </div>
-                </div> -->
-
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
+
                         @if (Auth::user()->role == 'admin')
                             <li class="nav-item">
                                 <a href="{{ route('tiger.index') }}"
@@ -96,35 +89,6 @@
                                 </a>
                             </li>
 
-                            {{-- <li class="nav-item">
-                                <a href="{{ route('rattachai.index') }}"
-                                    class="nav-link {{ request()->routeIs('rattachai.*') ? 'active' : '' }} ">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>รัตชัย มวยไทย</p>
-                                </a>
-                            </li> --}}
-
-                            {{-- <li class="nav-item">
-                                <a href="{{ route('nukzu.index') }}"
-                                    class="nav-link {{ request()->routeIs('nukzu.*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>นักสู้ มวยไทย</p>
-                                </a>
-                            </li> --}}
-
-                            {{-- <li class="nav-item">
-                                <a href="" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>ร้านนวด สาขา 1</p>
-                                </a>
-                            </li> --}}
-
-                            {{-- <li class="nav-item">
-                                <a href="" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>ร้านนวด สาขา 2</p>
-                                </a>
-                            </li> --}}
                             <li class="nav-item">
                                 <a href="" class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-sign-in-alt"></i>
@@ -201,7 +165,7 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('sponsers.index') }}"
-                                        class="nav-link {{ request()->routeIs('sponsers.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('sponsers.index','sponsers.profile') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>รายชื่อกลุ่มที่</p>
                                         <span class="badge badge-success">Active</span>
@@ -209,7 +173,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('sponsers.expired') }}"
-                                        class="nav-link {{ request()->routeIs('sponsers.expired') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('sponsers.expired','sponsers.profile') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>รายชื่อกลุ่มที่</p>
                                         <span class="badge badge-danger">Expied</span>
@@ -288,8 +252,6 @@
                                 </x-responsive-nav-link>
                             </form>
                         </li>
-
-
 
                         @yield('sidebar')
                     </ul>

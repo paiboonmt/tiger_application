@@ -7,11 +7,11 @@
 <div class="row">
     <div class="col p-1">
         <div class="card">
-            <!-- <div class="card-header bg-dark">
-                <h2>รายชื่อสมาชิก ที่ยังมีอายุการใช้งาน</h2>
-            </div> -->
+            <div class="card-header bg-dark">
+                <h3>รายชื่อสมาชิก ที่ยังมีอายุการใช้งาน</h3>
+            </div>
             <div class="card-body">
-                <table class="table table-bordered table-hover" id="example1">
+                <table class="table table-sm table-bordered table-hover" id="example1">
                     <thead class="bg-success">
                         <tr>
                             <th hidden>id</th>
@@ -33,8 +33,8 @@
                         <tr>
                             <td hidden>{{ $item->id }}</td>
                             <td>
-                                <a href="http://119.63.78.98:8889/memberimg/img/{{ $item->image }}" target="_blank">
-                                    <img src="http://119.63.78.98:8889/memberimg/img/{{ $item->image }}"
+                                <a href="http://172.16.0.3/memberimg/img/{{ $item->image }}" target="_blank">
+                                    <img src="http://172.16.0.3/memberimg/img/{{ $item->image }}"
                                         class="img-size-50 mr-2 img-circle"
                                         style="width:40px; height:40px;"
                                     >

@@ -9,7 +9,7 @@ class SponserController extends Controller
 {
     public function index()
     {
-        $data = DB::table('member')
+        $data = DB::table('fighters')
             ->where('status_code', '=', 3)
             ->where('exp_date', '>=', date('Y-m-d'))
             ->orderBy('id', 'desc')
@@ -66,7 +66,7 @@ class SponserController extends Controller
         $file = DB::table('tb_files')
             ->where('product_id', $member->id)
             ->get();
-        
+
         // คำนวนอายุวันเกิด
         if ($member && $member->birthday) { // dob = วันเกิด
             $birthday = \Carbon\Carbon::parse($member->birthday);
@@ -76,12 +76,14 @@ class SponserController extends Controller
             $member->age = null;
         }
 
-        return view('sponsers.profile', 
-        [
+        return view(
+            'sponsers.profile',
+            [
                 'member' => $member,
                 'product' => $product,
                 'timeLine' => $timeLine,
                 'file' => $file,
-            ]);
+            ]
+        );
     }
 }

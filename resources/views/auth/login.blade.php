@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>ไทยเกอร์ - มวยไทย Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700;800&family=Kanit:wght@600;800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('images/logo/logo.png') }}" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700;800&family=Kanit:wght@600;800&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -457,10 +460,14 @@
                         <circle cx="100" cy="100" r="80" fill="url(#tigerGradient)" />
 
                         <!-- Tiger Stripes -->
-                        <path d="M70 60 Q65 70 70 80" stroke="#000" stroke-width="6" stroke-linecap="round" fill="none" />
-                        <path d="M130 60 Q135 70 130 80" stroke="#000" stroke-width="6" stroke-linecap="round" fill="none" />
-                        <path d="M60 90 Q55 100 60 110" stroke="#000" stroke-width="5" stroke-linecap="round" fill="none" />
-                        <path d="M140 90 Q145 100 140 110" stroke="#000" stroke-width="5" stroke-linecap="round" fill="none" />
+                        <path d="M70 60 Q65 70 70 80" stroke="#000" stroke-width="6" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M130 60 Q135 70 130 80" stroke="#000" stroke-width="6" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M60 90 Q55 100 60 110" stroke="#000" stroke-width="5" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M140 90 Q145 100 140 110" stroke="#000" stroke-width="5" stroke-linecap="round"
+                            fill="none" />
 
                         <!-- Ears -->
                         <path d="M50 50 L40 30 L70 40 Z" fill="#FFA500" />
@@ -478,8 +485,10 @@
                         <path d="M100 105 L95 115 L100 118 L105 115 Z" fill="#000" />
 
                         <!-- Mouth -->
-                        <path d="M100 118 Q85 125 75 120" stroke="#000" stroke-width="3" stroke-linecap="round" fill="none" />
-                        <path d="M100 118 Q115 125 125 120" stroke="#000" stroke-width="3" stroke-linecap="round" fill="none" />
+                        <path d="M100 118 Q85 125 75 120" stroke="#000" stroke-width="3" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M100 118 Q115 125 125 120" stroke="#000" stroke-width="3" stroke-linecap="round"
+                            fill="none" />
 
                         <!-- Whiskers -->
                         <line x1="40" y1="100" x2="65" y2="95" stroke="#fff" stroke-width="2" />
@@ -506,9 +515,10 @@
 
             <!-- Session Status -->
             @if (session('status'))
-            <div style="background: rgba(34, 197, 94, 0.2); border: 2px solid #22c55e; border-radius: 12px; padding: 15px; margin-bottom: 25px; color: #22c55e; text-align: center; font-size: 14px;">
-                {{ session('status') }}
-            </div>
+                <div
+                    style="background: rgba(34, 197, 94, 0.2); border: 2px solid #22c55e; border-radius: 12px; padding: 15px; margin-bottom: 25px; color: #22c55e; text-align: center; font-size: 14px;">
+                    {{ session('status') }}
+                </div>
             @endif
 
             <form id="loginForm" method="POST" action="{{ route('login') }}">
@@ -516,38 +526,24 @@
 
                 <div class="form-group">
                     <label class="form-label" for="email">อีเมล / Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        class="form-input"
-                        placeholder="กรอกอีเมล"
-                        value="{{ old('email') }}"
-                        required
-                        autofocus
-                        autocomplete="username">
+                    <input type="email" id="email" name="email" class="form-input" placeholder="กรอกอีเมล"
+                        value="{{ old('email') }}" required autofocus autocomplete="username">
                     @error('email')
-                    <div style="color: #ef4444; font-size: 12px; margin-top: 8px;">{{ $message }}</div>
+                        <div style="color: #ef4444; font-size: 12px; margin-top: 8px;">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="password">รหัสผ่าน / Password</label>
                     <div class="password-wrapper">
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            class="form-input"
-                            placeholder="กรอกรหัสผ่าน"
-                            required
-                            autocomplete="current-password">
+                        <input type="password" id="password" name="password" class="form-input"
+                            placeholder="กรอกรหัสผ่าน" required autocomplete="current-password">
                         <button type="button" class="toggle-password" onclick="togglePassword()">
                             <span id="eyeIcon">👁️</span>
                         </button>
                     </div>
                     @error('password')
-                    <div style="color: #ef4444; font-size: 12px; margin-top: 8px;">{{ $message }}</div>
+                        <div style="color: #ef4444; font-size: 12px; margin-top: 8px;">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -606,7 +602,7 @@
         }
 
         // Add entrance animation
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             const card = document.querySelector('.login-card');
             card.style.opacity = '0';
             card.style.transform = 'translateY(30px)';
