@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table" id="payment-table">
+            <table class="table table-sm table-hover" id="payment-table">
                 <thead>
                     <tr>
                         <th>ชื่อชำระเงิน</th>
