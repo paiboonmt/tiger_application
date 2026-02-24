@@ -12,7 +12,7 @@
                     <li class="nav-item"><a class="nav-link active" href="#profile" data-toggle="tab">ข้อมูลส่วนบุคคล</a></li>
                     <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">บันทึกรานการเข้าใช้พื้นที่</a></li>
                     <li class="nav-item"><a class="nav-link" href="#document" data-toggle="tab">เอกสารส่วนบุคคล</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#data" data-toggle="tab">Data</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="#data" data-toggle="tab">Data</a></li> -->
                 </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -21,10 +21,10 @@
                         <div class="row">
                             <div class="col-2 text-center">
                                 <a
-                                    href="http://119.63.78.98:8889/memberimg/img/{{ $member->image }}"
+                                    href="http://172.16.0.3/memberimg/img/{{ $member->image }}"
                                     data-fancybox="gallery-1">
                                     <img
-                                        src="http://119.63.78.98:8889/memberimg/img/{{ $member->image }}"
+                                        src="http://172.16.0.3/memberimg/img/{{ $member->image }}"
                                         class="img-fluid rounded" style="max-width: 200px;"/>
                                 </a>
                             </div>
@@ -203,11 +203,11 @@
                                     <div class="card-body text-center">
 
                                         <a
-                                            href="http://119.63.78.98:8889/memberimg/file/{{ $doc->image }}"
+                                            href="http://172.16.0.3/memberimg/file/{{ $doc->image }}"
                                             data-fancybox="gallery-2"
                                             data-caption="Optional caption,&lt;br /&gt;that can contain &lt;em&gt;HTML&lt;/em&gt; code">
                                             <img
-                                                src="http://119.63.78.98:8889/memberimg/file/{{ $doc->image }}"
+                                                src="http://172.16.0.3/memberimg/file/{{ $doc->image }}"
                                                 width="100%" />
                                         </a>
 
@@ -219,7 +219,6 @@
                     </div>
                     <div class="tab-pane" id="data">
                         <pre>{{ json_encode($member, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE) }}</pre>
-
                     </div>
                 </div>
             </div>
@@ -230,17 +229,14 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function() {
-        $('#timeLineTable').DataTable({
-            "ordering": true,
-            "searching": true,
-            "paging": true,
-            "info": true,
-            "lengthChange": false,
-            "pageLength": 10,
+ $(function () {
+            $("#timeLineTable").DataTable({
+                "autoWidth": false,
+                "saveState": true,
+                "order": [[0, "desc"]],
+                "buttons": ["pdf"]
+            }).buttons().container().appendTo('#timeLineTable_wrapper .col-md-6:eq(0)');
         });
-    });
-
     Fancybox.bind("[data-fancybox]", {
         // Your custom options
     });

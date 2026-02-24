@@ -10,19 +10,8 @@
         cursor: pointer;
         max-width: 100%;
     }
-
-    #profileImage:hover {
-        transform: scale(1.01) rotate(-1deg);
-        transition: transform 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
-    }
-
-    .ribbon-wrapper {
-        transition: opacity 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
-    }
-    #profileImage:hover ~ .ribbon-wrapper,
-    .position-relative:hover .ribbon-wrapper {
-        opacity: 0;
-    }
+    
+    #profileImage:hover ~ .ribbon-wrapper
     
 </style>
 @endpush

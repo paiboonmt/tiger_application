@@ -88,19 +88,14 @@
                                     <p>ไทเกอร์ มวยไทย</p>
                                 </a>
                             </li>
-
                             <li class="nav-item">
                                 <a href="" class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-sign-in-alt"></i>
                                     <p>เช็คอินเข้าใช้บริการ</p>
                                 </a>
                             </li>
-                        @endif
-                        <!-- Menu with Submenu -->
-
-                        @if (Auth::user()->role == 'admin')
-                            <li class="nav-item {{ request()->is('users*') ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link {{ request()->is('users*') ? 'active' : '' }}">
+                            <li class="nav-item {{ request()->is('users*','roles*') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ request()->is('users*','roles*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
                                         ผู้ใช้งาน
@@ -110,14 +105,23 @@
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         <a href="{{ route('users.index') }}"
-                                            class="nav-link {{ request()->routeIs('users.index', 'users.create') ? 'active' : '' }}">
+                                            class="nav-link {{ request()->routeIs('users.index', 'users.create','users.edit') ? 'active' : '' }}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>ตั้งค่าผู้ใช้งาน</p>
                                         </a>
                                     </li>
                                 </ul>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('roles.index') }}"
+                                            class="nav-link {{ request()->routeIs('roles.index', 'roles.create','roles.edit') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>ตั้งค่าบทบาท</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
-                        @endif
+                        @endif 
 
                         <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : '' }}">
@@ -165,7 +169,7 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('sponsers.index') }}"
-                                        class="nav-link {{ request()->routeIs('sponsers.index','sponsers.profile') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('sponsers.index') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>รายชื่อกลุ่มที่</p>
                                         <span class="badge badge-success">Active</span>
@@ -173,7 +177,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('sponsers.expired') }}"
-                                        class="nav-link {{ request()->routeIs('sponsers.expired','sponsers.profile') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('sponsers.expired') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>รายชื่อกลุ่มที่</p>
                                         <span class="badge badge-danger">Expied</span>

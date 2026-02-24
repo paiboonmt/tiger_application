@@ -12,6 +12,7 @@ use App\Http\Controllers\TigerController;
 use App\Http\Controllers\NukzuController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,6 +36,17 @@ Route::middleware('auth')->group(function () {
         Route::get('users/edit/{id}', [UserController::class, 'show'])->name('users.edit');
         Route::post('users/update/{id}', [UserController::class, 'update'])->name('users.update');
     });
+
+    // RoleController
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('/roles', 'index')->name('roles.index');
+        Route::get('/roles/create', 'create')->name('roles.create');
+        Route::post('/roles/store', 'store')->name('roles.store');
+        Route::get('/roles/edit/{id}', 'edit')->name('roles.edit');
+        Route::post('/roles/update/{id}', 'update')->name('roles.update');
+    });
+
+    
 
     // Nationality
     Route::get('/nationality',[NationalityController::class , 'index'])->name('nationality.index');

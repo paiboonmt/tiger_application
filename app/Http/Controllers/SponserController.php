@@ -10,10 +10,9 @@ class SponserController extends Controller
     public function index()
     {
         $data = DB::table('fighters')
-            ->where('status_code', '=', 3)
             ->where('exp_date', '>=', date('Y-m-d'))
             ->orderBy('id', 'desc')
-            // ->limit(100)
+            ->limit(100)
             ->get();
         foreach ($data as $member) {
             $expDate = \Carbon\Carbon::parse($member->exp_date);
@@ -25,8 +24,7 @@ class SponserController extends Controller
 
     public function expired()
     {
-        $data = DB::table('member')
-            ->where('status_code', '=', 3)
+        $data = DB::table('fighters')
             ->where('exp_date', '<=', date('Y-m-d'))
             ->orderBy('id', 'desc')
             // ->limit(100)
