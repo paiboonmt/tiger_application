@@ -23,6 +23,7 @@ class RoleController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'status' => 'required',
         ]);
 
         Role::create($request->all());
@@ -39,6 +40,13 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $role->update($request->all());
+        return redirect()->route('roles.index');
+    }
+
+    public function destroy($id)
+    {
+        $role = Role::findOrFail($id);
+        $role->delete();
         return redirect()->route('roles.index');
     }
 }

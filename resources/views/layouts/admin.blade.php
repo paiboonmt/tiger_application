@@ -94,8 +94,8 @@
                                     <p>เช็คอินเข้าใช้บริการ</p>
                                 </a>
                             </li>
-                            <li class="nav-item {{ request()->is('users*','roles*') ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link {{ request()->is('users*','roles*') ? 'active' : '' }}">
+                            <li class="nav-item {{ request()->is('users*', 'roles*') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ request()->is('users*', 'roles*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
                                         ผู้ใช้งาน
@@ -105,7 +105,7 @@
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         <a href="{{ route('users.index') }}"
-                                            class="nav-link {{ request()->routeIs('users.index', 'users.create','users.edit') ? 'active' : '' }}">
+                                            class="nav-link {{ request()->routeIs('users.index', 'users.create', 'users.edit') ? 'active' : '' }}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>ตั้งค่าผู้ใช้งาน</p>
                                         </a>
@@ -114,14 +114,14 @@
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         <a href="{{ route('roles.index') }}"
-                                            class="nav-link {{ request()->routeIs('roles.index', 'roles.create','roles.edit') ? 'active' : '' }}">
+                                            class="nav-link {{ request()->routeIs('roles.index', 'roles.create', 'roles.edit') ? 'active' : '' }}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>ตั้งค่าบทบาท</p>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                        @endif 
+                        @endif
 
                         <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : '' }}">
@@ -233,18 +233,18 @@
                                 </p>
                             </a>
                         </li>
-
-                        <!-- payment -->
-                        <li class="nav-item">
-                            <a href="{{ route('payment.index') }}"
-                                class="nav-link {{ request()->is('payment*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-print"></i>
-                                <p>
-                                    ชำระเงิน
-                                </p>
-                            </a>
-                        </li>
-
+                        @if (Auth::user()->role == 'admin')
+                            <!-- payment -->
+                            <li class="nav-item">
+                                <a href="{{ route('payment.index') }}"
+                                    class="nav-link {{ request()->is('payment*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-print"></i>
+                                    <p>
+                                        ชำระเงิน
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
                         <!-- logout -->
                         <li class="nav-item">
                             <form method="POST" action="{{ route('logout') }}">

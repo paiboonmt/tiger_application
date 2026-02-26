@@ -25,53 +25,65 @@ Route::middleware('auth')->group(function () {
     // DashboardController
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     // RattachaiController
+
+
     Route::middleware('admin')->group(function () {
+
         Route::get('/tiger', [TigerController::class, 'index'])->name('tiger.index');
         Route::get('/nukzu', [NukzuController::class, 'index'])->name('nukzu.index');
         Route::get('/rattachai', [RattachaiController::class, 'index'])->name('rattachai.index');
-        // users.index
-        Route::get('users', [UserController::class, 'index'])->name('users.index');
-        Route::get('users/create', [UserController::class, 'create'])->name('users.create');
-        Route::post('users/store', [UserController::class, 'store'])->name('users.store');
-        Route::get('users/edit/{id}', [UserController::class, 'show'])->name('users.edit');
-        Route::post('users/update/{id}', [UserController::class, 'update'])->name('users.update');
+
+        Route::controller(UserController::class)->group(function () {
+            Route::get('users', 'index')->name('users.index');
+            Route::get('users/create', 'create')->name('users.create');
+            Route::post('users/store', 'store')->name('users.store');
+            Route::get('users/edit/{id}', 'show')->name('users.edit');
+            Route::post('users/update/{id}', 'update')->name('users.update');
+        });
+        Route::controller(PaymentController::class)->group(function () {
+            Route::get('/payment', 'index')->name('payment.index');
+            Route::get('/payment/create', 'create')->name('payment.create');
+            Route::post('/payment/store', 'store')->name('payment.store');
+            Route::get('/payment/edit/{id}', 'edit')->name('payment.edit');
+            Route::post('/payment/update/{id}', 'update')->name('payment.update');
+            Route::post('/payment/delete/{id}', 'destroy')->name('payment.destroy');
+        });
+        Route::controller(RoleController::class)->group(function () {
+            Route::get('/roles', 'index')->name('roles.index');
+            Route::get('/roles/create', 'create')->name('roles.create');
+            Route::post('/roles/store', 'store')->name('roles.store');
+            Route::get('/roles/edit/{id}', 'edit')->name('roles.edit');
+            Route::post('/roles/update/{id}', 'update')->name('roles.update');
+            Route::post('/roles/delete/{id}', 'destroy')->name('roles.destroy');
+        });
+        Route::controller(NationalityController::class)->group(function(){
+            // Nationality
+            Route::get('/nationality', [NationalityController::class, 'index'])->name('nationality.index');
+            Route::get('/nationality/create', [NationalityController::class, 'create'])->name('nationality.create');
+            Route::post('/nationality/store', [NationalityController::class, 'store'])->name('nationality.store');
+            Route::get('/nationality/edit/{id}', [NationalityController::class, 'edit'])->name('nationality.edit');
+            Route::post('/nationality/update/{id}', [NationalityController::class, 'update'])->name('nationality.update');
+            Route::post('/nationality/delete/{id}', [NationalityController::class, 'destroy'])->name('nationality.delete');
+
+        });
     });
 
-    // RoleController
-    Route::controller(RoleController::class)->group(function () {
-        Route::get('/roles', 'index')->name('roles.index');
-        Route::get('/roles/create', 'create')->name('roles.create');
-        Route::post('/roles/store', 'store')->name('roles.store');
-        Route::get('/roles/edit/{id}', 'edit')->name('roles.edit');
-        Route::post('/roles/update/{id}', 'update')->name('roles.update');
+    Route::middleware('user')->group(function () {
     });
 
-    
 
-    // Nationality
-    Route::get('/nationality',[NationalityController::class , 'index'])->name('nationality.index');
-    Route::get('/nationality/create',[NationalityController::class , 'create'])->name('nationality.create');
-    Route::post('/nationality/store',[NationalityController::class , 'store'])->name('nationality.store');
-    Route::get('/nationality/edit/{id}',[NationalityController::class , 'edit'])->name('nationality.edit');
-    Route::post('/nationality/update/{id}',[NationalityController::class , 'update'])->name('nationality.update');
-    Route::post('/nationality/delete/{id}',[NationalityController::class , 'destroy'])->name('nationality.delete');
+
+
+
+
 
     // product
-    Route::get('/product',[ProductsController::class , 'index'])->name('product.index');
-    Route::get('/product/create',[ProductsController::class , 'create'])->name('product.create');
-    Route::post('/product/store',[ProductsController::class , 'store'])->name('product.store');
-    Route::get('/product/edit/{id}',[ProductsController::class , 'edit'])->name('product.edit');
-    Route::post('/product/update/{id}',[ProductsController::class , 'update'])->name('product.update');
-    Route::post('/product/delete/{id}',[ProductsController::class , 'destroy'])->name('product.delete');
-
-    // payment
-    Route::get('/payment',[PaymentController::class , 'index'])->name('payment.index');
-    Route::get('/payment/create',[PaymentController::class , 'create'])->name('payment.create');
-    Route::post('/payment/store',[PaymentController::class , 'store'])->name('payment.store');
-    Route::get('/payment/edit/{id}',[PaymentController::class , 'edit'])->name('payment.edit');
-    Route::post('/payment/update/{id}',[PaymentController::class , 'update'])->name('payment.update');
-    Route::post('/payment/delete/{id}',[PaymentController::class , 'destroy'])->name('payment.destroy');
-
+    Route::get('/product', [ProductsController::class, 'index'])->name('product.index');
+    Route::get('/product/create', [ProductsController::class, 'create'])->name('product.create');
+    Route::post('/product/store', [ProductsController::class, 'store'])->name('product.store');
+    Route::get('/product/edit/{id}', [ProductsController::class, 'edit'])->name('product.edit');
+    Route::post('/product/update/{id}', [ProductsController::class, 'update'])->name('product.update');
+    Route::post('/product/delete/{id}', [ProductsController::class, 'destroy'])->name('product.delete');
     // CustomerController
     Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
     Route::get('customers/expired', [CustomerController::class, 'expired'])->name('customers.expired');
@@ -90,5 +102,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__ . '/auth.php';

@@ -12,7 +12,7 @@
                     <a href="{{ route('roles.create') }}" class="btn btn-primary float-right">เพิ่มบทบาท</a>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="table-role">
                         <thead>
                             <tr>
                                 <th>ชื่อ</th>
@@ -24,12 +24,19 @@
                                 <tr>
                                     <td>{{ $role->name }}</td>
                                     <td>
-                                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary">แก้ไข</a>
                                         <form action="{{ route('roles.destroy', $role->id) }}" method="POST"
                                             style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">ลบ</button>
+                                            <div class="btn-group">
+                                                <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-warning">
+                                                    <i class="fas fa-edit"></i>
+                                                    แก้ไข
+                                                </a>
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('คุณต้องการลบบทบาทนี้หรือไม่?')">
+                                                    <i class="fas fa-trash"></i>
+                                                    ลบ
+                                                </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -44,4 +51,9 @@
 @endsection
 
 @push('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#table-role').DataTable();
+        });
+    </script>
 @endpush
