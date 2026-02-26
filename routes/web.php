@@ -56,15 +56,25 @@ Route::middleware('auth')->group(function () {
             Route::post('/roles/update/{id}', 'update')->name('roles.update');
             Route::post('/roles/delete/{id}', 'destroy')->name('roles.destroy');
         });
-        Route::controller(NationalityController::class)->group(function(){
-            // Nationality
+        
+        // Nationality
+        Route::controller(NationalityController::class)->group(function () {
             Route::get('/nationality', [NationalityController::class, 'index'])->name('nationality.index');
             Route::get('/nationality/create', [NationalityController::class, 'create'])->name('nationality.create');
             Route::post('/nationality/store', [NationalityController::class, 'store'])->name('nationality.store');
             Route::get('/nationality/edit/{id}', [NationalityController::class, 'edit'])->name('nationality.edit');
             Route::post('/nationality/update/{id}', [NationalityController::class, 'update'])->name('nationality.update');
             Route::post('/nationality/delete/{id}', [NationalityController::class, 'destroy'])->name('nationality.delete');
+        });
 
+        // ProductController
+        Route::controller(ProductsController::class)->group(function () {
+            Route::get('/product', 'index')->name('product.index');
+            Route::get('/product/create', 'create')->name('product.create');
+            Route::post('/product/store', 'store')->name('product.store');
+            Route::get('/product/edit/{id}', 'edit')->name('product.edit');
+            Route::post('/product/update/{id}', 'update')->name('product.update');
+            Route::post('/product/delete/{id}', 'destroy')->name('product.delete');
         });
     });
 
@@ -78,12 +88,6 @@ Route::middleware('auth')->group(function () {
 
 
     // product
-    Route::get('/product', [ProductsController::class, 'index'])->name('product.index');
-    Route::get('/product/create', [ProductsController::class, 'create'])->name('product.create');
-    Route::post('/product/store', [ProductsController::class, 'store'])->name('product.store');
-    Route::get('/product/edit/{id}', [ProductsController::class, 'edit'])->name('product.edit');
-    Route::post('/product/update/{id}', [ProductsController::class, 'update'])->name('product.update');
-    Route::post('/product/delete/{id}', [ProductsController::class, 'destroy'])->name('product.delete');
     // CustomerController
     Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
     Route::get('customers/expired', [CustomerController::class, 'expired'])->name('customers.expired');
