@@ -26,7 +26,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     // RattachaiController
 
-
     Route::middleware('admin')->group(function () {
 
         Route::get('/tiger', [TigerController::class, 'index'])->name('tiger.index');
@@ -56,7 +55,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/roles/update/{id}', 'update')->name('roles.update');
             Route::post('/roles/delete/{id}', 'destroy')->name('roles.destroy');
         });
-        
+
         // Nationality
         Route::controller(NationalityController::class)->group(function () {
             Route::get('/nationality', [NationalityController::class, 'index'])->name('nationality.index');
@@ -76,22 +75,18 @@ Route::middleware('auth')->group(function () {
             Route::post('/product/update/{id}', 'update')->name('product.update');
             Route::post('/product/delete/{id}', 'destroy')->name('product.delete');
         });
+
+        // CustomerController
+        Route::controller(CustomerController::class)->group(function () {
+            Route::get('/customers', 'index')->name('customers.index');
+            Route::get('/customers/expired', 'expired')->name('customers.expired');
+            Route::get('/customers/profile/{id}', 'profile')->name('customers.profile');
+        });
     });
 
     Route::middleware('user')->group(function () {
     });
 
-
-
-
-
-
-
-    // product
-    // CustomerController
-    Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
-    Route::get('customers/expired', [CustomerController::class, 'expired'])->name('customers.expired');
-    Route::get('customers/profile/{id}', [CustomerController::class, 'profile'])->name('customers.profile');
     // SponserController
     Route::get('sponsers', [SponserController::class, 'index'])->name('sponsers.index');
     Route::get('sponsers/expired', [SponserController::class, 'expired'])->name('sponsers.expired');
