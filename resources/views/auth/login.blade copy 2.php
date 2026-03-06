@@ -454,6 +454,61 @@
             <div class="card-pattern"></div>
 
             <div class="logo-container">
+                <div class="tiger-icon">
+                    <svg class="tiger-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Tiger Head -->
+                        <circle cx="100" cy="100" r="80" fill="url(#tigerGradient)" />
+
+                        <!-- Tiger Stripes -->
+                        <path d="M70 60 Q65 70 70 80" stroke="#000" stroke-width="6" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M130 60 Q135 70 130 80" stroke="#000" stroke-width="6" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M60 90 Q55 100 60 110" stroke="#000" stroke-width="5" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M140 90 Q145 100 140 110" stroke="#000" stroke-width="5" stroke-linecap="round"
+                            fill="none" />
+
+                        <!-- Ears -->
+                        <path d="M50 50 L40 30 L70 40 Z" fill="#FFA500" />
+                        <path d="M150 50 L160 30 L130 40 Z" fill="#FFA500" />
+
+                        <!-- Eyes -->
+                        <circle cx="80" cy="90" r="12" fill="#FFD700" />
+                        <circle cx="120" cy="90" r="12" fill="#FFD700" />
+                        <circle cx="80" cy="90" r="6" fill="#000" />
+                        <circle cx="120" cy="90" r="6" fill="#000" />
+                        <circle cx="82" cy="88" r="2" fill="#fff" />
+                        <circle cx="122" cy="88" r="2" fill="#fff" />
+
+                        <!-- Nose -->
+                        <path d="M100 105 L95 115 L100 118 L105 115 Z" fill="#000" />
+
+                        <!-- Mouth -->
+                        <path d="M100 118 Q85 125 75 120" stroke="#000" stroke-width="3" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M100 118 Q115 125 125 120" stroke="#000" stroke-width="3" stroke-linecap="round"
+                            fill="none" />
+
+                        <!-- Whiskers -->
+                        <line x1="40" y1="100" x2="65" y2="95" stroke="#fff" stroke-width="2" />
+                        <line x1="40" y1="110" x2="65" y2="105" stroke="#fff" stroke-width="2" />
+                        <line x1="160" y1="100" x2="135" y2="95" stroke="#fff" stroke-width="2" />
+                        <line x1="160" y1="110" x2="135" y2="105" stroke="#fff" stroke-width="2" />
+
+                        <!-- Muay Thai Headband -->
+                        <path d="M30 85 Q100 75 170 85" stroke="#DC143C" stroke-width="8" fill="none" />
+                        <circle cx="100" cy="77" r="8" fill="#FFD700" />
+
+                        <defs>
+                            <linearGradient id="tigerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FFA500;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#FF8C00;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#FF6347;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
                 <h1 class="logo-title">ไทเกอร์ มวยไทย</h1>
                 <!-- <p class="logo-subtitle">tiger muay thai</p> -->
             </div>
