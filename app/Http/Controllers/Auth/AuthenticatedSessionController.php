@@ -28,11 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if (Auth::user()->role === 'admin') {
-            return redirect()->intended(route('tiger.index', absolute: false));
-        } else {
-            return redirect()->intended(route('dashboard.index', absolute: false));
-        }
+        return redirect()->intended(route('dashboard.index', absolute: false));
     }
 
     public function destroy(Request $request): RedirectResponse

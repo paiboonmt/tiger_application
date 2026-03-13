@@ -186,54 +186,52 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item {{ request()->is('report*') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ request()->is('report*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-print"></i>
-                                <p>
-                                    รายงาน
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('report.checkin') }}"
-                                        class="nav-link {{ request()->routeIs(['report.checkin', 'report.checkin.search']) ? 'active' : '' }}">
-                                        <i class="nav-icon fas fa-user"></i>
-                                        <p>รายงานเข้าใช้บริการ</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="{{ route('report.customerTotal') }}"
-                                        class="nav-link {{ request()->routeIs('report.customerTotal') ? 'active' : '' }}">
-                                        <i class="nav-icon fas fa-user"></i>
-                                        <p>รายงานจำนวนลูกค้า</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('nationality.index') }}"
-                                class="nav-link {{ request()->is('nationality*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-print"></i>
-                                <p>
-                                    สัญชาติ
-                                </p>
-                            </a>
-                        </li>
-
-                        <!-- product -->
-                        <li class="nav-item">
-                            <a href="{{ route('product.index') }}"
-                                class="nav-link {{ request()->is('product*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-print"></i>
-                                <p>
-                                    สินค้า
-                                </p>
-                            </a>
-                        </li>
                         @if (Auth::user()->role == 'admin')
+                            <li class="nav-item {{ request()->is('report*') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ request()->is('report*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-print"></i>
+                                    <p>
+                                        รายงาน
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('report.checkin') }}"
+                                            class="nav-link {{ request()->routeIs(['report.checkin', 'report.checkin.search']) ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-user"></i>
+                                            <p>รายงานเข้าใช้บริการ</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="{{ route('report.customerTotal') }}"
+                                            class="nav-link {{ request()->routeIs('report.customerTotal') ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-user"></i>
+                                            <p>รายงานจำนวนลูกค้า</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('nationality.index') }}"
+                                    class="nav-link {{ request()->is('nationality*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-print"></i>
+                                    <p>
+                                        สัญชาติ
+                                    </p>
+                                </a>
+                            </li>
+                            <!-- product -->
+                            <li class="nav-item">
+                                <a href="{{ route('product.index') }}"
+                                    class="nav-link {{ request()->is('product*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-print"></i>
+                                    <p>
+                                        สินค้า
+                                    </p>
+                                </a>
+                            </li>
                             <!-- payment -->
                             <li class="nav-item">
                                 <a href="{{ route('payment.index') }}"
@@ -245,6 +243,9 @@
                                 </a>
                             </li>
                         @endif
+
+
+                        
                         <!-- logout -->
                         <li class="nav-item">
                             <form method="POST" action="{{ route('logout') }}">

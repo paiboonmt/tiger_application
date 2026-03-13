@@ -76,17 +76,14 @@ Route::middleware('auth')->group(function () {
             Route::post('/product/delete/{id}', 'destroy')->name('product.delete');
         });
 
-        // CustomerController
-        Route::controller(CustomerController::class)->group(function () {
-            Route::get('/customers', 'index')->name('customers.index');
-            Route::get('/customers/expired', 'expired')->name('customers.expired');
-            Route::get('/customers/profile/{id}', 'profile')->name('customers.profile');
-        });
     });
-
-    Route::middleware('user')->group(function () {
+    
+    // CustomerController
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('/customers', 'index')->name('customers.index');
+        Route::get('/customers/expired', 'expired')->name('customers.expired');
+        Route::get('/customers/profile/{id}', 'profile')->name('customers.profile');
     });
-
     // SponserController
     Route::get('sponsers', [SponserController::class, 'index'])->name('sponsers.index');
     Route::get('sponsers/expired', [SponserController::class, 'expired'])->name('sponsers.expired');
