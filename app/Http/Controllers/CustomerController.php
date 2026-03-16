@@ -29,13 +29,13 @@ class CustomerController extends Controller
 
     public function expired()
     {
-         $customers = DB::table('member')
+        $customers = DB::table('member')
             ->join('products', 'member.package', '=', 'products.id')
             ->where('member.status_code', '=', 4)
             ->where('member.exp_date', '<=', date('Y-m-d'))
             ->select('member.*', 'products.product_name')
             ->limit(50)
-            ->orderBy('member.id', 'desc') 
+            ->orderBy('member.id', 'desc')
             ->get();
 
         foreach ($customers as $customer) {
