@@ -52,26 +52,7 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="card">
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>#</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    @include('components.sponser')
 
     @if (Auth::user()->role == 'admin')
         <div class="row">

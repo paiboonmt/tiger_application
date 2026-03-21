@@ -49,18 +49,6 @@
                     <a href="@yield('link')" class="nav-link">@yield('head', 'Home')</a>
                 </li>
             </ul>
-
-            <ul class="navbar-nav ml-auto">
-                <a href="#" class="nav-link">
-                    {{ Auth::user()->name ?? 'User Name' }}
-                </a>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="logout" href="{{ route('logout') }}" role="button">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
-                </li>
-            </ul>
         </nav>
 
         <!-- Main Sidebar -->
@@ -80,14 +68,14 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
 
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>แดชบอร์ด</p>
+                            </a>
+                        </li>
                         @if (Auth::user()->role == 'admin')
-                            <li class="nav-item">
-                                <a href="{{ route('tiger.index') }}"
-                                    class="nav-link {{ request()->routeIs('tiger.*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>ไทเกอร์ มวยไทย</p>
-                                </a>
-                            </li>
                             <li class="nav-item">
                                 <a href="" class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-sign-in-alt"></i>

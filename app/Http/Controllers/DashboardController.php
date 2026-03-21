@@ -42,6 +42,12 @@ class DashboardController extends Controller
             ->whereDate('exp_date', '>=',  now()->toDateString())
             ->count('id');
 
+        $sponsor = DB::table('member')
+            ->where('status_code', 3)
+            ->whereDate('exp_date', '>=',  now()->toDateString())
+            ->limit(1)
+            ->get();
+
         // Age group counts
         $ageRanges = [
             'น้อยกว่า 18' => [0, 17],
@@ -134,6 +140,7 @@ class DashboardController extends Controller
                 'freeMemberTotals' => $freeMemberTotals ?? 0,
                 'serviceSales' => $serviceSales ?? [],
                 'month' => $m ?? [],
+                'sponsor' => $sponsor ?? [],
             ]
         );
     }
