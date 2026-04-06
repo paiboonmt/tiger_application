@@ -4,7 +4,6 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                
                         <th>เลขสมาชิก</th>
                         <th>ชื่อสมาชิก</th>
                         <th>เลขวิซ่า</th>
