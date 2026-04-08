@@ -10,7 +10,7 @@
                 <div class="card-header bg-dark">
                     <h3 class="card-title">รายชื่อสมาชิก ที่ยังมีอายุการใช้งาน</h3>
                     <div class="card-tools">
-                        <a href="" class="btn btn-success btn-sm">
+                        <a href="{{ route('customers.create') }}" class="btn btn-success btn-sm">
                             <i class="fas fa-plus"></i>
                             เพิ่มสมาชิก
                         </a>

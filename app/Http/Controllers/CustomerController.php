@@ -49,7 +49,6 @@ class CustomerController extends Controller
 
     public function profile($id)
     {
-
         $member = DB::table('member')
             ->where('id', $id)
             ->first();
@@ -85,5 +84,10 @@ class CustomerController extends Controller
                 'file' => $file,
             ]
         );
+    }
+
+    public function create()
+    {
+        return view('customers.create');
     }
 }

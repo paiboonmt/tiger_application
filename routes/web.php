@@ -83,7 +83,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/customers', 'index')->name('customers.index');
         Route::get('/customers/expired', 'expired')->name('customers.expired');
         Route::get('/customers/profile/{id}', 'profile')->name('customers.profile');
+        Route::get('/customers/create', 'create')->name('customers.create');
     });
+
+
+
+    
     // SponserController
     Route::get('sponsers', [SponserController::class, 'index'])->name('sponsers.index');
     Route::get('sponsers/expired', [SponserController::class, 'expired'])->name('sponsers.expired');
