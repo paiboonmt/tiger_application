@@ -88,6 +88,10 @@ class CustomerController extends Controller
 
     public function create()
     {
-        return view('customers.create');
+        // Getall nationality
+        $nationality_data = DB::table('tb_nationality')->get();
+        // Getall package
+        $product_data = DB::table('products')->get();
+        return view('customers.create', ['nationality_data' => $nationality_data, 'product_data' => $product_data]);
     }
 }
