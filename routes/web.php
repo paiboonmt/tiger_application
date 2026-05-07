@@ -84,6 +84,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/customers/expired', 'expired')->name('customers.expired');
         Route::get('/customers/profile/{id}', 'profile')->name('customers.profile');
         Route::get('/customers/create', 'create')->name('customers.create');
+        Route::post('/customers/store', 'store')->name('customers.store');
+        Route::get('/customers/edit/{id}', 'edit')->name('customers.edit');
+        Route::post('/customers/update/{id}', 'update')->name('customers.update');
     });
 
 

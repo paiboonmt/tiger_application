@@ -94,4 +94,27 @@ class CustomerController extends Controller
         $product_data = DB::table('products')->get();
         return view('customers.create', ['nationality_data' => $nationality_data, 'product_data' => $product_data]);
     }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
+            // "_token" => "jBoVRRZ3VVBU091DKnofghvpwvxJYWqLFt4lPA3H"
+            // "group" => "1"
+            // "gender" => "ชาย"
+            // "fname" => "Mr.Paiboon Yaniwong"
+            // "nationality" => "Thailand"
+            // "phone" => "1234567890"
+            // "m_card" => "1234567890"
+            // "p_visa" => "1234567890"
+            // "email" => "paiboon@gmail.com"
+            // "product" => "All Inclusive Training (Weekly)"
+            // "accom" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, voluptatibus?"
+            // "comment" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, nihil."
+            // "sta_date" => "2026-05-07"
+            // "exp_date" => "2026-06-06"
+            // "em_phone" => "1234567890"
+            // "em_name" => "นายสมชาย ใจดี"
+            // "photo" =>
+            
+    }
 }
