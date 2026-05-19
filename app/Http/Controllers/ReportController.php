@@ -25,8 +25,6 @@ class ReportController extends Controller
         return view('reports.checkin',['data' => $data]);
     }
 
-
-
     // Display customer total report
     public function customerTotal()
     {
