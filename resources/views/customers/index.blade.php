@@ -21,6 +21,7 @@
                         <thead class="bg-success">
                             <tr>
                                 <th hidden>id</th>
+                                <td>See</td>
                                 <th>เลขสมาชิก</th>
                                 <th>ชื่อ</th>
                                 <th>บิล</th>
@@ -35,8 +36,11 @@
                         </thead>
                         <tbody>
                             @foreach ($customers as $item)
-                                <tr onclick="location.href='{{ route('customers.profile', $item->id) }}';" style="cursor: pointer;">
+                                <tr>
                                     <td hidden>{{ $item->id }}</td>
+                                    <td>
+                                        <a href="{{ route('customers.profile',$item->id) }}" target="_blank" class="btn btn-sm btn-info">See</a>
+                                    </td>
                                     <td>{{ $item->m_card }}</td>
                                     <td>{{ $item->fname }}</td>
                                     <td>{{ $item->invoice }}</td>
