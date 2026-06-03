@@ -7,7 +7,6 @@
     <div class="row">
         <div class="col-md-12 p-1">
             <div class="card">
-
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="profile">

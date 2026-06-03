@@ -12,25 +12,19 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables CSS -->
-    <link rel="stylesheet"
-        href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet"
-        href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet"
-        href="https://adminlte.io/themes/v3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css?v=3.2.0">
     <!-- fancyapps -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" />
-
     <style>
         body {
             font-family: "Source Sans Pro", "Sarabun", sans-serif;
         }
     </style>
-
     @stack('styles')
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -82,8 +76,8 @@
                                     <p>เช็คอินเข้าใช้บริการ</p>
                                 </a>
                             </li>
-                            <li class="nav-item {{ request()->is('users*', 'roles*') ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link {{ request()->is('users*', 'roles*') ? 'active' : '' }}">
+                            <li class="nav-item {{ request()->is('users*', 'roles*') ? 'menu-open' : 'menu-open' }}">
+                                <a href="#" class="nav-link {{ request()->is('users*', 'roles*') ? 'active' : 'active' }}">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
                                         ผู้ใช้งาน
@@ -111,8 +105,8 @@
                             </li>
                         @endif
 
-                        <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : '' }}">
+                        <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : 'menu-open' }}">
+                            <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : 'active' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     สมาชิกกลุ่ม ลูกค้า
@@ -146,8 +140,8 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item {{ request()->is('sponsers*') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ request()->is('sponsers*') ? 'active' : '' }}">
+                        <li class="nav-item {{ request()->is('sponsers*') ? 'menu-open' : 'menu-open' }}">
+                            <a href="#" class="nav-link {{ request()->is('sponsers*') ? 'active' : 'active' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     สมาชิกกลุ่ม พิเศษ
@@ -175,8 +169,8 @@
                         </li>
 
                         @if (Auth::user()->role == 'admin')
-                            <li class="nav-item {{ request()->is('report*') ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link {{ request()->is('report*') ? 'active' : '' }}">
+                            <li class="nav-item {{ request()->is('report*') ? 'menu-open' : 'menu-open' }}">
+                                <a href="#" class="nav-link {{ request()->is('report*') ? 'active' : 'active' }}">
                                     <i class="nav-icon fas fa-print"></i>
                                     <p>
                                         รายงาน
