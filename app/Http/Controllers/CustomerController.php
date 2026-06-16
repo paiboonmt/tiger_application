@@ -34,7 +34,7 @@ class CustomerController extends Controller
             ->where('member.status_code', '=', 4)
             ->where('member.exp_date', '<=', date('Y-m-d'))
             ->select('member.*', 'products.product_name')
-            ->limit(5000)
+            ->limit(1000)
             ->orderBy('member.id', 'desc')
             ->get();
 
