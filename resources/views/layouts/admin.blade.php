@@ -12,13 +12,17 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet"
+        href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet"
+        href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet"
+        href="https://adminlte.io/themes/v3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css?v=3.2.0">
     <!-- fancyapps -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             font-family: "Source Sans Pro", "Sarabun", sans-serif;
@@ -62,22 +66,27 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
 
-                        <li class="nav-item">
-                            <a href="{{ route('dashboard.index') }}"
-                                class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>แดชบอร์ด</p>
-                            </a>
-                        </li>
                         @if (Auth::user()->role == 'admin')
+                            <li class="nav-item">
+                                <a href="{{ route('dashboard.index') }}"
+                                    class="nav-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>แดชบอร์ด</p>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (Auth::user()->role == 'admin')
+
                             <li class="nav-item">
                                 <a href="" class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-sign-in-alt"></i>
                                     <p>เช็คอินเข้าใช้บริการ</p>
                                 </a>
                             </li>
-                            <li class="nav-item {{ request()->is('users*', 'roles*') ? 'menu-open' : 'menu-open' }}">
-                                <a href="#" class="nav-link {{ request()->is('users*', 'roles*') ? 'active' : 'active' }}">
+
+                            <li class="nav-item {{ request()->is('users*', 'roles*') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ request()->is('users*', 'roles*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
                                         ผู้ใช้งาน
@@ -103,10 +112,11 @@
                                     </li>
                                 </ul>
                             </li>
+
                         @endif
 
-                        <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : 'menu-open' }}">
-                            <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : 'active' }}">
+                        <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     สมาชิกกลุ่ม ลูกค้า
@@ -140,8 +150,8 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item {{ request()->is('sponsers*') ? 'menu-open' : 'menu-open' }}">
-                            <a href="#" class="nav-link {{ request()->is('sponsers*') ? 'active' : 'active' }}">
+                        <li class="nav-item {{ request()->is('sponsers*') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ request()->is('sponsers*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     สมาชิกกลุ่ม พิเศษ
@@ -169,8 +179,8 @@
                         </li>
 
                         @if (Auth::user()->role == 'admin')
-                            <li class="nav-item {{ request()->is('report*') ? 'menu-open' : 'menu-open' }}">
-                                <a href="#" class="nav-link {{ request()->is('report*') ? 'active' : 'active' }}">
+                            <li class="nav-item {{ request()->is('report*') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ request()->is('report*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-print"></i>
                                     <p>
                                         รายงาน
@@ -226,8 +236,6 @@
                             </li>
                         @endif
 
-
-                        
                         <!-- logout -->
                         <li class="nav-item">
                             <form method="POST" action="{{ route('logout') }}">
@@ -248,32 +256,30 @@
 
         <!-- Content Wrapper -->
         <div class="content-wrapper">
-            <!-- Content Header -->
-            <!-- <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">@yield('page-title', 'Dashboard')</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            @yield('breadcrumb')
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div> -->
 
             <!-- Main content -->
             <section class="content p-2">
                 <div class="container-fluid">
                     @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                        <!-- <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div> -->
+                        <script>
+                            // Swal.fire({
+                            //     title: "Good job!",
+                            //     text: "You clicked the button!",
+                            //     icon: "success"
+                            // });
+                            Swal.fire({
+                                title: "The Internet?",
+                                text: "That thing is still around?",
+                                icon: "question"
+                            });
+
+                        </script>
                     @endif
 
                     @if (session('error'))

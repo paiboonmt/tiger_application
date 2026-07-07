@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Nationality;
 
 class NationalityController extends Controller
@@ -20,13 +23,18 @@ class NationalityController extends Controller
 
     public function store(Request $request)
     {
+
+        // dd($request->all());
+
+
         $request->validate([
             'n_name' => 'required',
         ]);
 
-        $nationality = new Nationality();
-        $nationality->n_name = $request->n_name;
-        $nationality->save();
+        DB::table('tb_nationality')->insert([
+            'n_name' => $request->n_name,
+        ]);
+
 
         return redirect()->route('nationality.index');
     }
@@ -43,11 +51,17 @@ class NationalityController extends Controller
             'n_name' => 'required',
         ]);
 
-        $nationality = Nationality::findOrFail($id);
-        $nationality->n_name = $request->n_name;
-        $nationality->save();
+        $data = DB::table('tb_nationality')
+            ->where('nationality_id', $id)
+            ->update([
+                'n_name' => $request->n_name,
+            ]);
 
-        return redirect()->route('nationality.index');
+        // $nationality = Nationality::findOrFail($id);
+        // $nationality->n_name = $request->n_name;
+        // $nationality->save();
+
+        return redirect()->route('nationality.index')->with('success', 'Nationality updated successfully.');
     }
 
     public function destroy($id)

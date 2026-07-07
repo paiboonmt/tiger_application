@@ -25,11 +25,6 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-// route for admin dashboard
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardControler::class, 'index'])->name('admin.dashboard');
-});
-
 
 Route::middleware('auth')->group(function () {
     // DashboardController
@@ -71,6 +66,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/nationality', [NationalityController::class, 'index'])->name('nationality.index');
             Route::get('/nationality/create', [NationalityController::class, 'create'])->name('nationality.create');
             Route::post('/nationality/store', [NationalityController::class, 'store'])->name('nationality.store');
+            
             Route::get('/nationality/edit/{id}', [NationalityController::class, 'edit'])->name('nationality.edit');
             Route::post('/nationality/update/{id}', [NationalityController::class, 'update'])->name('nationality.update');
             Route::post('/nationality/delete/{id}', [NationalityController::class, 'destroy'])->name('nationality.delete');
@@ -99,9 +95,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/customers/update/{id}', 'update')->name('customers.update');
     });
 
-
-
-    
     // SponserController
     Route::get('sponsers', [SponserController::class, 'index'])->name('sponsers.index');
     Route::get('sponsers/expired', [SponserController::class, 'expired'])->name('sponsers.expired');
