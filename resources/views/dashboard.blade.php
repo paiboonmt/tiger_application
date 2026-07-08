@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'ไทเกอร์ มวยไทย | แดชบอร์ด')
-@section('page-title', 'แดชบอร์ด')
+@section('head', 'แดชบอร์ด')
 
 @section('breadcrumb')
     <li class="breadcrumb-item active">แดชบอร์ด</li>
@@ -9,197 +9,17 @@
 
 @section('content')
 
-    <div class="row">
+<!-- เป็น Admin ถึงจะมองเห็น -->
+@if (Auth::user()->role == 'admin')
 
-        <div class="col-12 p-2 col-sm-6 col-md-3">
-            <div class="info-box">
-                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">จำนวนลูกค้าที่เป็นสมาชิก</span>
-                    <span class="info-box-number">{{ $data }}</span>
-                </div>
-            </div>
-        </div>
+@include('components/dashboard/box')
 
-        <div class="col-12 p-2 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">ลูกค้าสมัครสมาชิกใหม่วันนี้</span>
-                    <span class="info-box-number">{{ $newMemberTotals }} </span>
-                </div>
-            </div>
-        </div>
+@include('components/dashboard/daily-sale')
 
-        <div class="col-12 p-2 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-check-double"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">จำนวนลูกค้าที่เข้ามาวันนี้</span>
-                    <span class="info-box-number">{{ $checkInTotals }}</span>
-                </div>
-            </div>
-        </div>
+@include("components/dashboard/sale-gg")
 
-        <div class="col-12 p-2 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fab fa-first-order-alt"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">จำนวนสมาชิกที่เข้าใช้บริการฟรี</span>
-                    <span class="info-box-number">{{ $freeMemberTotals }}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    @include('components.sponser')
-
-    @if (Auth::user()->role == 'admin')
-        <div class="row">
-            <!-- Left col -->
-            <div class="col-md-4">
-                <!-- Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-chart-line mr-1"></i>
-                            รายงานยอดขาย 1 เดือนล่าสุด
-                        </h3>
-                    </div>
-                    <div class="card-body p-1">
-                        <table class="table" id="table-sale-report-1month">
-                            <thead>
-                                <tr>
-                                    <th>วันที่</th>
-                                    <th>ยอดขาย</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($saleReport1Month as $report)
-                                    <tr>
-                                        <td>{{ $report->order_date }}</td>
-                                        <td>{{ number_format($report->sum, 2) }} บาท</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right col -->
-            <div class="col-md-4">
-                <!-- Info Box -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-chart-bar mr-1"></i>
-                            รายงานยอดขาย 12 เดือนล่าสุด
-                        </h3>
-                    </div>
-                    <div class="card-body p-1">
-                        <table class="table" id="table-sale-report-12month">
-                            <thead>
-                                <tr>
-                                    <th>เดือน</th>
-                                    <th>ยอดขาย</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($saleReport12Month as $report)
-                                    <tr>
-                                        <td>{{ $report->month }}</td>
-                                        <td>{{ number_format($report->sum, 2) }} บาท</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <!-- Info Box -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-chart-bar mr-1"></i>
-                            รายงานยอดขายรายปี
-                        </h3>
-                    </div>
-                    <div class="card-body p-1">
-                        <table class="table" id="table-sale-report-year">
-                            <thead>
-                                <tr>
-                                    <th>ปี</th>
-                                    <th>ยอดขาย</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($saleReportYear as $report)
-                                    <tr>
-                                        <td>{{ $report->year }}</td>
-                                        <td>{{ number_format($report->sum, 2) }} บาท</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td>รวม</td>
-                                    <td>{{ number_format($saleReportYear->sum('sum'), 2) }} บาท</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-chart-area mr-1"></i>
-                            บริการที่ขายดีที่สุด เดือน {{ $month }}
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <table class="table" id="table-service-sales">
-                            <thead>
-                                <tr>
-                                    <th>บริการ</th>
-                                    <th>ยอดขาย</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($serviceSales as $report)
-                                    <tr>
-                                        <td>{{ $report->product_name }}</td>
-                                        <td>{{ number_format($report->sum_total, 2) }} บาท</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-chart-area mr-1"></i>
-                            กราฟยอดขายประจำเดือน
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="monthlySalesChart" height="80" data-sales-data='@json($saleReport12Month)'></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
+@include('components/dashboard/sale-good')
+@endif
 
 
 @endsection
@@ -207,101 +27,105 @@
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script>
-        // Monthly Sales Chart - Data is passed via data attribute from Blade
-        const monthlyData = JSON.parse(document.getElementById('monthlySalesChart').dataset.salesData);
-        const months = monthlyData.map(item => item.month);
-        const sales = monthlyData.map(item => parseFloat(item.sum));
+        const chartCanvas = document.getElementById('monthlySalesChart');
 
-        const ctx = document.getElementById('monthlySalesChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: months,
-                datasets: [{
-                    label: 'ยอดขาย (บาท)',
-                    data: sales,
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 2,
-                    borderRadius: 5
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top'
+        if (chartCanvas && typeof Chart !== 'undefined') {
+            const monthlyData = JSON.parse(chartCanvas.dataset.salesData || '[]');
+
+            if (Array.isArray(monthlyData) && monthlyData.length) {
+                const months = monthlyData.map(item => item.month);
+                const sales = monthlyData.map(item => parseFloat(item.sum));
+                const ctx = chartCanvas.getContext('2d');
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: months,
+                        datasets: [{
+                            label: 'ยอดขาย (บาท)',
+                            data: sales,
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 2,
+                            borderRadius: 5
+                        }]
                     },
-                    tooltip: {
-                        callbacks: {
-                            label: function (context) {
-                                return 'ยอดขาย: ' + context.parsed.y.toLocaleString('th-TH', {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2
-                                }) + ' บาท';
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return 'ยอดขาย: ' + context.parsed.y.toLocaleString('th-TH', {
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2
+                                        }) + ' บาท';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function (value) {
+                                        return value.toLocaleString('th-TH') + ' ฿';
+                                    }
+                                }
                             }
                         }
                     }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function (value) {
-                                return value.toLocaleString('th-TH') + ' ฿';
-                            }
-                        }
-                    }
-                }
+                });
             }
-        });
+        }
 
-        $(document).ready(function () {
-            $('#table-sale-report-1month').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": false,
-                "autoWidth": false,
-                "responsive": false,
-                "pageLength": 5,
-                "order": [
-                    [0, 'desc']
-                ]
-            });
-        });
-        $(document).ready(function () {
-            $('#table-sale-report-12month').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": false,
-                "info": false,
-                "autoWidth": false,
-                "responsive": false,
-                "pageLength": 5,
-                "order": [
-                    [0, 'desc']
-                ]
-            });
-        });
+        $(function () {
+            const initDataTable = (selector, options = {}) => {
+                if (typeof $.fn.DataTable !== 'function') return;
+                const $table = $(selector);
+                if (!$table.length) return;
+                $table.DataTable(options);
+            };
 
-        $(document).ready(function () {
-            $('#table-service-sales').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": false,
-                "info": false,
-                "autoWidth": false,
-                "responsive": false,
-                "pageLength": 5,
-                "order": [
-                    [0, 'desc']
-                ]
+            initDataTable('#table-sale-report-1month', {
+                paging: true,
+                lengthChange: false,
+                searching: false,
+                ordering: true,
+                info: false,
+                autoWidth: false,
+                responsive: false,
+                pageLength: 5,
+                order: [[0, 'desc']]
+            });
+
+            initDataTable('#table-sale-report-12month', {
+                paging: true,
+                lengthChange: false,
+                searching: false,
+                ordering: false,
+                info: false,
+                autoWidth: false,
+                responsive: false,
+                pageLength: 5,
+                order: [[0, 'desc']]
+            });
+
+            initDataTable('#table-service-sales', {
+                paging: true,
+                lengthChange: false,
+                searching: false,
+                ordering: true,
+                info: false,
+                autoWidth: false,
+                responsive: false,
+                pageLength: 5,
+                order: [[0, 'desc']]
             });
         });
     </script>

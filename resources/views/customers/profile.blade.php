@@ -2,6 +2,8 @@
 @section('title', 'Profile : '. $member->fname)
 @section('head', 'รายชื่อสมาชิก > ข้อมูลสมาชิก')
 
+<link rel="stylesheet" href="{{ asset('css/fancybox.css') }}" />
+
 @section('content')
 
 <div class="row">

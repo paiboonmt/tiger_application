@@ -10,19 +10,19 @@
     @vite(['resources/css/app.css'])
     <link rel="shortcut icon" href="{{ asset('images/logo/logo.png') }}" type="image/x-icon">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/fontawesome-free/css/all.min.css">
-    <!-- DataTables CSS -->
-    <link rel="stylesheet"
-        href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet"
-        href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet"
-        href="https://adminlte.io/themes/v3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
+    <!-- <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/fontawesome-free/css/all.min.css"> -->
     <!-- Theme style -->
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css?v=3.2.0">
+    <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+    <!-- <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css?v=3.2.0"> -->
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
+    <!-- <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"> -->
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- fancyapps -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" /> -->
+
     <style>
         body {
             font-family: "Source Sans Pro", "Sarabun", sans-serif;
@@ -32,6 +32,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -45,6 +46,15 @@
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="@yield('link')" class="nav-link">@yield('head', 'Home')</a>
+                </li>
+            </ul>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-user-alt"></i>
+                        {{ Auth::user()->name }}
+                    </a>
                 </li>
             </ul>
         </nav>
@@ -80,7 +90,7 @@
 
                             <li class="nav-item">
                                 <a href="" class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-sign-in-alt"></i>
+                                    <i class="nav-icon fas fa-user-check"></i>
                                     <p>เช็คอินเข้าใช้บริการ</p>
                                 </a>
                             </li>
@@ -208,7 +218,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('nationality.index') }}"
                                     class="nav-link {{ request()->is('nationality*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-print"></i>
+                                    <i class="nav-icon fas fa-globe"></i>
                                     <p>
                                         สัญชาติ
                                     </p>
@@ -218,7 +228,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('product.index') }}"
                                     class="nav-link {{ request()->is('product*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-print"></i>
+                                    <i class="nav-icon fas fa-store-alt"></i>
                                     <p>
                                         สินค้า
                                     </p>
@@ -228,7 +238,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('payment.index') }}"
                                     class="nav-link {{ request()->is('payment*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-print"></i>
+                                    <i class="nav-icon fas fa-credit-card"></i>
                                     <p>
                                         ชำระเงิน
                                     </p>
@@ -260,36 +270,36 @@
             <!-- Main content -->
             <section class="content p-2">
                 <div class="container-fluid">
-                    @if (session('success'))
-                        <!-- <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <!-- @if (session('success')) -->
+                    <!-- <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     {{ session('success') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div> -->
-                        <script>
-                            // Swal.fire({
-                            //     title: "Good job!",
-                            //     text: "You clicked the button!",
-                            //     icon: "success"
-                            // });
-                            Swal.fire({
-                                title: "The Internet?",
-                                text: "That thing is still around?",
-                                icon: "question"
-                            });
+                    <!-- <script> -->
+                    // Swal.fire({
+                    // title: "Good job!",
+                    // text: "You clicked the button!",
+                    // icon: "success"
+                    // });
+                    // Swal.fire({
+                    // title: "The Internet?",
+                    // text: "That thing is still around?",
+                    // icon: "question"
+                    // });
 
-                        </script>
-                    @endif
+                    // </script>
+                    <!-- @endif -->
 
-                    @if (session('error'))
+                    <!-- @if (session('error'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             {{ session('error') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                    @endif
+                    @endif -->
 
                     @yield('content')
                 </div>
@@ -297,25 +307,25 @@
         </div>
 
         <!-- Footer -->
-        <footer class="main-footer">
+        <!-- <footer class="main-footer">
             <strong>Copyright &copy; 2026 <a href="#">Tiger Application</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1.0.0
             </div>
-        </footer>
+        </footer> -->
     </div>
 
     <!-- Vite JS -->
     @vite(['resources/js/app.js'])
 
     <!-- jQuery -->
-    <script src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('plugins/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
-    <script src="https://adminlte.io/themes/v3/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('plugins/bootstrap.bundle.min.js') }}"></script>
     <!-- DataTables  & Plugins -->
-    <script src="https://adminlte.io/themes/v3/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="https://adminlte.io/themes/v3/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('plugins/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/dataTables.bootstrap4.min.js') }}"></script>
     <script src="https://adminlte.io/themes/v3/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="https://adminlte.io/themes/v3/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>

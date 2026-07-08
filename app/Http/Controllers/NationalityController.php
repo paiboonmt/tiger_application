@@ -12,8 +12,12 @@ class NationalityController extends Controller
 {
     public function index()
     {
-        $nationalities = Nationality::all();
-        return view('nationality.index', compact('nationalities'));
+        // $nationalities = Nationality::all();
+        $data = DB::table('tb_nationality')
+            // ->offset(10)
+            // ->limit(10)
+            ->get();
+        return view('nationality.index', ['data' => $data]);
     }
 
     public function create()

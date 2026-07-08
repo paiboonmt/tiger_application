@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header bg-dark">
-                    <div class="card-title">สัญชาติ</div>
+                    <div class="card-title">สัญชาติ ( Nationality )</div>
                     <div class="card-tools">
                         <a href="{{ route('nationality.create') }}" class="btn btn-success btn-sm">
                             <i class="fas fa-plus"></i>
@@ -19,31 +19,35 @@
                     <table class="table table-sm" id="nationalityTable">
                         <thead>
                             <tr>
+                                <th>ลำดับที่</th>
                                 <th>ไอดี</th>
                                 <th>ชื่อสัญชาติ</th>
                                 <th>จัดการ</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($nationalities as $nationality)
+                            @php 
+                                $i = 1;
+                            @endphp
+                            @foreach ($data as $nationality)
                                 <tr>
+                                    <td>{{ $i++ }}</td>
                                     <td>{{ $nationality->nationality_id }}</td>
                                     <td>{{ $nationality->n_name }}</td>
                                     <th>
-                                        <form action="{{ route('nationality.delete', $nationality->nationality_id) }}"
-                                            method="POST">
+                                        <form action="{{ route('nationality.delete', $nationality->nationality_id) }}" method="POST">
                                             @csrf
                                             <div class="btn-group" role="group">
                                                 <a href="{{ route('nationality.edit', $nationality->nationality_id) }}"
-                                                    class="btn btn-success btn-sm">
+                                                    class="btn btn-info">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                <button type="submit" class="btn btn-warning"
                                                     onclick="return confirm('คุณต้องการลบข้อมูลนี้หรือไม่?')">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </div>
-                                        </form>
+                                         </form>
                                     </th>
                                 </tr>
                             @endforeach
@@ -59,7 +63,7 @@
     <script>
         $('#nationalityTable').DataTable({
             "paging": true,
-            "pageLength": 35,
+            // "pageLength": 20,
             "lengthChange": true,
             "searching": true,
             "ordering": true,
