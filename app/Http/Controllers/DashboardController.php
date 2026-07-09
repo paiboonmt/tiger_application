@@ -27,24 +27,24 @@ class DashboardController extends Controller
 
         // Check-in today total
         $checkInTotals = DB::table('totel')
-            ->whereDate('date',  now()->toDateString())
+            ->whereDate('date', now()->toDateString())
             ->first();
 
         // New members today total
         $newMemberTotals = DB::table('member')
             ->where('status_code', 4)
-            ->whereDate('date',  now()->toDateString())
+            ->whereDate('date', now()->toDateString())
             ->count('id');
 
         // จำนวนสมาชิกที่เข้าใช้บริการฟรี
         $freeMemberTotals = DB::table('member')
             ->where('status_code', 3)
-            ->whereDate('exp_date', '>=',  now()->toDateString())
+            ->whereDate('exp_date', '>=', now()->toDateString())
             ->count('id');
 
         $sponsor = DB::table('member')
             ->where('status_code', 3)
-            ->whereDate('exp_date', '>=',  now()->toDateString())
+            ->whereDate('exp_date', '>=', now()->toDateString())
             ->limit(1)
             ->get();
 
@@ -61,7 +61,7 @@ class DashboardController extends Controller
         foreach ($ageRanges as $key => [$min, $max]) {
             $ageCounts[$key] = DB::table('member')
                 ->where('status_code', 4)
-                ->whereDate('exp_date', '>=',  now()->toDateString())
+                ->whereDate('exp_date', '>=', now()->toDateString())
                 ->whereRaw("TIMESTAMPDIFF(YEAR, birthday, CURDATE()) BETWEEN ? AND ?", [$min, $max])
                 ->count('id');
         }
@@ -112,19 +112,33 @@ class DashboardController extends Controller
 
         $m = month(date('m'));
 
-        $serviceSales = DB::table('order_details')
-            ->select(
-                'product_id',
-                'product_name',
-                'total',
-                DB::raw('COUNT(*) as total_orders'),
-                DB::raw('SUM(quantity) as total_quantity_sold'),
-                DB::raw('SUM(total) as sum_total')
-            )
-            ->where('date', '>=', Carbon::now()->subMonth())
-            ->groupBy('product_id', 'product_name', 'total')
-            ->orderBy('sum_total', 'DESC')
+        // $serviceSales = DB::table('order_details')
+        //     ->select(
+        //         'product_id',
+        //         'product_name',
+        //         'total',
+        //         DB::raw('COUNT(*) as total_orders'),
+        //         DB::raw('SUM(quantity) as total_quantity_sold'),
+        //         DB::raw('SUM(total) as sum_total')
+        //     )
+        //     ->where('date', '>=', Carbon::now()->subMonth())
+        //     ->groupBy('product_id', 'product_name', 'total')
+        //     ->orderBy('sum_total', 'DESC')
+        //     ->get();
+
+        $monthlyProductSales = DB::table('member.order_details')
+            ->select('product_id', 'product_name')
+            ->selectRaw('COUNT(*) as total_orders')
+            ->selectRaw('SUM(quantity) as total_quantity_sold')
+            ->selectRaw('SUM(total) as sum_total')
+            ->whereBetween('date', [
+                now()->startOfMonth(),
+                now()->endOfMonth(),
+            ])
+            ->groupBy('product_id', 'product_name')
+            ->orderByDesc('sum_total')
             ->get();
+
 
         return view(
             'dashboard',
@@ -138,7 +152,7 @@ class DashboardController extends Controller
                 'saleReport12Month' => $saleReport12Month ?? [],
                 'saleReportYear' => $saleReportYear ?? [],
                 'freeMemberTotals' => $freeMemberTotals ?? 0,
-                'serviceSales' => $serviceSales ?? [],
+                'monthlyProductSales' => $monthlyProductSales ?? [],
                 'month' => $m ?? [],
                 'sponsor' => $sponsor ?? [],
             ]

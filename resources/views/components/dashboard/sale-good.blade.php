@@ -12,13 +12,15 @@
                     <thead>
                         <tr>
                             <th>บริการ</th>
+                            <th>จำนวนครั้ง</th>
                             <th>ยอดขาย</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($serviceSales as $report)
+                        @foreach($monthlyProductSales as $report)
                             <tr>
                                 <td>{{ $report->product_name }}</td>
+                                <td data-order="{{ $report->total_orders }}">{{ $report->total_orders }}</td>
                                 <td>{{ number_format($report->sum_total, 2) }} บาท</td>
                             </tr>
                         @endforeach

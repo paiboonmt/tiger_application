@@ -12,13 +12,11 @@
 <!-- เป็น Admin ถึงจะมองเห็น -->
 @if (Auth::user()->role == 'admin')
 
-@include('components/dashboard/box')
 
-@include('components/dashboard/daily-sale')
-
-@include("components/dashboard/sale-gg")
 
 @include('components/dashboard/sale-good')
+
+
 @endif
 
 
@@ -124,8 +122,8 @@
                 info: false,
                 autoWidth: false,
                 responsive: false,
-                pageLength: 5,
-                order: [[0, 'desc']]
+                pageLength: 10,
+                order: [[1, 'desc']]
             });
         });
     </script>
