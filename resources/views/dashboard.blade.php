@@ -9,15 +9,14 @@
 
 @section('content')
 
-<!-- เป็น Admin ถึงจะมองเห็น -->
-@if (Auth::user()->role == 'admin')
+@include('components/dashboard/box')
 
-
-
-@include('components/dashboard/sale-good')
-
-
-@endif
+    <!-- เป็น Admin ถึงจะมองเห็น -->
+    @if (Auth::user()->role == 'admin')
+        @include('components/dashboard/daily-sale')
+        @include("components/dashboard/sale-gg")
+        @include('components/dashboard/sale-good')
+    @endif
 
 
 @endsection
@@ -123,7 +122,7 @@
                 autoWidth: false,
                 responsive: false,
                 pageLength: 10,
-                order: [[1, 'desc']]
+                order: [[2, 'desc']]
             });
         });
     </script>

@@ -3,12 +3,8 @@
 @section('head', 'สร้างสมาชิกใหม่')
 
 @section('content')
-
-    <div class="row">
-        <h1>
-            Checkin
-        </h1>
-    </div>
+    @include('components/checkin/input')
+    @include('components/checkin/table_list')
 
 @endsection
 

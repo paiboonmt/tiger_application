@@ -127,7 +127,7 @@ class DashboardController extends Controller
         //     ->get();
 
         $monthlyProductSales = DB::table('member.order_details')
-            ->select('product_id', 'product_name')
+            ->select('product_id', 'product_name','price')
             ->selectRaw('COUNT(*) as total_orders')
             ->selectRaw('SUM(quantity) as total_quantity_sold')
             ->selectRaw('SUM(total) as sum_total')
@@ -135,10 +135,9 @@ class DashboardController extends Controller
                 now()->startOfMonth(),
                 now()->endOfMonth(),
             ])
-            ->groupBy('product_id', 'product_name')
+            ->groupBy('product_id', 'product_name', 'price')
             ->orderByDesc('sum_total')
             ->get();
-
 
         return view(
             'dashboard',

@@ -14,9 +14,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 
-// Admin Dashboard
-use App\Http\Controllers\Admin\DashboardControler;
-
+use App\Http\Controllers\CheckinController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +27,14 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     // DashboardController
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    // RattachaiController
+   
+
+    Route::controller(CheckinController::class)->group(function () {
+        Route::get('/checkin', 'index')->name('checkin.index');
+    });
+
+
+
 
     Route::middleware('admin')->group(function () {
 

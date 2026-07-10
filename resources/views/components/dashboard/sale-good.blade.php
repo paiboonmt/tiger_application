@@ -12,6 +12,7 @@
                     <thead>
                         <tr>
                             <th>บริการ</th>
+                            <th>ราคาบริการ</th>
                             <th>จำนวนครั้ง</th>
                             <th>ยอดขาย</th>
                         </tr>
@@ -20,8 +21,12 @@
                         @foreach($monthlyProductSales as $report)
                             <tr>
                                 <td>{{ $report->product_name }}</td>
+                                <td>{{ number_format($report->price,2) }}</td>
                                 <td data-order="{{ $report->total_orders }}">{{ $report->total_orders }}</td>
-                                <td>{{ number_format($report->sum_total, 2) }} บาท</td>
+                                @php
+                                    $sum_totals = $report->price * $report->total_orders 
+                                @endphp
+                                <td>{{ number_format($sum_totals, 2) }} บาท</td>
                             </tr>
                         @endforeach
                     </tbody>
