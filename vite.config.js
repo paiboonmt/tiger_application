@@ -16,5 +16,10 @@ export default defineConfig({
             '~bootstrap': 'bootstrap',
             '~admin-lte': 'admin-lte',
         }
+    },
+    server: {
+        host: 'localhost',
+        port: 5300,
+        strictPort: true,
     }
 });

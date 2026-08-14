@@ -112,20 +112,6 @@ class DashboardController extends Controller
 
         $m = month(date('m'));
 
-        // $serviceSales = DB::table('order_details')
-        //     ->select(
-        //         'product_id',
-        //         'product_name',
-        //         'total',
-        //         DB::raw('COUNT(*) as total_orders'),
-        //         DB::raw('SUM(quantity) as total_quantity_sold'),
-        //         DB::raw('SUM(total) as sum_total')
-        //     )
-        //     ->where('date', '>=', Carbon::now()->subMonth())
-        //     ->groupBy('product_id', 'product_name', 'total')
-        //     ->orderBy('sum_total', 'DESC')
-        //     ->get();
-
         $monthlyProductSales = DB::table('member.order_details')
             ->select('product_id', 'product_name','price')
             ->selectRaw('COUNT(*) as total_orders')
