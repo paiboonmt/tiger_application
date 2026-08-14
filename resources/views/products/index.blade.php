@@ -3,11 +3,17 @@
 @section('head', 'สินค้า')
 
 @section('content')
+
+@stack('css')
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header bg-dark">
-                    <div class="card-title">สินค้า</div>
+                    <div class="card-title">สินค้า ( Products )</div>
                     <div class="card-tools">
                         <a href="{{ route('product.create') }}" class="btn btn-primary btn-sm">
                             <i class="fas fa-plus"></i> เพิ่มสินค้า
@@ -15,7 +21,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-sm" id="product-table">
+                    <table class="table table-sm" id="productTable">
                         <thead>
                             <tr>
                                 <th>รหัสสินค้า</th>
@@ -35,10 +41,11 @@
                                             <div class="btn-group" rows="group">
                                                 @csrf
                                                 <a href="{{ route('product.edit', $product->id) }}"
-                                                    class="btn btn-success btn-sm">
+                                                    class="btn btn-warning btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                <button type="submit" 
+                                                class="btn btn-danger btn-sm"
                                                     onclick="return confirm('คุณต้องการลบสินค้านี้?')">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
@@ -56,32 +63,35 @@
 @endsection
 
 @push('scripts')
+    <!-- DataTables  & Plugins -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
     <script>
-        $("#product-table").DataTable({
-            "paging": true,
-            "pageLength": 35,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            "stateSave": true,
-            "language": {
-                "sProcessing": "กำลังดำเนินการ...",
-                "sLengthMenu": "แสดง _MENU_ รายการ",
-                "sZeroRecords": "ไม่พบข้อมูล",
-                "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ",
-                "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 รายการ",
-                "sInfoFiltered": "(กรองจากทั้งหมด _MAX_ รายการ)",
-                "sSearch": "ค้นหา:",
-                "oPaginate": {
-                    "sFirst": "หน้าแรก",
-                    "sPrevious": "ก่อนหน้า",
-                    "sNext": "ถัดไป",
-                    "sLast": "หน้าสุดท้าย"
-                }
-            },
+        $(function () {
+            $("#productTable").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#productTable_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
         });
     </script>
 @endpush

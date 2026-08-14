@@ -2,13 +2,17 @@
 @section('title', 'Sponsers Page')
 @section('head', 'รายชื่อสปอนเซอร์')
 @section('link', 'sponsers')
+
 @section('content')
+@stack('css')
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
+
     <div class="row">
         <div class="col p-2">
             <div class="card">
-                <div class="card-header bg-dark">
-                    <h3 class="card-title">รายชื่อสปอนเซอร์</h3>
-                </div>
                 <div class="card-body">
                     <table class="table table-sm" id="example1">
                         <thead>
@@ -30,24 +34,21 @@
                                 <tr>
                                     <td hidden>{{ $c->id }}</td>
                                     <td>
-                                        <a href="http://172.16.0.3/fighterimg/img/{{ $c->image }}" target="_blank">
+                                        <a href="{{ route('sponsers.profile_expired', $c->id) }}" target="_blank">
                                             <img src="http://172.16.0.3/fighterimg/img/{{ $c->image }}" alt="User Avatar"
                                                 class="img-size-50 mr-2 img-circle" style="width:40px; height:40px;">
                                         </a>
-                                        <span style="color: red; padding-right: 10px;">|</span>
-                                        <a href="{{ route('sponsers.profile', $c->id) }}" class="badge badge-info"
-                                            target="_blank">ดูโปรไฟล์</a>
                                     </td>
                                     <td>{{ $c->m_card }}</td>
                                     <td>{{ $c->fname }}</td>
                                     <td>{{ $c->nationalty }}</td>
                                     <td>{{ $c->type_training }}</td>
                                     <td>{{ $c->type_fighter }}</td>
-                                    <td><span
-                                            class="badge badge-success">{{ date('d-m-y', is_numeric($c->sta_date) ? $c->sta_date : strtotime($c->sta_date)) }}</span>
+                                    <td>
+                                        <span class="badge badge-success">{{ date('d-m-y', is_numeric($c->sta_date) ? $c->sta_date : strtotime($c->sta_date)) }}</span>
                                     </td>
-                                    <td><span
-                                            class="badge badge-warning">{{ date('d-m-y', is_numeric($c->exp_date) ? $c->exp_date : strtotime($c->exp_date)) }}</span>
+                                    <td>
+                                        <span class="badge badge-warning">{{ date('d-m-y', is_numeric($c->exp_date) ? $c->exp_date : strtotime($c->exp_date)) }}</span>
                                     </td>
                                     <td class="text-center">
                                         @if ($c->days_left >= 0)
@@ -64,9 +65,25 @@
             </div>
         </div>
     </div>
+    
 @endsection
 
 @push('scripts')
+    <!-- DataTables  & Plugins -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
+
     <script>
         $(function () {
             $("#example1").DataTable({

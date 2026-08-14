@@ -1,0 +1,279 @@
+@extends('layouts.admin')
+@section('title', 'Profile : ' . $member->fname)
+@section('head', 'รายชื่อสมาชิก > ข้อมูลสมาชิก')
+
+<link rel="stylesheet" href="{{ asset('css/fancybox.css') }}" />
+
+@section('content')
+@push('styles')
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" />
+
+<div class="row">
+    <div class="col-md-12 p-1">
+        <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="#profile"
+                            data-toggle="tab">ข้อมูลส่วนบุคคล</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#timeline"
+                            data-toggle="tab">บันทึกรานการเข้าใช้พื้นที่</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#document" data-toggle="tab">เอกสารส่วนบุคคล</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#data" data-toggle="tab">ข้อมูล</a></li>
+                </ul>
+            </div><!-- /.card-header -->
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="profile">
+                        <div class="row">
+                            <div class="col-2 text-center">
+                                <a href="http://172.16.0.3/memberimg/img/{{ $member->image }}"
+                                    data-fancybox="gallery-1">
+                                    <img src="http://172.16.0.3/memberimg/img/{{ $member->image }}"
+                                        class="img-fluid rounded" style="max-width: 200px;" />
+                                </a>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label>เพศ</label>
+                                            <input type="text" class="form-control" value="{{ $member->sex }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label>ชื่อ นามสกุล</label>
+                                            <input type="text" class="form-control" value="{{ $member->fname }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label>สัญชาติ</label>
+                                            <input type="text" class="form-control" value="{{ $member->nationalty }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>หมายเลขโทรศัพท์</label>
+                                            <input type="text" class="form-control" value="{{ $member->phone }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>หมายเลขสมาชิก</label>
+                                            <input type="text" class="form-control" value="{{ $member->m_card }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>หมายเลขบัตรประจำตัว</label>
+                                            <input type="text" class="form-control" value="{{ $member->p_visa }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>อีเมล</label>
+                                            <input type="text" class="form-control" value="{{ $member->email }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    @if ($member->package == 147)
+                                        <div class="col-4">
+                                            <!-- product -->
+                                            <div class="form-group">
+                                                <label>บริการ</label>
+                                                <input type="text" class="form-control"
+                                                    value="{{ $product->product_name }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <!-- product price -->
+                                            <div class="forp">
+                                                <label>ราคา</label>
+                                                <input type="text" class="form-control"
+                                                    value="{{ number_format($product->price, 2) }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <!-- product price -->
+                                            <div class="forp">
+                                                <label>จำนวนคงครั้งคงเหลือ</label>
+                                                <input type="text" class="form-control" value="{{ $member->dropin }}">
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="col-6">
+                                            <!-- product -->
+                                            <div class="form-group">
+                                                <label>บริการ</label>
+                                                <input type="text" class="form-control"
+                                                    value="{{ $product->product_name }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <!-- product price -->
+                                            <div class="forp">
+                                                <label>ราคา</label>
+                                                <input type="text" class="form-control"
+                                                    value="{{ number_format($product->price, 2) }}">
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>สถานที่พัก</label>
+                                            <textarea name="" id="" class="form-control"
+                                                rows="3">{{ $member->accom }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>หมายเหตุ</label>
+                                            <textarea name="" id="" class="form-control"
+                                                rows="3">{{ $member->comment }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label>เริ่มต้นใช้งาน</label>
+                                            <input type="date" class="form-control" value="{{ $member->sta_date }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label>วันหมดอายุบัตร</label>
+                                            <input type="date" class="form-control" value="{{ $member->exp_date }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label>จำนวนวันคงเหลือ</label>
+                                            @if ($member->days_left < 0)
+                                                <input type="text" class="form-control bg-danger"
+                                                    value="{{ $member->days_left }}">
+                                            @else
+                                                <input type="text" class="form-control bg-success"
+                                                    value="{{ $member->days_left }}">
+                                            @endif
+
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label>บันทึกเมื่อวันที่</label>
+                                            <input type="text" class="form-control" value="{{ $member->date }}"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>บันทึกข้อมูลโดย</label>
+                                            <input type="text" class="form-control" value="{{ $member->AddBy }}"
+                                                readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>เบอร์ติดต่อฉุกเฉิน</label>
+                                            <input type="text" class="form-control" value="{{ $member->emergency }}">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="timeline">
+                        <table class="table" id="timeLineTable">
+                            <thead>
+                                <tr>
+                                    <th>#No</th>
+                                    <th>Date : Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php $i = 1; @endphp
+                                @foreach ($timeLine as $item)
+                                    <tr>
+                                        <td>{{ $i++ }}</td>
+                                        <td>{{ $item->date }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="document">
+                        <div class="row">
+                            @foreach ($file as $doc)
+                                <div style="width: 350px;" class="px-2">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+
+                                            <a href="http://172.16.0.3/memberimg/file/{{ $doc->image }}"
+                                                data-fancybox="gallery-2"
+                                                data-caption="Optional caption,&lt;br /&gt;that can contain &lt;em&gt;HTML&lt;/em&gt; code">
+                                                <img src="http://172.16.0.3/memberimg/file/{{ $doc->image }}"
+                                                    width="100%" />
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="data">
+                        <pre>{{ json_encode($member, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script>
+        $(function () {
+            $("#timeLineTable").DataTable({
+                "autoWidth": false,
+                "saveState": true,
+                "order": [
+                    [0, "desc"]
+                ],
+                "buttons": ["pdf"]
+            }).buttons().container().appendTo('#timeLineTable_wrapper .col-md-6:eq(0)');
+        });
+        Fancybox.bind("[data-fancybox]", {
+            // Your custom options
+        });
+    </script>
+@endpush

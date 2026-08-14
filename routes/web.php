@@ -91,9 +91,10 @@ Route::middleware('auth')->group(function () {
     
     // CustomerController
     Route::controller(CustomerController::class)->group(function () {
-        Route::get('/customers', 'index')->name('customers.index');
+        Route::get('/customers','index')->name('customers.index');
         Route::get('/customers/expired', 'expired')->name('customers.expired');
-        Route::get('/customers/profile/{id}', 'profile')->name('customers.profile');
+        Route::get('/customers/profile_active/{id}', 'profile_active')->name('customers.profile_active');
+        Route::get('/customers/profile_expired/{id}', 'profile_expired')->name('customers.profile_expired');
         Route::get('/customers/create', 'create')->name('customers.create');
         Route::post('/customers/store', 'store')->name('customers.store');
         Route::get('/customers/edit/{id}', 'edit')->name('customers.edit');
@@ -104,6 +105,14 @@ Route::middleware('auth')->group(function () {
     Route::get('sponsers', [SponserController::class, 'index'])->name('sponsers.index');
     Route::get('sponsers/expired', [SponserController::class, 'expired'])->name('sponsers.expired');
     Route::get('sponsers/profile/{id}', [SponserController::class, 'profile'])->name('sponsers.profile');
+    Route::get('sponsers/profile_active/{id}', [SponserController::class, 'profile_active'])->name('sponsers.profile_active');
+    Route::get('sponsers/profile_expired/{id}', [SponserController::class, 'profile_expired'])->name('sponsers.profile_expired');
+
+
+
+
+
+
     // ReportController
     Route::get('report/checkin', [ReportController::class, 'checkin'])->name('report.checkin');
     // Search check-in report

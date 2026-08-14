@@ -40,10 +40,10 @@
                                                     <label>สัญชาติ</label>
                                                     <!-- <input type="text" class="form-control" name="nationalty"> -->
                                                     <select name="nationality" class="form-control" required>
-                                                        <!-- <option value="" disabled selected>เลือกสัญชาติ</option> -->
+                                                        <option value="" disabled selected>เลือกสัญชาติ</option>
                                                         @foreach($nationality_data as $row)
-                                                            <!-- <option value="{{ $row->n_name }}">{{ $row->n_name }}</option> -->
-                                                            <option value="Thailand">Thailand</option>
+                                                            <option value="{{ $row->n_name }}">{{ $row->n_name }}</option>
+                                                            <!-- <option value="Thailand">Thailand</option> -->
                                                         @endforeach
                                                     </select>
                                                 </div>

@@ -15,7 +15,7 @@ class CustomerController extends Controller
             ->where('member.status_code', '=', 4)
             ->where('member.exp_date', '>=', date('Y-m-d'))
             ->select('member.*', 'products.product_name')
-            // ->limit(10)
+            ->limit(50)
             ->get();
 
         foreach ($customers as $customer) {
@@ -34,7 +34,7 @@ class CustomerController extends Controller
             ->where('member.status_code', '=', 4)
             ->where('member.exp_date', '<=', date('Y-m-d'))
             ->select('member.*', 'products.product_name')
-            ->limit(1000)
+            ->limit(100)
             ->orderBy('member.id', 'desc')
             ->get();
 
@@ -86,6 +86,84 @@ class CustomerController extends Controller
         );
     }
 
+    public function profile_active($id)
+    {
+        $member = DB::table('member')
+            ->where('id', $id)
+            ->first();
+
+        if ($member && $member->exp_date) {
+            $expDate = \Carbon\Carbon::parse($member->exp_date);
+            $today = \Carbon\Carbon::today();
+            $member->days_left = $today->diffInDays($expDate, false);
+        } else {
+            $member->days_left = null;
+        }
+
+        // Join with products table to get product_name
+        $product = DB::table('products')
+            ->where('id', $member->package)
+            ->first();
+
+        $timeLine = DB::table('tb_time')
+            ->where('ref_m_card', $member->m_card)
+            ->orderBy('time_id', 'desc')
+            ->get();
+
+        $file = DB::table('tb_files')
+            ->where('product_id', $member->id)
+            ->get();
+
+        return view(
+            'customers.profile_active',
+            [
+                'member' => $member,
+                'product' => $product,
+                'timeLine' => $timeLine,
+                'file' => $file,
+            ]
+        );
+    }
+
+    public function profile_expired($id)
+    {
+        $member = DB::table('member')
+            ->where('id', $id)
+            ->first();
+
+        if ($member && $member->exp_date) {
+            $expDate = \Carbon\Carbon::parse($member->exp_date);
+            $today = \Carbon\Carbon::today();
+            $member->days_left = $today->diffInDays($expDate, false);
+        } else {
+            $member->days_left = null;
+        }
+
+        // Join with products table to get product_name
+        $product = DB::table('products')
+            ->where('id', $member->package)
+            ->first();
+
+        $timeLine = DB::table('tb_time')
+            ->where('ref_m_card', $member->m_card)
+            ->orderBy('time_id', 'desc')
+            ->get();
+
+        $file = DB::table('tb_files')
+            ->where('product_id', $member->id)
+            ->get();
+
+        return view(
+            'customers.profile_active',
+            [
+                'member' => $member,
+                'product' => $product,
+                'timeLine' => $timeLine,
+                'file' => $file,
+            ]
+        );
+    }
+
     public function create()
     {
         // Getall nationality
@@ -97,24 +175,6 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
-            // "_token" => "jBoVRRZ3VVBU091DKnofghvpwvxJYWqLFt4lPA3H"
-            // "group" => "1"
-            // "gender" => "ชาย"
-            // "fname" => "Mr.Paiboon Yaniwong"
-            // "nationality" => "Thailand"
-            // "phone" => "1234567890"
-            // "m_card" => "1234567890"
-            // "p_visa" => "1234567890"
-            // "email" => "paiboon@gmail.com"
-            // "product" => "All Inclusive Training (Weekly)"
-            // "accom" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, voluptatibus?"
-            // "comment" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, nihil."
-            // "sta_date" => "2026-05-07"
-            // "exp_date" => "2026-06-06"
-            // "em_phone" => "1234567890"
-            // "em_name" => "นายสมชาย ใจดี"
-            // "photo" =>
-            
+        dd($request->all());            
     }
 }

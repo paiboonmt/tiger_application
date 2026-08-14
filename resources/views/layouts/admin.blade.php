@@ -9,19 +9,10 @@
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
     <link rel="shortcut icon" href="{{ asset('images/logo/logo.png') }}" type="image/x-icon">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
-    <!-- <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/fontawesome-free/css/all.min.css"> -->
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
-    <!-- <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css?v=3.2.0"> -->
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
-    <!-- <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"> -->
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-    <!-- fancyapps -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" /> -->
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 
     <style>
         body {
@@ -126,16 +117,16 @@
                             <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    สมาชิกกลุ่ม ลูกค้า
+                                    Customers
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('customers.index') }}"
-                                        class="nav-link {{ request()->routeIs(['customers.index', 'customers.profile']) ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs(['customers.index', 'customers.profile_active']) ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
-                                        <p>รายชื่อลูกค้า
+                                        <p>Member   
                                             <span class="badge badge-success">
                                                 Active
                                             </span>
@@ -144,10 +135,10 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('customers.expired') }}"
-                                        class="nav-link {{ request()->routeIs('customers.expired') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs(['customers.expired','customers.profile_expired']) ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>
-                                            รายชื่อลูกค้า
+                                            Member
                                             <span class="badge badge-danger">
                                                 Expired
                                             </span>
@@ -161,24 +152,24 @@
                             <a href="#" class="nav-link {{ request()->is('sponsers*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    สมาชิกกลุ่ม พิเศษ
+                                    Sponser Fighter
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('sponsers.index') }}"
-                                        class="nav-link {{ request()->routeIs('sponsers.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs(['sponsers.index','sponsers.profile_active']) ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
-                                        <p>รายชื่อกลุ่มที่</p>
+                                        <p>Active</p>
                                         <span class="badge badge-success">Active</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('sponsers.expired') }}"
-                                        class="nav-link {{ request()->routeIs('sponsers.expired') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs(['sponsers.expired','sponsers.profile_expired']) ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-user"></i>
-                                        <p>รายชื่อกลุ่มที่</p>
+                                        <p>Expried</p>
                                         <span class="badge badge-danger">Expied</span>
                                     </a>
                                 </li>
@@ -315,31 +306,15 @@
 
     <!-- Vite JS -->
     @vite(['resources/js/app.js'])
-
     <!-- jQuery -->
-    <script src="{{ asset('plugins/jquery.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
-    <script src="{{ asset('plugins/bootstrap.bundle.min.js') }}"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="{{ asset('plugins/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('plugins/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="https://adminlte.io/themes/v3/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="https://adminlte.io/themes/v3/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="https://adminlte.io/themes/v3/plugins/jszip/jszip.min.js"></script>
-    <script src="https://adminlte.io/themes/v3/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="https://adminlte.io/themes/v3/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
-    <!-- AdminLTE App -->
-    <script src="https://adminlte.io/themes/v3/dist/js/adminlte.min.js?v=3.2.0"></script>
-    <!-- fancyapps -->
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js"></script>
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     @stack('scripts')
+    <!-- AdminLTE App -->
+    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+
 </body>
 
 </html>

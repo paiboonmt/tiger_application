@@ -4,6 +4,11 @@
 @section('link', 'customers')
 
 @section('content')
+@stack('css')
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
     <div class="row">
         <div class="col p-1">
             <div class="card">
@@ -21,7 +26,7 @@
                         <thead class="bg-success">
                             <tr>
                                 <th hidden>id</th>
-                                <td>See</td>
+                                <td class="text-center">ดู</td>
                                 <th>เลขสมาชิก</th>
                                 <th>ชื่อ</th>
                                 <th>บิล</th>
@@ -39,7 +44,7 @@
                                 <tr>
                                     <td hidden>{{ $item->id }}</td>
                                     <td>
-                                        <a href="{{ route('customers.profile',$item->id) }}" target="_blank" class="btn btn-sm btn-info">See</a>
+                                        <a href="{{ route('customers.profile_active',$item->id) }}" class="btn btn-sm btn-info">view</a>
                                     </td>
                                     <td>{{ $item->m_card }}</td>
                                     <td>{{ $item->fname }}</td>
@@ -62,11 +67,24 @@
 @endsection
 
 @push('scripts')
+    <!-- DataTables  & Plugins -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script>
         $(function () {
             $("#example1").DataTable({
-                // "responsive": true,
-                // "lengthChange": true,
+                "responsive": true,
+                "lengthChange": true,
                 "autoWidth": false,
                 "saveState": true,
                 "order": [
