@@ -112,18 +112,6 @@ class DashboardController extends Controller
 
         $m = month(date('m'));
 
-        $monthlyProductSales = DB::table('member.order_details')
-            ->select('product_id', 'product_name','price')
-            ->selectRaw('COUNT(*) as total_orders')
-            ->selectRaw('SUM(quantity) as total_quantity_sold')
-            ->selectRaw('SUM(total) as sum_total')
-            ->whereBetween('date', [
-                now()->startOfMonth(),
-                now()->endOfMonth(),
-            ])
-            ->groupBy('product_id', 'product_name', 'price')
-            ->orderByDesc('sum_total')
-            ->get();
 
         return view(
             'dashboard',
