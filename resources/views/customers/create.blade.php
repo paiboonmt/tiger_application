@@ -91,7 +91,7 @@
                                                             ไม่มีรูปภาพ
                                                         </div>
                                                     </div>
-                                                    <input type="file" class="form-control-file" name="photo" required
+                                                    <input type="file" class="form-control-file" name="image" required
                                                         accept="image/*" id="photo-input">
                                                 </div>
                                             </div>
