@@ -17,7 +17,7 @@
                             <a href="{{ route('dashboard.index') }}"
                                 class="nav-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>แดชบอร์ด</p>
+                                <p>Dashboard</p>
                             </a>
                         </li>
                         
