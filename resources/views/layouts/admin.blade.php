@@ -20,25 +20,16 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-
     <div class="wrapper">
-
-        <!-- Navbar -->
         @include('layouts.navbar')
-
-        <!-- Main Sidebar -->
         @include('layouts.aside')
-
-        <!-- Content Wrapper -->
         <div class="content-wrapper">
-            <!-- Main content -->
             <section class="content p-2">
                 <div class="container-fluid">
                     @yield('content')
                 </div>
             </section>
         </div>
-
     </div>
 
     <!-- Vite JS -->

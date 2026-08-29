@@ -14,12 +14,14 @@
             <div class="card">
                 <div class="card-header bg-dark">
                     <h3 class="card-title">รายชื่อสมาชิก ที่ยังมีอายุการใช้งาน</h3>
-                    <div class="card-tools">
-                        <a href="{{ route('customers.create') }}" class="btn btn-success btn-sm">
-                            <i class="fas fa-plus"></i>
-                            เพิ่มสมาชิก
-                        </a>
-                    </div>
+                    @if(Auth::user()->role == 'admin')
+                        <div class="card-tools">
+                            <a href="{{ route('customers.create') }}" class="btn btn-success btn-sm">
+                                <i class="fas fa-plus"></i>
+                                เพิ่มสมาชิก
+                            </a>
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     <table class="table table-sm table-bordered table-hover" id="example1">

@@ -9,34 +9,39 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
+    @include('./customers/box')
+
+
     <div class="row">
         <div class="col p-1">
             <div class="card">
                 <div class="card-header bg-dark">
                     <h3 class="card-title">รายชื่อสมาชิก ที่ยังมีอายุการใช้งาน</h3>
+                    @if(Auth::user()->role == 'admin')
                     <div class="card-tools">
                         <a href="{{ route('customers.create') }}" class="btn btn-success btn-sm">
                             <i class="fas fa-plus"></i>
                             เพิ่มสมาชิก
                         </a>
                     </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     <table class="table table-sm table-bordered table-hover" id="example1">
                         <thead class="bg-success">
                             <tr>
                                 <th hidden>id</th>
-                                <td class="text-center">ดู</td>
-                                <th>เลขสมาชิก</th>
-                                <th>ชื่อ</th>
-                                <th>บิล</th>
+                                <td class="text-center"><i class="fas fa-binoculars"></i></td>
+                                <th>Number</th>
+                                <th>Name</th>
+                                <th hidden>Bill</th>
                                 <th>สัญชาติ</th>
                                 <th>บริการ</th>
                                 <th>เริ่ม</th>
                                 <th>หมด</th>
                                 <th hidden>บันทึก</th>
                                 <th>วัน</th>
-                                <th>ผู้บันทึก</th>
+                                <!-- <th>ผู้บันทึก</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -44,18 +49,20 @@
                                 <tr>
                                     <td hidden>{{ $item->id }}</td>
                                     <td>
-                                        <a href="{{ route('customers.profile_active',$item->id) }}" class="btn btn-sm btn-info">view</a>
+                                        <a href="{{ route('customers.profile_active',$item->id) }}" class="btn btn-sm btn-dark">
+                                            <i class="fas fa-binoculars"></i>
+                                        </a>
                                     </td>
                                     <td>{{ $item->m_card }}</td>
                                     <td>{{ $item->fname }}</td>
-                                    <td>{{ $item->invoice }}</td>
+                                    <td hidden>{{ $item->invoice }}</td>
                                     <td>{{ $item->nationalty }}</td>
                                     <td>{{ $item->product_name }}</td>
-                                    <td>{{ $item->sta_date }}</td>
-                                    <td>{{ $item->exp_date }}</td>
+                                    <td class="bg-success">{{ date('d-m-Y', strtotime($item->sta_date)) }}</td>
+                                    <td class="bg-success">{{ date('d-m-Y', strtotime($item->exp_date)) }}</td>
                                     <td hidden>{{ $item->date }}</td>
-                                    <td><span class="badge badge-info" style="width: 40px;">{{ $item->days_left }}</span></td>
-                                    <td>{{ $item->AddBy }}</td>
+                                    <td><span class="badge badge-info" style="width: 100%;">{{ $item->days_left }}</span></td>
+                                    <!-- <td>{{ $item->AddBy }}</td> -->
                                 </tr>
                             @endforeach
                         </tbody>
@@ -64,6 +71,9 @@
             </div>
         </div>
     </div>
+
+
+
 @endsection
 
 @push('scripts')
