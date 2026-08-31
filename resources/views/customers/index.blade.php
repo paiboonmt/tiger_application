@@ -11,8 +11,9 @@
 
     @include('./customers/box')
 
+    {{ $box  }}
 
-    <div class="row">
+    <div class="row"> 
         <div class="col p-1">
             <div class="card">
                 <div class="card-header bg-dark">
@@ -35,13 +36,13 @@
                                 <th>Number</th>
                                 <th>Name</th>
                                 <th hidden>Bill</th>
-                                <th>สัญชาติ</th>
+                                <th hidden>สัญชาติ</th>
                                 <th>บริการ</th>
                                 <th>เริ่ม</th>
                                 <th>หมด</th>
                                 <th hidden>บันทึก</th>
                                 <th>วัน</th>
-                                <!-- <th>ผู้บันทึก</th> -->
+                                <th hidden>ผู้บันทึก</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,13 +57,13 @@
                                     <td>{{ $item->m_card }}</td>
                                     <td>{{ $item->fname }}</td>
                                     <td hidden>{{ $item->invoice }}</td>
-                                    <td>{{ $item->nationalty }}</td>
+                                    <td hidden>{{ $item->nationalty }}</td>
                                     <td>{{ $item->product_name }}</td>
-                                    <td class="bg-success">{{ date('d-m-Y', strtotime($item->sta_date)) }}</td>
-                                    <td class="bg-success">{{ date('d-m-Y', strtotime($item->exp_date)) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($item->sta_date)) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($item->exp_date)) }}</td>
                                     <td hidden>{{ $item->date }}</td>
-                                    <td><span class="badge badge-info" style="width: 100%;">{{ $item->days_left }}</span></td>
-                                    <!-- <td>{{ $item->AddBy }}</td> -->
+                                    <td class="text-success text-center">{{ $item->days_left }}</td>
+                                    <td hidden>{{ $item->AddBy }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

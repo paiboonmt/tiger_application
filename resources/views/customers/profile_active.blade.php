@@ -2,24 +2,30 @@
 @section('title', 'Profile : ' . $member->fname)
 @section('head', 'รายชื่อสมาชิก > ข้อมูลสมาชิก')
 
-<link rel="stylesheet" href="{{ asset('css/fancybox.css') }}" />
 
 @section('content')
 @push('styles')
-<!-- Font Awesome Icons -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" />
+<link rel="stylesheet" href="{{ asset('css/fancybox.css') }}" />
 
 <div class="row">
     <div class="col-md-12 p-1">
         <div class="card">
             <div class="card-header">
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#profile"
-                            data-toggle="tab">ข้อมูลส่วนบุคคล</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#timeline"
-                            data-toggle="tab">บันทึกรานการเข้าใช้พื้นที่</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#document" data-toggle="tab">เอกสารส่วนบุคคล</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#data" data-toggle="tab">ข้อมูล</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#profile" data-toggle="tab">ข้อมูลส่วนบุคคล</a>
+                    </li>
+                    @if ( Auth::user()->role == 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="#timeline" data-toggle="tab">บันทึกรานการเข้าใช้พื้นที่</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#document" data-toggle="tab">เอกสารส่วนบุคคล</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#data" data-toggle="tab">ข้อมูล</a>
+                        </li>
+                    @endif
                 </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -163,7 +169,6 @@
                                                 <input type="text" class="form-control bg-success"
                                                     value="{{ $member->days_left }}">
                                             @endif
-
                                         </div>
                                     </div>
                                     <div class="col-3">

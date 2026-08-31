@@ -29,7 +29,11 @@ class CustomerController extends Controller
             $customer->days_left = $today->diffInDays($expDate, false);
         }
         // dd($customers);
-        return view('customers.index', ['customers' => $customers]);
+
+        // use function box
+        $box = box();
+
+        return view('customers.index', ['customers' => $customers , 'box' => $box ]);
     }
 
     public function expired()
@@ -225,6 +229,7 @@ class CustomerController extends Controller
 
     }
 
+    // Funtion
 
     private function resizeImage(string $src, string $dest, int $maxWidth = 1200, int $quality = 75): void
     {
@@ -282,7 +287,12 @@ class CustomerController extends Controller
         imagedestroy($resized);
     }
 
-
 }
 
 
+    function box() {
+
+        // count member
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+        return  10 + 10 ;
+    }
