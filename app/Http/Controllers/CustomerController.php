@@ -20,7 +20,7 @@ class CustomerController extends Controller
             ->where('member.status_code', '=', 4)
             ->whereDate('member.exp_date', '>=', Carbon::today()->toDateString())
             ->select('member.*', 'products.product_name')
-            ->limit(50)
+            ->limit(10)
             ->get();
 
         foreach ($customers as $customer) {
@@ -33,7 +33,10 @@ class CustomerController extends Controller
         // use function box
         $box = box();
 
-        return view('customers.index', ['customers' => $customers , 'box' => $box ]);
+        // New member
+        $newMeber = newMember();
+
+        return view('customers.index', ['customers' => $customers , 'box' => $box , 'newMember' => $newMeber ]);
     }
 
     public function expired()
@@ -43,7 +46,7 @@ class CustomerController extends Controller
             ->where('member.status_code', '=', 4)
             ->whereDate('member.exp_date', '<=', Carbon::today()->toDateString())
             ->select('member.*', 'products.product_name')
-            ->limit(100)
+            ->limit(5000)
             ->orderBy('member.id', 'desc')
             ->get();
 
@@ -290,9 +293,15 @@ class CustomerController extends Controller
 }
 
 
-    function box() {
+    function box() { // นับจำนวนสมาชิกลูกค้า
+        $countMember = DB::table('member')
+            ->where('member.status_code', '=', 4)
+            ->whereDate('member.exp_date', '>=', Carbon::today()->toDateString())
+            ->select('member.id')
+            ->count();
+        return  ($countMember);
+    }
 
-        // count member
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-        return  10 + 10 ;
+    function newMember(){
+        return 100;
     }

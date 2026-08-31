@@ -8,11 +8,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-
-    @include('./customers/box')
-
-    {{ $box  }}
-
+    <!-- @include('./customers/box') -->
     <div class="row"> 
         <div class="col p-1">
             <div class="card">
@@ -72,11 +68,7 @@
             </div>
         </div>
     </div>
-
-
-
 @endsection
-
 @push('scripts')
     <!-- DataTables  & Plugins -->
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>

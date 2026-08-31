@@ -5,7 +5,7 @@
             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">จำนวนลูกค้าที่เป็นสมาชิก</span>
-                <span class="info-box-number">{{ 10 }}</span>
+                <span class="info-box-number">{{ $box }}</span>
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
             <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">ลูกค้าสมัครสมาชิกใหม่วันนี้</span>
-                <span class="info-box-number">{{ 10}} </span>
+                <span class="info-box-number">{{ $newMember }} </span>
             </div>
         </div>
     </div>

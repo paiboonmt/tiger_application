@@ -8,6 +8,14 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+                <li class="nav-item">
+                    <a href="{{ route('dashboard.index') }}"
+                        class="nav-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-search"></i>
+                        <p>Search</p>
+                    </a>
+                </li>
+
 
                 @if (Auth::user()->role == 'admin')
 
