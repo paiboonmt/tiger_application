@@ -46,7 +46,7 @@ class CustomerController extends Controller
             ->where('member.status_code', '=', 4)
             ->whereDate('member.exp_date', '<=', Carbon::today()->toDateString())
             ->select('member.*', 'products.product_name')
-            ->limit(5000)
+            ->limit(10)
             ->orderBy('member.id', 'desc')
             ->get();
 
