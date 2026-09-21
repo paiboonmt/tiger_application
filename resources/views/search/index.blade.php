@@ -8,6 +8,8 @@
 
 @section('content')
 
+
+
 <h1>Search</h1>
 
 

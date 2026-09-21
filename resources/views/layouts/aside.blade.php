@@ -9,10 +9,10 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.index') }}"
-                        class="nav-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
+                    <a href="{{ route('search.index') }}"
+                        class="nav-link {{ request()->routeIs('search.index') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-search"></i>
-                        <p>Search</p>
+                        <p>ค้นหา</p>
                     </a>
                 </li>
 
@@ -69,7 +69,7 @@
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             <i class="right fas fa-angle-left"></i>
-                            Customers
+                            ลูกค้า สมาชิก
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -77,16 +77,14 @@
                             <a href="{{ route('customers.index') }}"
                                 class="nav-link {{ request()->routeIs(['customers.index', 'customers.profile_active','customers.create']) ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user"></i>
-                                <span class="badge badge-success">Active</span>
+                                <span class="badge badge-success">ยังไม่หมดอายุ</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('customers.expired') }}"
                                 class="nav-link {{ request()->routeIs(['customers.expired','customers.profile_expired']) ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user"></i>
-                                <span class="badge badge-danger">
-                                    Expired
-                                </span>
+                                <span class="badge badge-danger">หมดอายุแล้ว</span>
                             </a>
                         </li>
                     </ul>
@@ -96,7 +94,7 @@
                     <a href="#" class="nav-link {{ request()->is('sponsers*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Free Training
+                            นักสู้ สมาชิก
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -105,16 +103,14 @@
                             <a href="{{ route('sponsers.index') }}"
                                 class="nav-link {{ request()->routeIs(['sponsers.index','sponsers.profile_active']) ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user"></i>
-                                <p>Active</p>
-                                <span class="badge badge-success">Active</span>
+                                <span class="badge badge-success">ยังไม่หมดอายุ</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('sponsers.expired') }}"
                                 class="nav-link {{ request()->routeIs(['sponsers.expired','sponsers.profile_expired']) ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user"></i>
-                                <p>Expried</p>
-                                <span class="badge badge-danger">Expied</span>
+                                <span class="badge badge-danger">หมดอายุแล้ว</span>
                             </a>
                         </li>
                     </ul>

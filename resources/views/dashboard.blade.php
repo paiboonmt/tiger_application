@@ -8,8 +8,8 @@
 
 @section('content')
 @include('components/dashboard/box')
-@endsection
 
+@endsection
 @push('scripts')
 
 @endpush
