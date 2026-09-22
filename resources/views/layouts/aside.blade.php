@@ -8,6 +8,16 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+                @if (Auth::user()->role == 'admin')
+
+                <li class="nav-item">
+                    <a href="{{ route('dashboard.index') }}"
+                        class="nav-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>แดซบอร์ด</p>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a href="{{ route('search.index') }}"
                         class="nav-link {{ request()->routeIs('search.index') ? 'active' : '' }}">
@@ -16,53 +26,50 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('checkin.index') }}" class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-user-check"></i>
+                        <p>เช็คอินเข้าใช้บริการ</p>
+                    </a>
+                </li>
 
-                @if (Auth::user()->role == 'admin')
-
-                    <li class="nav-item">
-                        <a href="{{ route('dashboard.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('checkin.index') }}" class="nav-link {{ request()->routeIs('checkin.*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-user-check"></i>
-                            <p>เช็คอินเข้าใช้บริการ</p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item {{ request()->is('users*', 'roles*') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ request()->is('users*', 'roles*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                ผู้ใช้งาน
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('users.index') }}"
-                                    class="nav-link {{ request()->routeIs('users.index', 'users.create', 'users.edit') ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>ตั้งค่าผู้ใช้งาน</p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('roles.index') }}"
-                                    class="nav-link {{ request()->routeIs('roles.index', 'roles.create', 'roles.edit') ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>ตั้งค่าบทบาท</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="nav-item {{ request()->is('users*', 'roles*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('users*', 'roles*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            ผู้ใช้งาน
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('users.index') }}"
+                                class="nav-link {{ request()->routeIs('users.index', 'users.create', 'users.edit') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ตั้งค่าผู้ใช้งาน</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('roles.index') }}"
+                                class="nav-link {{ request()->routeIs('roles.index', 'roles.create', 'roles.edit') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ตั้งค่าบทบาท</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
                 @endif
+
+                <li class="nav-item">
+                    <a href="{{ route('user.dashboard') }}"
+                        class="nav-link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>แดซบอร์ด</p>
+                    </a>
+                </li>
 
                 <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : '' }}">
@@ -118,70 +125,70 @@
 
                 @if (Auth::user()->role == 'admin')
 
-                    <li class="nav-item {{ request()->is('report*') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ request()->is('report*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-print"></i>
-                            <p>
-                                รายงาน
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('report.checkin') }}"
-                                    class="nav-link {{ request()->routeIs(['report.checkin', 'report.checkin.search']) ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-user"></i>
-                                    <p>รายงานเข้าใช้บริการ</p>
-                                </a>
-                            </li>
+                <li class="nav-item {{ request()->is('report*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('report*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-print"></i>
+                        <p>
+                            รายงาน
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('report.checkin') }}"
+                                class="nav-link {{ request()->routeIs(['report.checkin', 'report.checkin.search']) ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>รายงานเข้าใช้บริการ</p>
+                            </a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a href="{{ route('report.customerTotal') }}"
-                                    class="nav-link {{ request()->routeIs('report.customerTotal') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-user"></i>
-                                    <p>รายงานจำนวนลูกค้า</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- สัญชาติ -->
-                    <li class="nav-item">
-                        <a href="{{ route('nationality.index') }}"
-                            class="nav-link {{ request()->is('nationality*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-globe"></i>
-                            <p>สัญชาติ</p>
-                        </a>
-                    </li>
-                    <!-- product -->
-                    <li class="nav-item">
-                        <a href="{{ route('product.index') }}"
-                            class="nav-link {{ request()->is('product*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-store-alt"></i>
-                            <p>สินค้า</p>
-                        </a>
-                    </li>
-                    <!-- payment -->
-                    <li class="nav-item">
-                        <a href="{{ route('payment.index') }}"
-                            class="nav-link {{ request()->is('payment*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-credit-card"></i>
-                            <p>ชำระเงิน</p>
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a href="{{ route('report.customerTotal') }}"
+                                class="nav-link {{ request()->routeIs('report.customerTotal') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>รายงานจำนวนลูกค้า</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- สัญชาติ -->
+                <li class="nav-item">
+                    <a href="{{ route('nationality.index') }}"
+                        class="nav-link {{ request()->is('nationality*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-globe"></i>
+                        <p>สัญชาติ</p>
+                    </a>
+                </li>
+                <!-- product -->
+                <li class="nav-item">
+                    <a href="{{ route('product.index') }}"
+                        class="nav-link {{ request()->is('product*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-store-alt"></i>
+                        <p>สินค้า</p>
+                    </a>
+                </li>
+                <!-- payment -->
+                <li class="nav-item">
+                    <a href="{{ route('payment.index') }}"
+                        class="nav-link {{ request()->is('payment*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-credit-card"></i>
+                        <p>ชำระเงิน</p>
+                    </a>
+                </li>
 
                 @endif
 
-                    <!-- logout -->
-                    <li class="nav-item">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <x-responsive-nav-link :href="route('logout')" class="nav-link"
-                                onclick="event.preventDefault(); this.closest('form').submit();">
-                                <i class="nav-icon fas fa-sign-out-alt"></i>
-                                <p>Logout</p>
-                            </x-responsive-nav-link>
-                        </form>
-                    </li>
+                <!-- logout -->
+                <li class="nav-item">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-responsive-nav-link :href="route('logout')" class="nav-link"
+                            onclick="event.preventDefault(); this.closest('form').submit();">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>Logout</p>
+                        </x-responsive-nav-link>
+                    </form>
+                </li>
 
                 @yield('sidebar')
             </ul>
