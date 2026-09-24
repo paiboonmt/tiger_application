@@ -11,18 +11,18 @@
                 @if (Auth::user()->role == 'admin')
 
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.index') }}"
-                        class="nav-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>แดซบอร์ด</p>
+                    <a href="{{ route('search.index') }}"
+                        class="nav-link {{ request()->routeIs('search.index') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-search"></i>
+                        <p>ค้นหา</p> 
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('search.index') }}"
-                        class="nav-link {{ request()->routeIs('search.index') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-search"></i>
-                        <p>ค้นหา</p>
+                    <a href="{{ route('user.dashboard') }}"
+                        class="nav-link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>แดซบอร์ด</p>
                     </a>
                 </li>
 
@@ -62,14 +62,6 @@
                 </li>
 
                 @endif
-
-                <li class="nav-item">
-                    <a href="{{ route('user.dashboard') }}"
-                        class="nav-link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>แดซบอร์ด</p>
-                    </a>
-                </li>
 
                 <li class="nav-item {{ request()->is('customers*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->is('customers*') ? 'active' : '' }}">
