@@ -49,3 +49,4 @@ class PaymentController extends Controller
         return redirect()->route('payment.index');
     }
 }
+
