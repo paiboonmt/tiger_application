@@ -44,11 +44,10 @@
                                             class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <button type="submit"
+                                        <button
+                                            type="submit"
                                             class="btn btn-danger btn-sm"
-                                            btnDelete()
-                                            >
-                                            <!-- onclick="return confirm('คุณต้องการลบสินค้านี้?')" -->
+                                            onclick="return confirm('คุณต้องการลบสินค้านี้?')">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>

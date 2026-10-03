@@ -12,10 +12,8 @@ class NationalityController extends Controller
 {
     public function index()
     {
-        // $nationalities = Nationality::all();
-        $data = DB::table('tb_nationality')
-            // ->offset(10)
-            // ->limit(10)
+        $data = Nationality::limit(10)
+            ->orderBy('nationality_id', 'desc')
             ->get();
         return view('nationality.index', ['data' => $data]);
     }

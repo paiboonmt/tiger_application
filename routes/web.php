@@ -26,18 +26,12 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     // DashboardController
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-   
-    Route::get('/dashboard',[UserDashboardController::class,'index'])->name('user.dashboard');
-   
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
 
     Route::controller(CheckinController::class)->group(function () {
         Route::get('/checkin', 'index')->name('checkin.index');
     });
-
-
-
-
     // Route Admin
     Route::middleware('admin')->group(function () {
         Route::get('/tiger', [TigerController::class, 'index'])->name('tiger.index');
@@ -112,12 +106,6 @@ Route::middleware('auth')->group(function () {
     Route::get('sponsers/profile/{id}', [SponserController::class, 'profile'])->name('sponsers.profile');
     Route::get('sponsers/profile_active/{id}', [SponserController::class, 'profile_active'])->name('sponsers.profile_active');
     Route::get('sponsers/profile_expired/{id}', [SponserController::class, 'profile_expired'])->name('sponsers.profile_expired');
-
-
-
-
-
-
     // ReportController
     Route::get('report/checkin', [ReportController::class, 'checkin'])->name('report.checkin');
     // Search check-in report

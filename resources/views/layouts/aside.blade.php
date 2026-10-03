@@ -14,13 +14,13 @@
                     <a href="{{ route('search.index') }}"
                         class="nav-link {{ request()->routeIs('search.index') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-search"></i>
-                        <p>ค้นหา</p> 
+                        <p>ค้นหา</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('user.dashboard') }}"
-                        class="nav-link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard') }}"
+                        class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>แดซบอร์ด</p>
                     </a>
