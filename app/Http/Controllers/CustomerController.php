@@ -7,8 +7,8 @@ use Date;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\Customer;
 
 class CustomerController extends Controller
 {
@@ -20,7 +20,8 @@ class CustomerController extends Controller
             ->where('member.status_code', '=', 4)
             ->whereDate('member.exp_date', '>=', Carbon::today()->toDateString())
             ->select('member.*', 'products.product_name')
-            ->limit(10)
+            ->orderBy('member.id', 'desc')
+            ->limit(5)
             ->get();
 
         foreach ($customers as $customer) {
@@ -36,7 +37,7 @@ class CustomerController extends Controller
         // New member
         $newMeber = newMember();
 
-        return view('customers.index', ['customers' => $customers , 'box' => $box , 'newMember' => $newMeber ]);
+        return view('customers.index', ['customers' => $customers, 'box' => $box, 'newMember' => $newMeber]);
     }
 
     public function expired()
@@ -209,7 +210,7 @@ class CustomerController extends Controller
 
         $file = $request->file('image');
         $filename = Str::ulid() . '.webp';
-        $dir = storage_path('app/public/uploads/customers/img');
+        $dir = storage_path('image/customer/img');
         $path = $dir . '/' . $filename;
 
         // สร้างโฟลเดอร์ถ้ายังไม่มี
@@ -227,9 +228,27 @@ class CustomerController extends Controller
             'created_at' => Carbon::now('Asia/Bangkok')
         ]);
 
-
-
-
+        // เพิ่มลงฐานข้อมูล member
+        $member = new Customer();
+        $member->group = $request->input('group');
+        $member->m_card = $request->input('m_card');
+        $member->p_visa = $request->input('p_visa');
+        $member->email = $request->input('email');
+        $member->phone = $request->input('phone');
+        $member->sex = $request->input('gender');
+        $member->fname = $request->input('fname');
+        $member->nationalty = $request->input('nationality');
+        $member->package = $request->input('product');
+        $member->accom = $request->input('accom');
+        $member->comment = $request->input('comment');
+        $member->sta_date = $request->input('sta_date');
+        $member->exp_date = $request->input('exp_date');
+        $member->image = $filename;
+        $member->AddBy = Auth::user()->name;
+        $member->date = Carbon::now('Asia/Bangkok');
+        $member->save();
+        
+        return redirect()->route('customers.index')->with('success', 'เพิ่มข้อมูลลูกค้าเรียบร้อยแล้ว');  
     }
 
     // Funtion
@@ -289,19 +308,19 @@ class CustomerController extends Controller
         imagedestroy($image);
         imagedestroy($resized);
     }
-
 }
 
+function box()
+{ // นับจำนวนสมาชิกลูกค้า
+    $countMember = DB::table('member')
+        ->where('member.status_code', '=', 4)
+        ->whereDate('member.exp_date', '>=', Carbon::today()->toDateString())
+        ->select('member.id')
+        ->count();
+    return ($countMember);
+}
 
-    function box() { // นับจำนวนสมาชิกลูกค้า
-        $countMember = DB::table('member')
-            ->where('member.status_code', '=', 4)
-            ->whereDate('member.exp_date', '>=', Carbon::today()->toDateString())
-            ->select('member.id')
-            ->count();
-        return  ($countMember);
-    }
-
-    function newMember(){
-        return 100;
-    }
+function newMember()
+{
+    return 100;
+}

@@ -37,7 +37,7 @@
                                 <th>เริ่ม</th>
                                 <th>หมด</th>
                                 <th hidden>บันทึก</th>
-                                <th>วัน</th>
+                                <th class="text-center">วันคงเหลือ</th>
                                 <th hidden>ผู้บันทึก</th>
                             </tr>
                         </thead>
