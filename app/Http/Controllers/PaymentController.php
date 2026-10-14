@@ -20,6 +20,12 @@ class PaymentController extends Controller
 
     public function store(Request $request)
     {
+
+        $request->validate([
+            'pay_name' => 'required|string|max:255',
+            'value' => 'required|numeric',
+        ]);
+
         $payment = new Payment();
         $payment->pay_name = $request->pay_name;
         $payment->value = $request->value;
@@ -33,8 +39,13 @@ class PaymentController extends Controller
         return view('payment.edit', compact('payment'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
+        $request->validate([
+            'pay_name' => 'required|string|max:255',
+            'value' => 'required|numeric',
+        ]);
+
         $payment = Payment::findOrFail($id);
         $payment->pay_name = $request->pay_name;
         $payment->value = $request->value;
@@ -44,6 +55,8 @@ class PaymentController extends Controller
 
     public function destroy($id)
     {
+        dd($id);
+        
         $payment = Payment::findOrFail($id);
         $payment->delete();
         return redirect()->route('payment.index');

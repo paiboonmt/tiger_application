@@ -3,25 +3,43 @@
 @section('head', 'แก้ไขชำระเงิน')
 
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">แก้ไขชำระเงิน</h3>
-        </div>
-        <div class="card-body">
+
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header bg-dark">
+                <div class="card-title">
+                    <h2>แก้ไขชำระเงิน</h2>
+                </div>
+                <div class="card-tools">
+                    <a href="{{ route('payment.index') }}" class="btn btn-primary">
+                        <i class="fas fa-undo-alt"></i>
+                        กลับ
+                    </a>
+                </div>
+            </div>
             <form action="{{ route('payment.update', $payment->pay_id) }}" method="POST">
                 @csrf
-                <div class="form-group">
-                    <label for="pay_name">ชื่อชำระเงิน</label>
-                    <input type="text" class="form-control" id="pay_name" name="pay_name" value="{{ $payment->pay_name }}" required>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="pay_name">ชื่อชำระเงิน</label>
+                        <input type="text" class="form-control" id="pay_name" name="pay_name" value="{{ $payment->pay_name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="value">ราคา</label>
+                        <input type="number" class="form-control" id="value" name="value" value="{{ $payment->value }}" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="value">ราคา</label>
-                    <input type="number" class="form-control" id="value" name="value" value="{{ $payment->value }}" required>
+                <!-- footer -->
+                <div class="card-footer">
+                    <button type="submit" class="col-12 btn btn-success">อัปเดท</button>
                 </div>
-                <button type="submit" class="btn btn-primary">บันทึก</button>
             </form>
         </div>
     </div>
+</div>
+
+
 @endsection
 
 @push('scripts')
