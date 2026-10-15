@@ -1,17 +1,15 @@
 @extends('layouts.admin')
 @section('title', 'ไทเกอร์ มวยไทย | เพื่มสินค้า')
 @section('head', 'ผู้ใช้งานระบบ')
-
 @section('content')
-
     <div class="row">
-        <div class="col-md-6 mx-auto">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header bg-dark">
                     <h3 class="card-title">เพิ่มสินค้า</h3>
                     <div class="card-tools">
                         <a href="{{ route('product.index') }}" class="btn btn-primary btn-sm">
-                            <i class="fas fa-arrow-left"></i> กลับ
+                            <i class="fas fa-arrow-left"></i> ย้อนกลับหน้าสินค้าทั้งหมด
                         </a>
                     </div>
                 </div>
@@ -20,28 +18,35 @@
                         @csrf
                         <div class="form-group">
                             <label for="product_name">ชื่อสินค้า</label>
-                            <input type="text" class="form-control" id="product_name" value="{{ $product->product_name }}" name="product_name">
+                            <input type="text" class="form-control" required name="product_name"
+                                value="{{ $product->product_name }}">
                         </div>
                         <div class="form-group">
                             <label for="price">ราคา</label>
-                            <input type="number" class="form-control" id="price" value="{{ $product->price }}" name="price">
+                            <input type="number" class="form-control" required name="price"
+                                value="{{ $product->price }}">
                         </div>
-                        <div class="form-group">
-                            <label for="detail">รายละเอียด</label>
-                            <input type="text" class="form-control" id="detail" value="{{ $product->detail }}" name="detail">
-                        </div>
-                        <div class="form-group">
-                            <label for="code">รหัสสินค้า</label>
-                            <input type="text" class="form-control" id="code" value="{{ $product->code }}" name="code">
-                        </div>
-                        <button type="submit" class="btn btn-primary">อัพเดท</button>
+                        <button type="submit" class="col btn btn-primary">อัปเดทสินค้า</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection
-
 @push('scripts')
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'สำเร็จ',
+                text: @json(session('success')),
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location = "{{ route('product.index') }}";
+            });
+        </script>
+    @endif
 @endpush

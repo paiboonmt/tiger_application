@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Nationality;
+use PDOException;
 
 class NationalityController extends Controller
 {
@@ -25,20 +26,19 @@ class NationalityController extends Controller
 
     public function store(Request $request)
     {
-
-        // dd($request->all());
-
-
         $request->validate([
             'n_name' => 'required',
         ]);
 
-        DB::table('tb_nationality')->insert([
-            'n_name' => $request->n_name,
-        ]);
-
-
-        return redirect()->route('nationality.index');
+        try {
+            DB::table('tb_nationality')->insert([
+                'n_name' => $request->n_name,
+            ]);
+            $mass = 'บันทึกข้อมูลเรียบร้อยแล้ว';
+            return redirect()->back()->with('success', $mass);
+        } catch (PDOException $e) {
+            return redirect()->back()->withErrors(['error' => 'เกิดข้อผิดพลาดในการบันทึกข้อมูล: ' . $e->getMessage()]);
+        }
     }
 
     public function edit($id)

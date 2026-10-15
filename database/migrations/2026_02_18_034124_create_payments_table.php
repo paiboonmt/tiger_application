@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('pay_id');
             $table->string('pay_name');
             $table->string('value');
-            $table->timestamp('updated_at');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

@@ -15,20 +15,15 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use Illuminate\Support\Facades\Route;
-
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
-
 Route::middleware('auth')->group(function () {
     // DashboardController
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-
     Route::controller(CheckinController::class)->group(function () {
         Route::get('/checkin', 'index')->name('checkin.index');
     });
@@ -75,7 +70,7 @@ Route::middleware('auth')->group(function () {
         });
         // ProductController
         Route::controller(ProductsController::class)->group(function () {
-            Route::get('/product','index')->name('product.index');
+            Route::get('/product', 'index')->name('product.index');
             Route::get('/product/create', 'create')->name('product.create');
             Route::post('/product/store', 'store')->name('product.store');
             Route::get('/product/edit/{id}', 'edit')->name('product.edit');
@@ -84,13 +79,12 @@ Route::middleware('auth')->group(function () {
         });
         // SearchController
         Route::controller(SearchController::class)->group(function () {
-            Route::get('/search','index')->name('search.index');
+            Route::get('/search', 'index')->name('search.index');
         });
     });
-    
     // CustomerController
     Route::controller(CustomerController::class)->group(function () {
-        Route::get('/customers','index')->name('customers.index');
+        Route::get('/customers', 'index')->name('customers.index');
         Route::get('/customers/expired', 'expired')->name('customers.expired');
         Route::get('/customers/profile_active/{id}', 'profile_active')->name('customers.profile_active');
         Route::get('/customers/profile_expired/{id}', 'profile_expired')->name('customers.profile_expired');
@@ -99,7 +93,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/customers/edit/{id}', 'edit')->name('customers.edit');
         Route::post('/customers/update/{id}', 'update')->name('customers.update');
     });
-
     // SponserController
     Route::get('sponsers', [SponserController::class, 'index'])->name('sponsers.index');
     Route::get('sponsers/expired', [SponserController::class, 'expired'])->name('sponsers.expired');
@@ -111,12 +104,10 @@ Route::middleware('auth')->group(function () {
     // Search check-in report
     Route::post('report/checkin', [ReportController::class, 'searchCheckin'])->name('report.checkin.search');
     Route::get('report/customer-total', [ReportController::class, 'customerTotal'])->name('report.customerTotal');
-
+    // ProfileController
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
 
 require __DIR__ . '/auth.php';

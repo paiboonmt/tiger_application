@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="pay_name">ชื่อชำระเงิน</label>
-                        <input type="text" class="form-control" id="pay_name" name="pay_name" required>
+                        <input type="text" class="form-control" id="pay_name" name="pay_name" autofocus required>
                     </div>
                     <div class="form-group">
                         <label for="value">ราคา</label>

@@ -6,9 +6,9 @@
 @section('content')
 
     <div class="row">
-        <div class="col-6 mx-auto">
+        <div class="col-6">
             <div class="card">
-                
+
                 <div class="card-header bg-dark">
                     <div class="card-title">
                         เพิ่มสัญชาติ ( ประเทศ )
@@ -20,7 +20,6 @@
                         </a>
                     </div>
                 </div>
-
                 <div class="card-body">
                     <form action="{{ route('nationality.store') }}" method="POST">
                         @csrf
@@ -48,7 +47,20 @@
     </div>
 
 @endsection
-
 @push('scripts')
-
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'สำเร็จ',
+                text: @json(session('success')),
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location = "{{ route('nationality.index') }}";
+            });
+        </script>
+    @endif
 @endpush
