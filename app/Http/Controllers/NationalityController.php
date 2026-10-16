@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\DB;
-
 use App\Models\Nationality;
 use PDOException;
 
@@ -18,12 +15,10 @@ class NationalityController extends Controller
             ->get();
         return view('nationality.index', ['data' => $data]);
     }
-
     public function create()
     {
         return view('nationality.create');
     }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -40,36 +35,37 @@ class NationalityController extends Controller
             return redirect()->back()->withErrors(['error' => 'เกิดข้อผิดพลาดในการบันทึกข้อมูล: ' . $e->getMessage()]);
         }
     }
-
     public function edit($id)
     {
         $nationality = Nationality::findOrFail($id);
         return view('nationality.edit', compact('nationality'));
     }
-
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $request->validate([
             'n_name' => 'required',
         ]);
+        try {
+            DB::table('tb_nationality')
+                ->where('nationality_id', $id)
+                ->update(['n_name' => $request->n_name,]);
+            $mass = 'บันทึกข้อมูลเรียบร้อยแล้ว';
+            return redirect()->back()->with('success', $mass);
+        } catch (PDOException $e) {
+            return redirect()->back()->withErrors(['error' => 'เกิดข้อผิดพลาดในการบันทึกข้อมูล: ' . $e->getMessage()]);
+        }
 
-        $data = DB::table('tb_nationality')
-            ->where('nationality_id', $id)
-            ->update([
-                'n_name' => $request->n_name,
-            ]);
-
-        // $nationality = Nationality::findOrFail($id);
-        // $nationality->n_name = $request->n_name;
-        // $nationality->save();
-
-        return redirect()->route('nationality.index')->with('success', 'Nationality updated successfully.');
     }
-
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        $nationality = Nationality::findOrFail($id);
-        $nationality->delete();
-        return redirect()->route('nationality.index');
+        try {
+            DB::table('tb_nationality')
+                ->where('nationality_id', $id)
+                ->delete();
+            $mass = 'บันทึกข้อมูลเรียบร้อยแล้ว';
+            return redirect()->back()->with('success', $mass);
+        } catch (PDOException $e) {
+            return redirect()->back()->withErrors(['error' => 'เกิดข้อผิดพลาดในการบันทึกข้อมูล: ' . $e->getMessage()]);
+        }
     }
 }

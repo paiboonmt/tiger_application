@@ -1,10 +1,7 @@
 @extends('layouts.admin')
-
 @section('title', 'ไทเกอร์ มวยไทย | เพิ่มสัญชาติ')
 @section('page-title', 'เพิ่มสัญชาติ')
-
 @section('content')
-
     <div class="row">
         <div class="col-6">
             <div class="card">
@@ -45,7 +42,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 @push('scripts')
     <!-- SweetAlert2 -->
