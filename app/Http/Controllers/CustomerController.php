@@ -222,10 +222,6 @@ class CustomerController extends Controller
         // ย่อขนาด + แปลงเป็น webp (แทน $file->move())
         $this->resizeImage($file->getPathname(), $path, 1200, 75);
 
-
-`package`,  `dropin`,  `new_package`,  `height`,  `weigh`,  `accom`,  `payment`,  `invoice`,  `vaccine`, LEFT(`comment`, 256),  `emergency`,  `sta_date`,  `exp_date`,  `expired`,  `tenure`,  `type_training`,  `type_fighter`,  `sponsored`,  `commission`,  `mealplan_month`,  `affiliate`,  `facebook`,  `instagram`,  `status`,  `image`,  `AddBy`,  `code`,  `status_code`,  `date` FROM `member`.`member` ORDER BY `id` DESC LIMIT 1000;
-
-
         // เพิ่มลงฐานข้อมูล member
         try {
             DB::table('group_type')->insert([
@@ -235,25 +231,54 @@ class CustomerController extends Controller
             ]);
 
             $data = [
-                'group'     => 1,
-                'm_card'    => $request->m_card,
-                'p_visa'    => $request->p_visa,
-                'email'     => $request->email,
-                'phone'     => $request->phone,
-                'sex'       => $request->sex,
-                'fname'     => $request->fname,
-                'price'     => 0,
-                'pay'       => $request->pay,
-                'fightname' => $request->fightname,
-                'nationalty'=> $request->nationalty,
-                'birthday'  => $request->birthday,
-                'age'       => $request->age,
-                'discount'  => $request->discount,
-                'vat7'      => $request->vat7,
-                'vat3'      => $request->vat3,
-                'total'      => $request->total,
+                'group'          => 1,
+                'm_card'         => $request->m_card,
+                'p_visa'         => $request->p_visa,
+                'email'          => $request->email,
+                'phone'          => $request->phone,
+                'sex'            => $request->gender,
+                'fname'          => $request->fname,
+                'price'          => $request->price ?? 0,
+                'pay'            => $request->pay ?? 0,
+                'fightname'      => $request->fightname ?? '',
+                'nationalty'     => $request->nationality,
+                'birthday'       => $request->birthday ?? '',
+                'age'            => $request->age ?? '',
+                'discount'       => $request->discount ?? 0,
+                'vat7'           => $request->vat7 ?? 0,
+                'vat3'           => $request->vat3 ?? 0,
+                'total'          => $request->total ?? 0,
+                'package'        => $request->product,
+                'dropin'         => (int) ($request->dropin ?? 0),
+                'new_package'    => $request->new_package ?? '',
+                'height'         => $request->height ?? '',
+                'weigh'          => $request->weigh ?? '',
+                'accom'          => $request->accom ?? '',
+                'payment'        => $request->payment ?? '',
+                'invoice'        => $request->invoice ?? '',
+                'vaccine'        => $request->vaccine ?? '',
+                'comment'        => $request->comment ?? '',
+                'emergency'      => trim(($request->emergency ?? '') . ' ' . ($request->em_phone ?? '')),
+                'sta_date'       => $request->sta_date,
+                'exp_date'       => $request->exp_date,
+                'expired'        => $request->expired ?? '',
+                'tenure'         => $request->tenure ?? '',
+                'type_training'  => $request->type_training ?? '',
+                'type_fighter'   => $request->type_fighter ?? '',
+                'sponsored'      => $request->sponsored ?? '',
+                'commission'     => $request->commission ?? '',
+                'mealplan_month' => $request->mealplan_month ?? '',
+                'affiliate'      => $request->affiliate ?? '',
+                'facebook'       => $request->facebook ?? '',
+                'instagram'      => $request->instagram ?? '',
+                'status'         => $request->status ?? '',
+                'image'          => $filename,
+                'AddBy'          => Auth::user()->name ?? '',
+                'code'           => (int) ($request->code ?? 0),
+                'status_code'    => 4, // 4 = ลูกค้า (ใช้ใน index/dashboard)
+                // 'date' ใช้ค่า default CURRENT_TIMESTAMP ของตาราง
             ];
-
+            $this->insertData($data);
 
             $mass = 'เพื่มข้อมูลเรียบร้อย';
             return redirect()->back()->with('success',$mass);
@@ -318,9 +343,10 @@ class CustomerController extends Controller
         imagedestroy($image);
         imagedestroy($resized);
     }
-    private function insertData(`group`,  `m_card`,  `p_visa`,  `email`,  `phone`,  `sex`,  `fname`,  `price`,  `pay`,  `fightname`,  `nationalty`,  `birthday`,  `age`,  `discount`,  `vat7`,  `vat3`,  `total`,  `package`,  `dropin`,  `new_package`,  `height`,  `weigh`,  `accom`,  `payment`,  `invoice`,  `vaccine`, LEFT(`comment`, 256),  `emergency`,  `sta_date`,  `exp_date`,  `expired`,  `tenure`,  `type_training`,  `type_fighter`,  `sponsored`,  `commission`,  `mealplan_month`,  `affiliate`,  `facebook`,  `instagram`,  `status`,  `image`,  `AddBy`,  `code`,  `status_code`,  `date` FROM `member`.`member` ORDER BY `id` DESC LIMIT 1000;
-){
-
+    private function insertData(array $data): int
+    {
+        // เพิ่มข้อมูลลงตาราง member และคืนค่า id ที่เพิ่ม
+        return DB::table('member')->insertGetId($data);
     }
 }
 

@@ -101,7 +101,7 @@
                                                     <select name="product" class="form-control" required>
                                                         <option value="" disabled selected>เลือกบริการ</option>
                                                         @foreach($product_data as $row)
-                                                            <option value="{{ $row->product_name }}">{{ $row->product_name }}
+                                                            <option value="{{ $row->id }}">{{ $row->product_name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
