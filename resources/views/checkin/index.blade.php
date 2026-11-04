@@ -3,9 +3,15 @@
 @section('head', 'สร้างสมาชิกใหม่')
 
 @section('content')
-    @include('components/checkin/input')
-    @include('components/checkin/table_list')
-
+<div class="row">
+    <div class="col-6">
+        @include('components/checkin/input')
+        @include('components/checkin/table_list')
+    </div>
+    <div class="col-6">
+        @include('components/checkin/profile')
+    </div>
+</div>
 @endsection
 
 @push('scripts')

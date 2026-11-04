@@ -5,7 +5,6 @@
     <div class="row">
         <div class="col-6">
             <div class="card">
-
                 <div class="card-header bg-dark">
                     <div class="card-title">
                         เพิ่มสัญชาติ ( ประเทศ )
@@ -38,7 +37,6 @@
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
@@ -51,7 +49,7 @@
             Swal.fire({
                 icon: 'success',
                 title: 'สำเร็จ',
-                text: @json(session('success')),
+                text: "{{ session('success') }}",
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {

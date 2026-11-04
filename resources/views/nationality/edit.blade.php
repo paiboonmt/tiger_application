@@ -51,7 +51,7 @@
             Swal.fire({
                 icon: 'success',
                 title: 'สำเร็จ',
-                text: @json(session('success')),
+                text: "{{ session('success') }}",
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {

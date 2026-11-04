@@ -13,7 +13,7 @@
                 <div class="card-header bg-dark">
                     <div class="card-title">รายการ สัญชาติ (Nationality)</div>
                     <div class="card-tools">
-                        <a href="{{ route('nationality.create') }}" class="btn btn-success btn-sm">
+                        <a href="{{ route('nationality.create') }}" class="btn btn-primary">
                             <i class="fas fa-plus"></i>
                             เพื่มข้อมูล
                         </a>
@@ -44,7 +44,7 @@
                                             <div class="btn-group" role="group">
                                                 @csrf
                                                 <a href="{{ route('nationality.edit', $nationality->nationality_id) }}"
-                                                    class="btn btn-warning btn-sm">
+                                                    class="btn btn-success btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <button type="submit" class="btn btn-danger btn-sm">
@@ -85,7 +85,7 @@
             Swal.fire({
                 icon: 'success',
                 title: 'สำเร็จ',
-                text: @json(session('success')),
+                text: "{{ session('success') }}",
                 timer: 2000,
                 showConfirmButton: false
             });
@@ -97,7 +97,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'เกิดข้อผิดพลาด',
-                text: @json($errors->first())
+                text: "{{ $errors->first() }}"
             });
         </script>
     @endif

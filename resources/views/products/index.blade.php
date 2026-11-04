@@ -13,7 +13,7 @@
                 <div class="card-header bg-dark">
                     <div class="card-title">สินค้า ( Products )</div>
                     <div class="card-tools">
-                        <a href="{{ route('product.create') }}" class="btn btn-primary btn-sm">
+                        <a href="{{ route('product.create') }}" class="btn btn-primary">
                             <i class="fas fa-plus"></i> เพิ่มสินค้า
                         </a>
                     </div>
@@ -40,7 +40,7 @@
                                             <div class="btn-group" rows="group">
                                                 @csrf
                                                 <a href="{{ route('product.edit', $product->id) }}"
-                                                    class="btn btn-warning btn-sm">
+                                                    class="btn btn-success btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <button type="submit" class="btn btn-sm btn-danger">
@@ -82,7 +82,7 @@
             Swal.fire({
                 icon: 'success',
                 title: 'สำเร็จ',
-                text: @json(session('success')),
+                text: "{{ session('success') }}",
                 timer: 2000,
                 showConfirmButton: false
             });
@@ -94,7 +94,9 @@
             Swal.fire({
                 icon: 'error',
                 title: 'เกิดข้อผิดพลาด',
-                text: @json($errors->first())
+                text: "{{ $errors->first() }}",
+                timer: 2000,
+                showConfirmButton: false
             });
         </script>
     @endif

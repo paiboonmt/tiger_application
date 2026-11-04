@@ -3,7 +3,7 @@
 @section('head', 'ผู้ใช้งานระบบ')
 @section('content')
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mx-auto">
             <div class="card">
                 <div class="card-header bg-dark">
                     <h3 class="card-title">เพิ่มสินค้า</h3>
@@ -41,7 +41,7 @@
             Swal.fire({
                 icon: 'success',
                 title: 'สำเร็จ',
-                text: @json(session('success')),
+                text: "{{ session('success') }}",
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {
