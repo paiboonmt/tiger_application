@@ -24,9 +24,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     // DashboardController
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::controller(CheckinController::class)->group(function () {
-        Route::get('/checkin', 'index')->name('checkin.index');
-    });
+
     // Route Admin
     Route::middleware('admin')->group(function () {
         Route::get('/tiger', [TigerController::class, 'index'])->name('tiger.index');
@@ -80,6 +78,11 @@ Route::middleware('auth')->group(function () {
         // SearchController
         Route::controller(SearchController::class)->group(function () {
             Route::get('/search', 'index')->name('search.index');
+        });
+        // CheckinController
+        Route::controller(CheckinController::class)->group(function () {
+            Route::get('/checkin', 'index')->name('checkin.index');
+            Route::post('/checkin/checkNumber', 'checkNumber')->name('checkin.checkNumber');
         });
     });
     // CustomerController

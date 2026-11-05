@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use PDOException;
 
 class CheckinController extends Controller
 {
@@ -86,5 +88,37 @@ class CheckinController extends Controller
 
 
         return view('checkin.index', compact('data', 'image'));
+    }
+
+    function checkNumber(Request $request)
+    {
+
+        $request->validate([
+            'number' => 'required|numeric',
+        ]);
+
+        // Perform your logic here, e.g., check the number in the database
+        try {
+           $number = DB::table('member')
+            ->where('m_card', $request->number)
+            ->first();
+            return response()->json(['exists' => $number !== null, 'data' => $number]);
+        } catch (PDOException $e) {
+            // Handle the exception, e.g., log it or return an error response
+            return response()->json(['error' => 'Database query failed: ' . $e->getMessage()], 500);
+        }
+
+    //    dd($number);
+        $group = $number->group ?? null;
+
+        dd($group);
+
+        // if ($number) {
+        //     // Number exists in the database
+        //     return response()->json(['exists' => true, 'data' => $number]);
+        // } else {
+        //     // Number does not exist in the database
+        //     return response()->json(['exists' => false]);
+        // }
     }
 }
