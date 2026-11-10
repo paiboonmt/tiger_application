@@ -9,7 +9,7 @@
         @include('components/checkin/table_list')
     </div>
     <div class="col-6">
-        @include('components/checkin/profile')
+       
     </div>
 </div>
 @endsection

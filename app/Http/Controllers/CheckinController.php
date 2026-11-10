@@ -11,9 +11,8 @@ class CheckinController extends Controller
 {
     public function index()
     {
-
-        $data = [] ?? null;
-        return view('checkin.index', compact('data'));
+        $data = [];
+        return view('checkin.index',compact('data'));
     }
 
     function checkNumber(Request $request)
@@ -26,5 +25,16 @@ class CheckinController extends Controller
         $count = DB::table('member')
             ->where('m_card', $request->number)
             ->count();
+
+        if ( $count > 0) {
+            $data = DB::table('member')
+                ->where('m_card', $request->number)
+                ->first();
+
+            return redirect()->route('checkin.index', ['data' => $data]);
+        } else {
+            return back()->with('error', 'Member not found.');
+        }
+
     }
 }
