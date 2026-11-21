@@ -113,6 +113,22 @@ class DashboardController extends Controller
         $m = month(date('m'));
 
 
+        // monthlyProductSales
+        $monthlyProductSales = DB::table('order_details')
+            ->select(
+                'product_id',
+                'product_name',
+                DB::raw('MAX(price) as price'),
+                DB::raw('COUNT(*) as total_orders'),
+                DB::raw('SUM(quantity) as total_quantity_sold'),
+                DB::raw('SUM(total) as sum_total')
+            )
+            ->whereYear('date', now()->year)
+            ->whereMonth('date', now()->month)
+            ->groupBy('product_id', 'product_name')
+            ->get();
+
+            
         return view(
             'dashboard',
             [

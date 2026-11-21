@@ -10,7 +10,7 @@
                 </h3>
             </div>
             <div class="card-body p-1">
-                <table class="table" id="table-sale-report-1month">
+                <table class="table table-sm" id="table-sale-report-1month">
                     <thead>
                         <tr>
                             <th>วันที่</th>
@@ -41,7 +41,7 @@
                 </h3>
             </div>
             <div class="card-body p-1">
-                <table class="table" id="table-sale-report-12month">
+                <table class="table table-sm" id="table-sale-report-12month">
                     <thead>
                         <tr>
                             <th>เดือน</th>
@@ -71,7 +71,7 @@
                 </h3>
             </div>
             <div class="card-body p-1">
-                <table class="table" id="table-sale-report-year">
+                <table class="table table-sm" id="table-sale-report-year">
                     <thead>
                         <tr>
                             <th>ปี</th>
