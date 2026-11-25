@@ -15,12 +15,13 @@
 
 <!-- box -->
 @include('components/dashboard/box')
+
+@if(Auth::user()->role == 'admin')
 <!-- table -->
 @include('components/dashboard/daily-sale')
+@endif
 <!-- sale-good -->
 @include('components/dashboard/sale-good')
-
-
 
 @endsection
 

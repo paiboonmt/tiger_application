@@ -34,7 +34,7 @@
                                 <tr>
                                     <td hidden>{{ $c->id }}</td>
                                     <td>
-                                        <a href="{{ route('sponsers.profile_active', $c->id) }}" target="_blank">
+                                        <a href="{{ route('sponsers.profile_active', $c->id) }}">
                                             <img src="http://172.16.0.3/fighterimg/img/{{ $c->image }}" alt="User Avatar"
                                                 class="img-size-50 mr-2 img-circle" style="width:40px; height:40px;">
                                         </a>

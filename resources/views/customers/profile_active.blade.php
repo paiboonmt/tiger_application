@@ -5,6 +5,9 @@
 
 @section('content')
 @push('styles')
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/fancybox.css') }}" />
 
 <div class="row">
@@ -15,10 +18,10 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#profile" data-toggle="tab">ข้อมูลส่วนบุคคล</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#timeline" data-toggle="tab">บันทึกรานการเข้าใช้พื้นที่</a>
+                    </li>
                     @if ( Auth::user()->role == 'admin')
-                        <li class="nav-item">
-                            <a class="nav-link" href="#timeline" data-toggle="tab">บันทึกรานการเข้าใช้พื้นที่</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#document" data-toggle="tab">เอกสารส่วนบุคคล</a>
                         </li>
@@ -27,10 +30,11 @@
                         </li>
                     @endif
                 </ul>
-            </div><!-- /.card-header -->
+            </div>
             <div class="card-body">
                 <div class="tab-content">
-                    <div class="tab-pane active" id="profile">
+                    <!-- ข้อมูลส่วนบุคคล -->
+                    <div class="tab-pane" id="profile">
                         <div class="row">
                             <div class="col-2 text-center">
                                 <a href="http://172.16.0.3/memberimg/img/{{ $member->image }}"
@@ -199,27 +203,32 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.tab-pane -->
-                    <div class="tab-pane" id="timeline">
-                        <table class="table" id="timeLineTable">
-                            <thead>
-                                <tr>
-                                    <th>#No</th>
-                                    <th>Date : Time</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php $i = 1; @endphp
-                                @foreach ($timeLine as $item)
+                    <!-- ข้อมูลส่วนบุคคล -->
+                    <!-- บันทึกรานการเข้าใช้พื้นที่ -->
+                    <div class="tab-pane active" id="timeline">
+                        <div class="row">
+                            <div class="col-8">
+                            <table class="table" id="timeLineTable">
+                                <thead>
                                     <tr>
-                                        <td>{{ $i++ }}</td>
-                                        <td>{{ $item->date }}</td>
+                                        <th>#</th>
+                                        <th>วัน : เวลา</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @php $i = 1; @endphp
+                                    @foreach ($timeLine as $item)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td>{{ $item->date }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
                     </div>
-                    <!-- /.tab-pane -->
+                    <!-- บันทึกรานการเข้าใช้พื้นที่ -->
                     <div class="tab-pane" id="document">
                         <div class="row">
                             @foreach ($file as $doc)
@@ -270,11 +279,12 @@
         $(function () {
             $("#timeLineTable").DataTable({
                 "autoWidth": false,
+                
                 "saveState": true,
                 "order": [
                     [0, "desc"]
                 ],
-                "buttons": ["pdf"]
+                "buttons": ["pdf","print"]
             }).buttons().container().appendTo('#timeLineTable_wrapper .col-md-6:eq(0)');
         });
         Fancybox.bind("[data-fancybox]", {

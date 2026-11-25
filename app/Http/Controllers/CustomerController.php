@@ -22,7 +22,7 @@ class CustomerController extends Controller
             ->whereDate('member.exp_date', '>=', Carbon::today()->toDateString())
             ->select('member.*', 'products.product_name')
             ->orderBy('member.id', 'desc')
-            ->limit(5)
+            // ->limit(5)
             ->get();
 
         foreach ($customers as $customer) {

@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+
 class UserMiddleware
 {
     /**
@@ -21,3 +22,4 @@ class UserMiddleware
         return $next($request);
     }
 }
+
